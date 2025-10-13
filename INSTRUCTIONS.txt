@@ -1,0 +1,56 @@
+🔧 HOW TO FIX YOUR VERCEL DEPLOYMENT
+====================================
+
+Your Vercel deployment is failing because your local GitHub repo has different 
+code than the working Abacus.AI server.
+
+STEP 1: BACKUP YOUR CURRENT PROJECT
+-----------------------------------
+In Terminal on your Mac:
+
+cd ~/Desktop
+mv Formula-Racing-Trivia Formula-Racing-Trivia-OLD-BACKUP
+
+
+STEP 2: DOWNLOAD THIS FOLDER
+----------------------------
+1. Download the entire "WORKING-CODE-FOR-VERCEL" folder from the Files panel
+2. Save it to ~/Desktop/
+
+
+STEP 3: RENAME THE FOLDER
+-------------------------
+In Terminal:
+
+cd ~/Desktop
+mv WORKING-CODE-FOR-VERCEL Formula-Racing-Trivia
+
+
+STEP 4: INITIALIZE GIT
+----------------------
+cd ~/Desktop/Formula-Racing-Trivia
+git init
+git add .
+git commit -m "Fresh working code from Abacus.AI server"
+
+
+STEP 5: CONNECT TO YOUR GITHUB REPO
+-----------------------------------
+git remote add origin https://github.com/efotta/Formula-Racing-Trivia.git
+git push -f origin main
+
+
+STEP 6: WAIT FOR VERCEL
+-----------------------
+1. Vercel will automatically detect the push
+2. Wait 2-3 minutes for deployment to complete
+3. Clear browser cache (Cmd + Shift + R)
+4. Visit: formula-racing-trivia.vercel.app
+
+
+✅ DONE!
+--------
+Your Vercel deployment should now work perfectly!
+
+NOTE: The -f flag in "git push -f" forces an overwrite of your GitHub repo.
+This is safe because we backed up your old project in Step 1.

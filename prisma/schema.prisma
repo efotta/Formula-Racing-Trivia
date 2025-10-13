@@ -1,0 +1,127 @@
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+    output = "/home/ubuntu/f1-trivia-challenge/app/node_modules/.prisma/client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model admin_settings {
+  id        String   @id
+  updatedAt DateTime
+}
+
+model feedback {
+  id        String   @id
+  username  String?
+  message   String
+  type      String   @default("general")
+  processed Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([processed, createdAt])
+}
+
+model game_scores {
+  id               String   @id
+  userId           String
+  username         String
+  level            Int
+  levelName        String
+  questionsCorrect Int
+  totalQuestions   Int
+  timeInSeconds    Float
+  penalties        Int      @default(0)
+  penaltyTime      Float    @default(0)
+  finalTime        Float
+  completed        Boolean  @default(false)
+  attempt          Int      @default(1)
+  createdAt        DateTime @default(now())
+  users            users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([completed, level])
+  @@index([userId, level])
+}
+
+model leaderboard {
+  id                 String    @id
+  userId             String    @unique
+  username           String
+  totalTime          Float
+  completedDate      DateTime
+  attempt            Int       @default(1)
+  allLevelsCompleted Boolean   @default(false)
+  noMistakes         Boolean   @default(false)
+  createdAt          DateTime  @default(now())
+  allLevelsTime      Float?
+  hasPerfectRun      Boolean   @default(false)
+  perfectRunDate     DateTime?
+  perfectRunTime     Float?
+  users              users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([allLevelsCompleted, noMistakes, totalTime])
+  @@index([hasPerfectRun, perfectRunTime])
+}
+
+model penalty_settings {
+  id                    String   @id
+  level3PenaltySeconds  Float    @default(1.0)
+  level4PenaltySeconds  Float    @default(1.0)
+  level5PenaltySeconds  Float    @default(1.0)
+  level4GridDropPenalty Float    @default(5.0)
+  level5SponsorPenalty  Float    @default(10.0)
+  updatedAt             DateTime
+}
+
+model perfect_run_sessions {
+  id           String    @id
+  userId       String
+  username     String
+  sessionId    String    @unique
+  startedAt    DateTime  @default(now())
+  completedAt  DateTime?
+  currentLevel Int       @default(1)
+  totalTime    Float?
+  completed    Boolean   @default(false)
+  users        users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([completed, totalTime])
+  @@index([userId, sessionId])
+}
+
+model questions {
+  id            String       @id
+  level         Int
+  levelName     String
+  question      String
+  correctAnswer String
+  wrongAnswers  String[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime
+  questionType  QuestionType @default(Fixed)
+
+  @@index([level])
+}
+
+model users {
+  id                   String                 @id
+  username             String                 @unique
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime
+  addedBy              String?
+  isAdmin              Boolean                @default(false)
+  isApproved           Boolean                @default(false)
+  needsPasswordSetup   Boolean                @default(false)
+  password             String?
+  game_scores          game_scores[]
+  leaderboard          leaderboard?
+  perfect_run_sessions perfect_run_sessions[]
+}
+
+enum QuestionType {
+  Fixed
+  Fluid
+}

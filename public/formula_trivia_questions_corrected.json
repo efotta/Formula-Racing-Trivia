@@ -1,0 +1,2594 @@
+[
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fluid",
+    "question": "How many teams typically participate in F1 races each season?",
+    "correctAnswer": "10",
+    "wrongAnswers": [
+      "8",
+      "12",
+      "15"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fluid",
+    "question": "How many drivers are typically in a standard F1 race?",
+    "correctAnswer": "20",
+    "wrongAnswers": [
+      "24",
+      "18",
+      "26"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fluid",
+    "question": "How many standard F1 races are currently on the schedule?",
+    "correctAnswer": "24",
+    "wrongAnswers": [
+      "10",
+      "16",
+      "20"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "How long does a standard F1 race generally last?",
+    "correctAnswer": "2 hours",
+    "wrongAnswers": [
+      "1 hour",
+      "3 hours",
+      "4 hours"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "How many points are awarded for 1st place in a standard F1 race?",
+    "correctAnswer": "25 points",
+    "wrongAnswers": [
+      "30 points",
+      "20 points",
+      "50 points"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fluid",
+    "question": "How many drivers are awarded points per race?",
+    "correctAnswer": "10",
+    "wrongAnswers": [
+      "20",
+      "15",
+      "12"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "What trophy is awarded to the top point-scoring driver each season?",
+    "correctAnswer": "F1 World Drivers' Championship Trophy",
+    "wrongAnswers": [
+      "FIA Championship Racing Trophy",
+      "F1 Driver Trophy",
+      "F1 World Drivers' Cup"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "What trophy is awarded to the most winning team each season?",
+    "correctAnswer": "F1 World Constructors' Championship Trophy",
+    "wrongAnswers": [
+      "World Champion Drivers' Cup",
+      "World Manufacturer's Championship",
+      "Constructors Cup"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "Over how many days does an F1 race weekend extend?",
+    "correctAnswer": "3",
+    "wrongAnswers": [
+      "4",
+      "2",
+      "1"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "How much time is allotted for each pre-race Free Practice session?",
+    "correctAnswer": "1 hour",
+    "wrongAnswers": [
+      "1.5 hours",
+      "2 hours",
+      "2.5 hours"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "What is the 1st position on the starting grid called?",
+    "correctAnswer": "Pole",
+    "wrongAnswers": [
+      "Grid",
+      "Front",
+      "Start"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "What color flag is used for caution such as a minor accident or debris on the track?",
+    "correctAnswer": "Yellow",
+    "wrongAnswers": [
+      "Red",
+      "Orange",
+      "White"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "What color flag indicates the track is clear and racing can resume?",
+    "correctAnswer": "Green",
+    "wrongAnswers": [
+      "White",
+      "Blue",
+      "Orange"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "How many qualifying stages determine pole positions?",
+    "correctAnswer": "3",
+    "wrongAnswers": [
+      "1",
+      "2",
+      "4"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "What is the minimum number of pit-stops required per standard race?",
+    "correctAnswer": "1",
+    "wrongAnswers": [
+      "0",
+      "2",
+      "3"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "Which F1 team uses the prancing horse logo?",
+    "correctAnswer": "Ferrari",
+    "wrongAnswers": [
+      "Mercedes",
+      "Alpine",
+      "McLaren"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "What nationality is Fernando Alonso?",
+    "correctAnswer": "Spanish",
+    "wrongAnswers": [
+      "Portuguese",
+      "Mexican",
+      "Italian"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "Which country hosts the Suzuka Grand Prix?",
+    "correctAnswer": "Japan",
+    "wrongAnswers": [
+      "China",
+      "Saudi Arabia",
+      "Spain"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "Which team is associated with the color papaya orange?",
+    "correctAnswer": "McLaren",
+    "wrongAnswers": [
+      "Red Bull",
+      "Aston Martin",
+      "Audi"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "Which circuit was added to the F1 calendar in 2023?",
+    "correctAnswer": "Las Vegas",
+    "wrongAnswers": [
+      "Miami",
+      "Jeddah (Saudi Arabia)",
+      "Qatar"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "What drink is traditionally consumed on the podium after an F1 win?",
+    "correctAnswer": "Champagne",
+    "wrongAnswers": [
+      "Prosecco",
+      "Sparkling Wine",
+      "Franciacorta"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "Which country is Lando Norris from?",
+    "correctAnswer": "United Kingdom",
+    "wrongAnswers": [
+      "Australia",
+      "Austria",
+      "Italy"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fluid",
+    "question": "For which team does Isack Hadjar currently drive?",
+    "correctAnswer": "Racing Bulls",
+    "wrongAnswers": [
+      "Haas",
+      "Williams",
+      "Alpine"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "Which driver replaced Lewis Hamilton at Mercedes in 2025?",
+    "correctAnswer": "Kimi Antonelli",
+    "wrongAnswers": [
+      "Ollie Bearman",
+      "Liam Lawson",
+      "Franco Colapinto"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "Which F1 driver is famously recognized by his blonde mullet?",
+    "correctAnswer": "Valtteri Bottas",
+    "wrongAnswers": [
+      "Sebastian Vettel",
+      "Kevin Magnussen",
+      "Alex Albon"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fluid",
+    "question": "How many F1 race circuits are in the United States?",
+    "correctAnswer": "3",
+    "wrongAnswers": [
+      "1",
+      "2",
+      "4"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fluid",
+    "question": "Which F1 driver has had the longest F1 career?",
+    "correctAnswer": "Fernando Alonso",
+    "wrongAnswers": [
+      "Lewis Hamilton",
+      "Kimi Raikkonen",
+      "Rubens Barrichello"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "Which driver is known by fans as “Smooth Operator”",
+    "correctAnswer": "Carlos Sainz",
+    "wrongAnswers": [
+      "Fernando Alonso",
+      "Charles Leclerc",
+      "George Russell"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "What do drivers stand on after a race to receive trophies?",
+    "correctAnswer": "Podium",
+    "wrongAnswers": [
+      "Box",
+      "Mount",
+      "Platform"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "Which F1 team is owned by a major energy drink company?",
+    "correctAnswer": "Red Bull",
+    "wrongAnswers": [
+      "Alpine",
+      "McLaren",
+      "Kick Sauber"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "Which F1 team is headquartered in Silverstone, UK and races in green?",
+    "correctAnswer": "Aston Martin",
+    "wrongAnswers": [
+      "Haas",
+      "Williams",
+      "Racing Bulls"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": " What is the term used when a driver wins a race from pole position, sets the fastest lap, and leads every lap",
+    "correctAnswer": "Grand Slam",
+    "wrongAnswers": [
+      "Triple Crown",
+      "360",
+      "Hat Trick"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "Who won the first (2023) Las Vegas Grand Prix?",
+    "correctAnswer": "Max Verstappen",
+    "wrongAnswers": [
+      "Charles Leclerc",
+      "Lando Norris",
+      "George Russell"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "Which rookie American driver joined Williams for the 2023 season?",
+    "correctAnswer": "Logan Sargeant",
+    "wrongAnswers": [
+      "Jack Doohan",
+      "Lance Stroll",
+      "Kevin Magnussen"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "What nationality is driver Lance Stroll?",
+    "correctAnswer": "Canadian",
+    "wrongAnswers": [
+      "American",
+      "French",
+      "Hungarian"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "What term is used to reference the shorter race held on some Saturdays that awards points and affects grid position?",
+    "correctAnswer": "Sprint",
+    "wrongAnswers": [
+      "Heat",
+      "Shootout",
+      "Qualifier"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "What does it mean when a driver is told \"box box box\" during a F1 race?",
+    "correctAnswer": "They are being called in for a pit stop",
+    "wrongAnswers": [
+      "They are about to be boxed in by another car",
+      "Something is wrong and they need to retire their car",
+      "The team is about to communicate details over team radio"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fluid",
+    "question": "Which racing tire supplier is currently used in F1?",
+    "correctAnswer": "Pirelli",
+    "wrongAnswers": [
+      "Michelin",
+      "Goodyear",
+      "Firestone"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "Which F1 driver is known as the ‘Honey Badger”?",
+    "correctAnswer": "Daniel Ricciardo",
+    "wrongAnswers": [
+      "Lando Norris",
+      "Alexander Albon",
+      "Max Verstappen"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "What is the stat for the quickest single lap recorded by a F1 driver during a race?",
+    "correctAnswer": "Fastest Lap",
+    "wrongAnswers": [
+      "Speed Lap",
+      "Quickest Lap",
+      "Top Lap"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fluid",
+    "question": "Which of these is NOT a F1 pit crew job during a race?",
+    "correctAnswer": "Refueler",
+    "wrongAnswers": [
+      "Jack Man",
+      "Car Stabilizer",
+      "Front Wing Adjuster"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "What is the name of the all-female motor racing championship series founded by the FIA?",
+    "correctAnswer": "F1 Academy",
+    "wrongAnswers": [
+      "Women in Racing",
+      "F3 Academy",
+      "FIA  Academy"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "Which of these is NOT a current F1 Team?",
+    "correctAnswer": "Lamborghini",
+    "wrongAnswers": [
+      "Ferrari",
+      "McLaren",
+      "Aston Martin"
+    ]
+  },
+  {
+    "levelNumber": 1,
+    "levelName": "Rookie",
+    "questionType": "Fixed",
+    "question": "What breed is Charles Leclerc's dog (Leo)?",
+    "correctAnswer": "Dachshund",
+    "wrongAnswers": [
+      "Bull Dog",
+      "Jack Russell",
+      "Corgie"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "What is the total number of points awarded across the board for each standard F1 race?",
+    "correctAnswer": "101 points",
+    "wrongAnswers": [
+      "100 points",
+      "210 points",
+      "80 points"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "What race strategy involves pitting earlier to gain time on fresher tires and leapfrog a rival?",
+    "correctAnswer": "Undercut",
+    "wrongAnswers": [
+      "Pit-First",
+      "Flanking",
+      "Stealth Pass"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "Which Grand Prix was canceled mid-race in 2023 due to flooding and safety concerns?",
+    "correctAnswer": "Imola",
+    "wrongAnswers": [
+      "Cota",
+      "Madring",
+      "Miami"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "Which driver won a Grand Prix in 2020 despite standing in for another driver due to COVID?",
+    "correctAnswer": "Sergio Perez",
+    "wrongAnswers": [
+      "Carlos Sainz",
+      "Pietro Fittipaldi ",
+      "Nico Hulkenberg"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "Which team raced with the slogan “The Power of Dreams”?",
+    "correctAnswer": "Honda",
+    "wrongAnswers": [
+      "Red Bull",
+      "McLaren",
+      "Benetton"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fluid",
+    "question": "What is the fastest F1 recorded pit-stop for tire changes?",
+    "correctAnswer": "1.80 seconds",
+    "wrongAnswers": [
+      "2.01 seconds",
+      "2.25 seconds",
+      "1.94 seconds"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "What color flag is used to stop a race due to a dangerous situation?",
+    "correctAnswer": "Red",
+    "wrongAnswers": [
+      "Orange",
+      "Black",
+      "Yellow"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "What color flag indicates the end of a race or practice session?",
+    "correctAnswer": "Checkered",
+    "wrongAnswers": [
+      "White",
+      "Black",
+      "Blue"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "What is the F1 term for the period when there's a lot of speculation surrounding driver contracts and team changes? ",
+    "correctAnswer": "Silly Season",
+    "wrongAnswers": [
+      "Summer Season",
+      "Rumor Season",
+      "Scuttle Season"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "What is the F1 governing organization called?",
+    "correctAnswer": "FIA",
+    "wrongAnswers": [
+      "FIFA",
+      "IMSA",
+      "NASCAR"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fluid",
+    "question": "During how many months of the year are F1 races generally held?",
+    "correctAnswer": "10",
+    "wrongAnswers": [
+      "8",
+      "9",
+      "7"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "How long in distance is a sprint race?",
+    "correctAnswer": "1/3 of a full race",
+    "wrongAnswers": [
+      "1/4 of a full race",
+      "1/2 of a full race",
+      "2/3 of a full race"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "What is the final pre-race lap on race day called?",
+    "correctAnswer": "Formation Lap",
+    "wrongAnswers": [
+      "Reconnaissance Lap",
+      "Qualifying Lap",
+      "Flying Lap"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fluid",
+    "question": "How many types of wet and dry tires are available for F1 races?",
+    "correctAnswer": "5",
+    "wrongAnswers": [
+      "4",
+      "6",
+      "7"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "What term is used for the judges and referees for F1 race sessions?",
+    "correctAnswer": "Stewards",
+    "wrongAnswers": [
+      "Paddock Judge",
+      "Clockers",
+      "Marshals"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fluid",
+    "question": "Which driver has the most pole positions in history?",
+    "correctAnswer": "Lewis Hamilton",
+    "wrongAnswers": [
+      "Michael Schumacher",
+      "Sebestian Vettel",
+      "Ayrton Senna"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fluid",
+    "question": "Who is the youngest driver to win an F1 race to date?",
+    "correctAnswer": "Max Verstappen",
+    "wrongAnswers": [
+      "Kimi Antonelli",
+      "Oscar Piastri",
+      "Lewis Hamilton"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fluid",
+    "question": "What are the maximum points a driver can earn over a single weekend?",
+    "correctAnswer": "33",
+    "wrongAnswers": [
+      "25",
+      "20",
+      "50"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "Which F1 driver is known as Checo?",
+    "correctAnswer": "Sergio Perez",
+    "wrongAnswers": [
+      "Carlos Sainz",
+      "Charles Leclerc",
+      "Liam Lawson"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "Which new constructor enters F1 in the 2026 season?",
+    "correctAnswer": "Cadillac",
+    "wrongAnswers": [
+      "Porsche",
+      "Tesla",
+      "Jaguar"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "Which F1 driver famously drank from his shoe after winning races?",
+    "correctAnswer": "Daniel Ricciardo",
+    "wrongAnswers": [
+      "Lando Norris",
+      "Kimi Raikkonen",
+      "Ollie Bearman"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fluid",
+    "question": "Who is the current team principal for Williams Racing?",
+    "correctAnswer": "James Vowles",
+    "wrongAnswers": [
+      "Toto Wolff",
+      "Christian Horner",
+      "Andy Cowell"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "Which driver scored a podium as a 2023 rookie with McLaren?",
+    "correctAnswer": "Oscar Piastri",
+    "wrongAnswers": [
+      "Kimi Antonelli",
+      "Logan Sargeant",
+      "Nick de Vries"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "Who was the first Thai driver to ever stand on the F1 podium?",
+    "correctAnswer": "Alex Albon",
+    "wrongAnswers": [
+      "Yuki Tsunoda",
+      "Prince Bira",
+      "Zhou Guanyu"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "Which F1 driver was known early in his career as ‘Mr. Saturday’?",
+    "correctAnswer": "George Russell",
+    "wrongAnswers": [
+      "Nico Hulkenberg",
+      "Yuki Tsunoda",
+      "Pierre Gasly"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "How many F1 World Championships did Fernando Alonso win?",
+    "correctAnswer": "2",
+    "wrongAnswers": [
+      "0",
+      "1",
+      "3"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "Who are the unpaid safety volunteers that monitor track incidents?",
+    "correctAnswer": "Marshals",
+    "wrongAnswers": [
+      "Stewards",
+      "EMTs",
+      "Runners"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "Which team has competed in every season of the F1 World Championship since its inception?",
+    "correctAnswer": "Ferrari",
+    "wrongAnswers": [
+      "McLaren",
+      "Williams",
+      "Mercedes"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fluid",
+    "question": "How many types of slick tires can drivers choose from?",
+    "correctAnswer": "3",
+    "wrongAnswers": [
+      "2",
+      "4",
+      "5"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "What role leads, manages, and represents an F1 team, both operationally and strategically, across all aspects of the sport?",
+    "correctAnswer": "Team Principal",
+    "wrongAnswers": [
+      "Chief Engineer",
+      "Technical Director",
+      "Chief Mechanic"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "Which F1 driver was the first to go through the Honda Formula Dream Program?",
+    "correctAnswer": "Yuki Tsunoda",
+    "wrongAnswers": [
+      "Zhou Guanyu",
+      "Alex Albon",
+      "Ayumu Iwasa"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fluid",
+    "question": "What is the maximum penalty an F1 driver can receive?",
+    "correctAnswer": "Race Ban",
+    "wrongAnswers": [
+      "Retirement",
+      "Grid Drops",
+      "Penalty Points on License"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "What car number has Lewis Hamilton used for most of his F1 career?",
+    "correctAnswer": "44",
+    "wrongAnswers": [
+      "1",
+      "14",
+      "10"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "What is the name of the starting position grid line that the pole-sitter lines up on?",
+    "correctAnswer": "P1",
+    "wrongAnswers": [
+      "G1",
+      "SP1",
+      "F1"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "What is the term used when a driver finishes among the top 10 in a race?",
+    "correctAnswer": "Points Finish",
+    "wrongAnswers": [
+      "Pack Finish",
+      "Scorer",
+      "Finisher"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fluid",
+    "question": "What company owns F1?",
+    "correctAnswer": "Liberty Media",
+    "wrongAnswers": [
+      "FIA",
+      "Delta Topco",
+      "International Motorsports Assoc. "
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "What year was the first F1 race held?",
+    "correctAnswer": "1950",
+    "wrongAnswers": [
+      "1940",
+      "1954",
+      "1962"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "Which F1 driver achieved his first podium finish ever after 239 race starts?",
+    "correctAnswer": "Nico Hulkenberg",
+    "wrongAnswers": [
+      "Felipe Massa",
+      "David Coulthard",
+      "Adrian Sutil"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "What color flag gives drivers a warning for unsportsmanlike behavior?",
+    "correctAnswer": "Black and White",
+    "wrongAnswers": [
+      "Orange and White",
+      "Black and Blue",
+      "Blue and Yellow"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fluid",
+    "question": "What cars do the F1 Academy drivers drive?",
+    "correctAnswer": "Formula 4 level cars",
+    "wrongAnswers": [
+      "Formula 3 level cars",
+      "Formula Junior cars",
+      "Formula E cars"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fluid",
+    "question": "Which F1 driver holds the record for the fastest recorded top speed during a F1 race (231 mph)?",
+    "correctAnswer": "Valtteri Bottas",
+    "wrongAnswers": [
+      "Lewis Hamilton",
+      "Max Verstappen",
+      "Sergio Perez"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "What is the name of the F1 car part that gives downforce and looks like a wing?",
+    "correctAnswer": "Rear Wing",
+    "wrongAnswers": [
+      "Diffuser",
+      "Spoiler",
+      "Exhaust"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fixed",
+    "question": "What is a chicane?",
+    "correctAnswer": "A sequence of tight turns designed to slow cars down",
+    "wrongAnswers": [
+      "A long, high-speed straight section of track",
+      "A steep hill climb followed by a sharp descent",
+      "A type of pit lane speed control system"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fluid",
+    "question": "Which driver holds the record for the fastest lap in F1 history (average speed of 164.466 mph)?",
+    "correctAnswer": "Max Verstappen",
+    "wrongAnswers": [
+      "Lewis Hamilton",
+      "Fernando Alanso",
+      "Valtteri Bottas"
+    ]
+  },
+  {
+    "levelNumber": 2,
+    "levelName": "Midfielder",
+    "questionType": "Fluid",
+    "question": "What is the record for the highest number of red flags issued during a full F1 qualifying session?",
+    "correctAnswer": "6",
+    "wrongAnswers": [
+      "2",
+      "4",
+      "8"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fluid",
+    "question": "Which track is known for the tightest pit entry in Formula 1?",
+    "correctAnswer": "Baku",
+    "wrongAnswers": [
+      "COTA (Texas)",
+      "Yas Marina (Abu Dhabi)",
+      "Las Vegas"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "Which F1 driver finished 2nd in the 2008 championship by just one point, despite winning more races than the champion?",
+    "correctAnswer": "Felipe Massa",
+    "wrongAnswers": [
+      "Lewis Hamilton",
+      "Fernando Alonso",
+      "Jenson Button"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fluid",
+    "question": "Which of these issues would NOT incur a driver penalty during the race?",
+    "correctAnswer": "Electronic System Failure",
+    "wrongAnswers": [
+      "Loose Wheel",
+      "Speeding in the Pit Lane",
+      "Unsafe Release"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "What does it indicate when a F1 driver's sector time during a session is displayed in purple?",
+    "correctAnswer": "Fastest of all drivers in a specific sector",
+    "wrongAnswers": [
+      "Slowest of all drivers in a specific sector",
+      "Personal best time in a specific sector",
+      "Track record in a specific sector"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fluid",
+    "question": "Which brand of champagne is currently used for the F1 podium celebrations?",
+    "correctAnswer": "Moet & Chandon",
+    "wrongAnswers": [
+      "Veuve Clicquot",
+      "Dom Perignon",
+      "Ferrari Trento"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "What type of tire would be used for a damp track with light water?",
+    "correctAnswer": "Intermediate",
+    "wrongAnswers": [
+      "Wet",
+      "Hard",
+      "Medium"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "What is the term for the process where tire rubber gets deposited on the racing line which can improve tire grip?",
+    "correctAnswer": "Rubbering-in",
+    "wrongAnswers": [
+      "Run-Off",
+      "Gripping",
+      "Evolution"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "What are the small pieces of rubber that generally accumulate off the racing line most often called?",
+    "correctAnswer": "Marbles",
+    "wrongAnswers": [
+      "Pellets",
+      "Tire Boogers",
+      "Loose Stuff"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "What does a blue flag mean in F1 racing?",
+    "correctAnswer": "A faster car is approaching; let them pass",
+    "wrongAnswers": [
+      "Rain is coming",
+      "Overtaking is not allowed",
+      "Pit lane is closed"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fluid",
+    "question": "What are the most F1 World Championships won by a single driver?",
+    "correctAnswer": "7",
+    "wrongAnswers": [
+      "5",
+      "6",
+      "8"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "What year did Max Verstappen win his first F1 World Championship?",
+    "correctAnswer": "2021",
+    "wrongAnswers": [
+      "2022",
+      "2023",
+      "2024"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "Which driver was inspired from age 3 to start go-kart racing by the Pixar movie Cars? ",
+    "correctAnswer": "Liam Lawson",
+    "wrongAnswers": [
+      "Gabriel Bortoleto",
+      "Ollie Bearman",
+      "Isack Hadjar"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "What team did Daniel Ricciardo join after leaving Red Bull?",
+    "correctAnswer": "Renault",
+    "wrongAnswers": [
+      "Alpine",
+      "Williams",
+      "Audi"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "Which driver earned the nickname ‘Iceman’?",
+    "correctAnswer": "Kimi Raikkonen",
+    "wrongAnswers": [
+      "Kevin Magnussen",
+      "Max Verstappen",
+      "Ayrton Senna"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "Which team did Max Verstappen debut with in F1?",
+    "correctAnswer": "Toro Rosso",
+    "wrongAnswers": [
+      "Ferrari",
+      "Haas",
+      "Renault"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "What country did Robert Kubica represent?",
+    "correctAnswer": "Poland",
+    "wrongAnswers": [
+      "Hungary",
+      "Netherlands",
+      "Italy"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fluid",
+    "question": "Who was the youngest driver to win an F1 race for Ferrari?",
+    "correctAnswer": "Charles Leclerc",
+    "wrongAnswers": [
+      "Niki Lauda",
+      "Kimi Raikkonen",
+      "Alain Prost"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fluid",
+    "question": "Who is the youngest British driver to achieve an F1 podium finish?",
+    "correctAnswer": "Lando Norris",
+    "wrongAnswers": [
+      "Lewis Hamilton",
+      "Oliver Bearman",
+      "George Russell"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "Which F1 driver is the son of a two-time World Rally Champion?",
+    "correctAnswer": "Carlos Sainz",
+    "wrongAnswers": [
+      "Max Verstappen",
+      "Damon Hill",
+      "Nico Rosberg"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "How many years did Lewis Hamilton race for Mercedes?",
+    "correctAnswer": "12 years",
+    "wrongAnswers": [
+      "8 years",
+      "10 years",
+      "14 years"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fluid",
+    "question": "Who is the youngest driver ever to lead a Formula 1 race?",
+    "correctAnswer": "Kimi Antonelli",
+    "wrongAnswers": [
+      "Max Verstappen",
+      "Robert Kubica",
+      "Sebastian Vettel"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "Who scored points on his F1 debut in 2024 as a stand-in driver for Ferrari?",
+    "correctAnswer": "Oliver Bearman",
+    "wrongAnswers": [
+      "Issac Hadjar",
+      "Franco Colapinto",
+      "George Russell"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "What year were Sprint races introduced to the F1 calendar?",
+    "correctAnswer": "2021",
+    "wrongAnswers": [
+      "2020",
+      "2019",
+      "2018"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "What color flag disqualifies a driver requiring a return to the pit?",
+    "correctAnswer": "Black",
+    "wrongAnswers": [
+      "Yellow",
+      "Red",
+      "Blue"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "What cockpit structure helps shield a driver’s head from flying debris?",
+    "correctAnswer": "HALO",
+    "wrongAnswers": [
+      "Helmet",
+      "HANS",
+      "Windscreen"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fluid",
+    "question": "In which country are the majority of current F1 team headquarters located?",
+    "correctAnswer": "United Kingdom",
+    "wrongAnswers": [
+      "Italy",
+      "Austria",
+      "United States"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "In what year did F1 stop awarding a bonus point for the fastest lap of the race?",
+    "correctAnswer": "2025",
+    "wrongAnswers": [
+      "2022",
+      "2023",
+      "2024"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "Which Brazilian driver is the first to compete in F1 full-time since Felipe Massa?",
+    "correctAnswer": "Gabriel Bortoleto",
+    "wrongAnswers": [
+      "Franco Colapinto",
+      "Alfa Romeo",
+      "Juan Pablo Montoya"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "Which driver has a tattoo of his race number “14” on his back?",
+    "correctAnswer": "Fernando Alonso",
+    "wrongAnswers": [
+      "Lando Norris",
+      "Lewis Hamilton",
+      "Sergio Perez"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "Which team is often associated with the phrase “Silver Arrows”?",
+    "correctAnswer": "Mercedes",
+    "wrongAnswers": [
+      "Aston Martin",
+      "Haas",
+      "Alpine"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "Which famous F1 race is also part of the \"Triple Crown of Motorsport\"?",
+    "correctAnswer": "Monaco GP",
+    "wrongAnswers": [
+      "Imola GP",
+      "Spa GP",
+      "Singapore GP"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "Which country’s Grand Prix was held at the \"Österreichring\" track before it became the Red Bull Ring?",
+    "correctAnswer": "Austria",
+    "wrongAnswers": [
+      "Hungary",
+      "Netherlands",
+      "Portugal"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "What year did Red Bull Racing Team make their Formula 1 debut?",
+    "correctAnswer": "2005",
+    "wrongAnswers": [
+      "2003",
+      "2007",
+      "2010"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "Which F1 driver has the nickname ‘The Viking’?",
+    "correctAnswer": "Kevin Magnussen",
+    "wrongAnswers": [
+      "Nico Hulkenberg",
+      "Valtteri Bottas",
+      "Romain Grosjean"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "What number is permanently retired in honor of Jules Bianchi?",
+    "correctAnswer": "17",
+    "wrongAnswers": [
+      "29",
+      "33",
+      "15"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "Which driver is known as the ‘Man Who Walked Out of the Fire”?",
+    "correctAnswer": "Romain Grosjean",
+    "wrongAnswers": [
+      "Jos Verstappen",
+      "Niki Lauda",
+      "Jo Siffert"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "Which circuit is known for the longest race ever (4 min, 39 sec)?",
+    "correctAnswer": "Canadian GP",
+    "wrongAnswers": [
+      "COTA GP (Texas)",
+      "Silverstone GP (UK)",
+      "Suzuka GP (Japan)"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fluid",
+    "question": "What is the standard pit-lane speed limit?",
+    "correctAnswer": "50 mph",
+    "wrongAnswers": [
+      "40 mph",
+      "30 mph",
+      "60 mph"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fluid",
+    "question": "Which F1 driver was given the most grid drops ever (70) when all his penalty points were added up?",
+    "correctAnswer": "Jenson Button",
+    "wrongAnswers": [
+      " Romain Grosjean",
+      "Felipe Nasr",
+      "Daniil Kvyat"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "Which F1 commentator drove for the Renault Sport F1 team from 2016-2018?",
+    "correctAnswer": "Jolyon Palmer",
+    "wrongAnswers": [
+      "Jenson Button",
+      "Martin Brundle",
+      "David Coulthard"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fluid",
+    "question": "Which Formula 2 racing question below is NOT correct?",
+    "correctAnswer": "F2 Championship winners always advance to F1 the following season",
+    "wrongAnswers": [
+      "All F2 cars are identical in design",
+      "F2 races are always 60 minutes in length",
+      "F2 is a testing ground for future F1 drivers"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fluid",
+    "question": "What type of engines do modern F1 cars use?",
+    "correctAnswer": "V6 Turbo Hybrid",
+    "wrongAnswers": [
+      "V12",
+      "Diesel",
+      "Electric only"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fixed",
+    "question": "Which F1 team ran a sponsor-less car and black nose to mourn the 9/11 attacks?",
+    "correctAnswer": "Ferrari",
+    "wrongAnswers": [
+      "Williams-BMW",
+      "McLaren-Mercedes",
+      "Jaguar-Cosworth"
+    ]
+  },
+  {
+    "levelNumber": 3,
+    "levelName": "Front Runner",
+    "questionType": "Fluid",
+    "question": "What is the highest number of pit stops in a single F1 race (across all drivers)?",
+    "correctAnswer": "89",
+    "wrongAnswers": [
+      "52",
+      "63",
+      "77"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "Which track is famous for a chaotic first corner and has a stadium section?",
+    "correctAnswer": "Mexico",
+    "wrongAnswers": [
+      "Montreal",
+      "US - COTA",
+      "Barcelona"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "With which team did Ayrton Senna win his first championship title?",
+    "correctAnswer": "McLaren",
+    "wrongAnswers": [
+      "Ferrari",
+      "Williams",
+      "Lotus"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "Which F1 driver is known as ‘The Professor”?",
+    "correctAnswer": "Alain Prost",
+    "wrongAnswers": [
+      "Ayton Senna",
+      "Michael Schumacher",
+      "Robert Kubica"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "What track is nicknamed ‘The Temple of Speed”?",
+    "correctAnswer": "Monza",
+    "wrongAnswers": [
+      "Jeddha",
+      "Suzuka",
+      "Spa"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "What constructor has won the most Constructor’s Championships?",
+    "correctAnswer": "Ferrari",
+    "wrongAnswers": [
+      "McLaren",
+      "Williams",
+      "Red Bull"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "Which driver got their first F1 win at the 2020 Italian Grand Prix?",
+    "correctAnswer": "Pierre Gasly",
+    "wrongAnswers": [
+      "Esteban Ocon",
+      "Carlos Saintz",
+      "Lance Stroll"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "Which engine powered McLaren in 2015-2017?",
+    "correctAnswer": "Honda",
+    "wrongAnswers": [
+      "Mercedes",
+      "Williams",
+      "Alpine"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "Who was the first driver to win a race for Red Bull?",
+    "correctAnswer": "Sebestian Vettel",
+    "wrongAnswers": [
+      "Max Verstappen",
+      "Mark Webber",
+      "Daniel Ricciardo"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fluid",
+    "question": "Approximately how much lateral g-force can a driver experience under normal circumstances when cornering?",
+    "correctAnswer": "6G",
+    "wrongAnswers": [
+      "4G",
+      "5G",
+      "8G"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fluid",
+    "question": "Who is Max Verstappen’s long-time race engineer?",
+    "correctAnswer": "Gianpiero Lambiase ('GP')",
+    "wrongAnswers": [
+      "Peter Bonnington",
+      "Bryan Bozzi",
+      "John Howard"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fluid",
+    "question": "How many of the current F1 races are held on street circuits?",
+    "correctAnswer": "8",
+    "wrongAnswers": [
+      "6",
+      "7",
+      "9"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fluid",
+    "question": "How many times has a F1 driver won a race after starting last?",
+    "correctAnswer": "6 times",
+    "wrongAnswers": [
+      "3 times",
+      "4 times",
+      "7 times"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fluid",
+    "question": "What is the highest number of wins for any F1 driver?",
+    "correctAnswer": "103",
+    "wrongAnswers": [
+      "94",
+      "97",
+      "108"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fluid",
+    "question": "Who holds the record for the youngest F1 World Champion at the time of their first win?",
+    "correctAnswer": "Sebastian Vettel",
+    "wrongAnswers": [
+      "Max Verstappen",
+      "Ayrton Senna",
+      "George Russell"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fluid",
+    "question": "What is the typical number of F1 pit crew members per team?",
+    "correctAnswer": "20",
+    "wrongAnswers": [
+      "15",
+      "25",
+      "10"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fluid",
+    "question": "Who holds the record (19) for the most wins in a single season?",
+    "correctAnswer": "Max Verstappen ",
+    "wrongAnswers": [
+      "Ayton Senna",
+      "Michael Schumacher",
+      "Lewis Hamilton"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "What is the 75% rule in F1?",
+    "correctAnswer": "If more than 75% of a scheduled race is completed, full points are awarded",
+    "wrongAnswers": [
+      "If more than 75% of drivers complete a scheduled race, 75% of points are awarded",
+      "Only 75% of total race points are awarded if 10 or more drivers fail to complete a scheduled race",
+      "If more than 75% of drivers complete a scheduled race, full points are awarded"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fluid",
+    "question": "Who was the youngest team principal to take the helm of an F1 race team?",
+    "correctAnswer": " Christian Horner",
+    "wrongAnswers": [
+      "Toto Wolff",
+      "Sir Frank Williams",
+      "Andrea Stella"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "What devise helps reduce head and neck injuries during crashes?",
+    "correctAnswer": "HANS",
+    "wrongAnswers": [
+      "HALO",
+      "Seat Belt",
+      "Cockpit"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "What year did Bernd Maylander begin driving the safety car at each F1 race?",
+    "correctAnswer": "2000",
+    "wrongAnswers": [
+      "2005",
+      "2010",
+      "2015"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "What special license is a qualification that allows a driver to compete in the FIA Formula One World Championship?",
+    "correctAnswer": "Super license",
+    "wrongAnswers": [
+      "International Drivers License",
+      "Rally License",
+      "Entrant's License"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "What is the role of the 'lollipop man' during a pit stop?",
+    "correctAnswer": "To signal the driver when it is safe to leave a pit stop",
+    "wrongAnswers": [
+      "To signal the driver where to come to a halt for a pit stop",
+      "To lift the car slightly so the tires can be removed",
+      "To let the driver know the pit stop activities have been completed"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fluid",
+    "question": "How long does a F1 engine typically last?",
+    "correctAnswer": "5 races",
+    "wrongAnswers": [
+      "7 races",
+      "10 races",
+      "12 races"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "Which race in 2021 saw a one-lap restart with a standing start that controversially decided the championship?",
+    "correctAnswer": "Abu Dhabi GP",
+    "wrongAnswers": [
+      "Monaco GP",
+      "British GP",
+      "Bahrain GP"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fluid",
+    "question": "Who is the Managing Director of the all female F1 Academy Series?",
+    "correctAnswer": "Susie Wolff",
+    "wrongAnswers": [
+      "Claire Williams",
+      "Hannah Schmitz",
+      "Desire Wilson"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "Which driver won the 1988 F1 World Championship with 15 poles and 18 race wins?",
+    "correctAnswer": "Ayrton Senna",
+    "wrongAnswers": [
+      "Nelson Piquet",
+      "Thierry Boutsen",
+      "Alain Prost"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "Which team was disqualified from the 2007 Constructors' Championship due to a spying scandal?",
+    "correctAnswer": "McLaren",
+    "wrongAnswers": [
+      "Mercedes",
+      "Williams",
+      "Ferrari"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "Which location hosted the first F1 night race in 2008?",
+    "correctAnswer": "Singapore",
+    "wrongAnswers": [
+      "Monaco",
+      "Las Vegas",
+      "Qatar"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fluid",
+    "question": "What is attached to an F1 car to keep it from running too low to the ground?",
+    "correctAnswer": "Skid Block",
+    "wrongAnswers": [
+      "Ride Sensor",
+      "Aerodynamic Vent",
+      "Tire Sensor"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "What F1 driver was notably caught speeding (off-track) in 1998?",
+    "correctAnswer": "Nigel Mansell",
+    "wrongAnswers": [
+      "Eddie Irvine",
+      "Jacques Villeneuve",
+      "Ralf Schumacher"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "Which F1 driver famously shouted \"leave me alone, I know what I’m doing\"?",
+    "correctAnswer": " Kimi Räikkönen",
+    "wrongAnswers": [
+      "Lewis Hamilton",
+      "Max Verstappen",
+      "Yuki Tsunoda"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "Which F1 track features a banked final corner?",
+    "correctAnswer": "Netherlands (Zandvoort)",
+    "wrongAnswers": [
+      "Madrid (Madring)",
+      "Malaysia (Sepang)",
+      "GB (Silverstone)"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "Which city’s street circuit includes the famous “Casino Square” and “Tunnel”?",
+    "correctAnswer": "Monaco",
+    "wrongAnswers": [
+      "Las Vegas",
+      "Miami",
+      "Baku City"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "Which Formula 1 race features the iconic \"S Curves\" section at the start of the lap?",
+    "correctAnswer": "Suzuka (Japan)",
+    "wrongAnswers": [
+      "Monza (Italy)",
+      "Red Bull Ring (Austria)",
+      "Bahrain International Circuit"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fluid",
+    "question": "What is the maximum number of power unit components (ICE, Turbo, MGU-H, MGU-K) a driver can use in a season without penalty?",
+    "correctAnswer": "3",
+    "wrongAnswers": [
+      "2",
+      "4",
+      "5"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "Who is the only F1 driver to have won a championship without winning a single race in the final season of his career?",
+    "correctAnswer": "Nico Rosberg",
+    "wrongAnswers": [
+      "Pierre Gasly",
+      "Fernando Alonso",
+      "Jenson Button"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "Which F1 driver earned the nickname “Crash Kid” from Mark Webber in 2010?",
+    "correctAnswer": "Sebastian Vettel",
+    "wrongAnswers": [
+      "Felipe Massa",
+      "Robert Kubica",
+      "Bruno Senna"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "Which team ran the infamous “six-wheeled” F1 car in the 1970s?",
+    "correctAnswer": "Tyrrell",
+    "wrongAnswers": [
+      "Lotus",
+      "Benetton",
+      "Ferrari"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "What is Autodromo Internazionale Enzo e Dino Ferrari also know as?",
+    "correctAnswer": "Imola",
+    "wrongAnswers": [
+      "Ferrari Headquarters",
+      "The Autodrome",
+      "Ferrari International Auto Museum"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fluid",
+    "question": "What is the highest number of rookie drivers to join a single F1 season?",
+    "correctAnswer": "7",
+    "wrongAnswers": [
+      "3",
+      "5",
+      "9"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fixed",
+    "question": "Who was the first F1 driver to be managed by Fernando Alonso's company, A14 Management?",
+    "correctAnswer": "Gabriel Bortoleto",
+    "wrongAnswers": [
+      "Oliver Bearman",
+      "Kimi Antonelli",
+      "Isack Hadjar"
+    ]
+  },
+  {
+    "levelNumber": 4,
+    "levelName": "World Champion",
+    "questionType": "Fluid",
+    "question": "What is the highest number of retirements in a single F1 race (hint: 21 starters)",
+    "correctAnswer": "18",
+    "wrongAnswers": [
+      "16",
+      "14",
+      "10"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "What color flag signals a mechanical issue requiring return to the pit?",
+    "correctAnswer": "Black with Orange Disc",
+    "wrongAnswers": [
+      "Yellow",
+      "Red",
+      "Blue"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "What color flag indicates a deterioration in track grip (oil or water)?",
+    "correctAnswer": "Yellow and Red Striped",
+    "wrongAnswers": [
+      "Orange and White Checkered",
+      "Black and Blue Striped",
+      "Blue and Yellow Checkered"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fluid",
+    "question": "What is the maximum fuel limit (kg) for a race?",
+    "correctAnswer": "110 kg",
+    "wrongAnswers": [
+      "120 kg",
+      "130 kg",
+      "140 kg"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Which driver is the son of a MotoGP legend?",
+    "correctAnswer": "Jack Doohan",
+    "wrongAnswers": [
+      "Liam Lawson",
+      "Franco Colapinto",
+      "Niki Lauda"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fluid",
+    "question": "Who is the longest serving team principal since F1 inception?",
+    "correctAnswer": "Sir Frank Williams",
+    "wrongAnswers": [
+      "Fred Vasseur",
+      "Flavio Briatore",
+      "Christian Horner"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Which team was first to have a female team principal?",
+    "correctAnswer": "Sauber",
+    "wrongAnswers": [
+      "Alpine",
+      "Haas",
+      "Williams"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Who is considered the most famous F1 commentator of all time?",
+    "correctAnswer": "Murray Walker",
+    "wrongAnswers": [
+      "Martin Brundle",
+      "David Croft",
+      "Ted Kravitz"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "What carbon fiber structure surrounds drivers as a safety capsule?",
+    "correctAnswer": "Survival Cell",
+    "wrongAnswers": [
+      "HALO",
+      "Helmet",
+      "Roll Bar"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Which F1 driver led the push for mandatory seatbelts & helmets?",
+    "correctAnswer": "Sir Jackie Stewart",
+    "wrongAnswers": [
+      "Niki Lauda",
+      "Ayrton Senna",
+      "Michael Schumacher"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fluid",
+    "question": "How many points must a driver collect to qualify for a F1 super license?",
+    "correctAnswer": "40 points",
+    "wrongAnswers": [
+      "25 pts",
+      "30 pts",
+      "50 pts"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fluid",
+    "question": "Which driver holds the record for the most consecutive races finishes without retirement (27)?",
+    "correctAnswer": "Lewis Hamilton",
+    "wrongAnswers": [
+      "Esteban Ocon",
+      "Max Verstappen",
+      "Michael Schumacher"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fluid",
+    "question": "Which F1 circuit has the most corners?",
+    "correctAnswer": "Jeddah",
+    "wrongAnswers": [
+      "Austin (COTA) ",
+      "Miami",
+      "Singapore"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "At the 1997 European GP, 3 drivers set identical lap times (1:21.072) - which driver was NOT one of them?",
+    "correctAnswer": "David Coulthard",
+    "wrongAnswers": [
+      "Jacques Villeneuve",
+      "Michael Schumacher",
+      "Heinz-Harald"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Which manufacturer last competed in F1 in 2009?",
+    "correctAnswer": "BMW",
+    "wrongAnswers": [
+      "Ford",
+      "Porsche",
+      "Jaguar"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Who was the first female race engineer in F1?",
+    "correctAnswer": "Laura Muller",
+    "wrongAnswers": [
+      "Claire Williams",
+      "Susie Wolff",
+      "Hanna Schmitz"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Slim Borgudd was a drummer for which band while also racing in F1?",
+    "correctAnswer": "ABBA",
+    "wrongAnswers": [
+      "Eagles",
+      "The Cure",
+      "Depeche Mode"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Which F1 driver famously pushed his car across the finish line in 1985?",
+    "correctAnswer": "Thierry Boutsen",
+    "wrongAnswers": [
+      "Jackie Stewart",
+      "Nigel Manson",
+      "Alain Prost"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fluid",
+    "question": "What is the highest number of cars that ran out of fuel in a single race?",
+    "correctAnswer": "6",
+    "wrongAnswers": [
+      "3",
+      "4",
+      "7"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fluid",
+    "question": "What is the approximate sound of a F1 car in decibels?",
+    "correctAnswer": "130",
+    "wrongAnswers": [
+      "140",
+      "150",
+      "160"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fluid",
+    "question": "Which F1 driver has raced for the most teams (14) over his career?",
+    "correctAnswer": "Chris Amon",
+    "wrongAnswers": [
+      "Luca Badoer",
+      "Ayrton Senna",
+      "Andrea de Cesaris "
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "What material previously used for track barriers was banned in 1967?",
+    "correctAnswer": "Hay Bales",
+    "wrongAnswers": [
+      "Tire Barriers",
+      "Sand Filled Drums",
+      "Concrete Barriers"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Who claimed the first “Triple Crown’ by winning in the Monaco GP, the 24 Hours of Le Mans, and the Indianapolis 500?",
+    "correctAnswer": "Graham Hill",
+    "wrongAnswers": [
+      "Fernando Alonso",
+      "Michael Schumacher",
+      "Juan Pablo Montoya"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fluid",
+    "question": "Which driver holds the record (24) for most consecutive front-row starts in Formula 1 history?",
+    "correctAnswer": "Ayrton Senna",
+    "wrongAnswers": [
+      "Lewis Hamilton",
+      "Max Verstappen",
+      "Michael Schumacher"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "At which circuit did Ayrton Senna take his first F1 victory?",
+    "correctAnswer": "Portuguese Grand Prix",
+    "wrongAnswers": [
+      "Austrian GP",
+      "SPA ",
+      "Spanish GP"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "What object does the Monaco GP require be welded down before each race?",
+    "correctAnswer": "Manhole Covers",
+    "wrongAnswers": [
+      "Track Barriers",
+      "Raised Curbs",
+      "Starting Line Markers"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Which constructor entered F1, won a race in its debut season, and then never won again?",
+    "correctAnswer": "Brawn GP",
+    "wrongAnswers": [
+      "Shadow Racing Cars",
+      "EMKA Racing",
+      "NISMO"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Which famous race was part of the F1 World Championship calendar from 1950-1960?",
+    "correctAnswer": "Indianapolis 500",
+    "wrongAnswers": [
+      "24 Hours of Le Mans",
+      "Targa Florio",
+      "Carrera Panamericana"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fluid",
+    "question": "Approximately how many meters does it take for a F1 driver to break from 60 mpg to 0 mph?",
+    "correctAnswer": "15",
+    "wrongAnswers": [
+      "10",
+      "20",
+      "25"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fluid",
+    "question": "Approximately what is the F1 record for leading the most racing miles in a single season from the front?",
+    "correctAnswer": "3300 miles",
+    "wrongAnswers": [
+      "2600 miles",
+      "3900 miles",
+      "4400 miles"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Which former F1 World Champion was once kidnapped before a race?",
+    "correctAnswer": "Juan Manuel Fangio",
+    "wrongAnswers": [
+      "Ayrton Senna",
+      "Jack Brabham",
+      "Giuseppe Farina"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Which country hosted the first F1 Grand Prix outside of Europe, in 1953?",
+    "correctAnswer": "Argentina",
+    "wrongAnswers": [
+      "Mexico",
+      "Canada",
+      "US"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "What is the purpose of F1's 107% rule?",
+    "correctAnswer": "To prevent cars that drive to slowly from competing",
+    "wrongAnswers": [
+      "To prevent tire pressure from being overinflated",
+      "To ensure skid blocks are within mandate parameters",
+      "To ensure a car is not more than 107% above the targeted weight"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Which race in 1997 saw a deliberate crash by Michael Schumacher to try to secure the championship?",
+    "correctAnswer": "Jerez GP",
+    "wrongAnswers": [
+      "Austrian GP",
+      "Hungarian GP",
+      "Italian GP"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fluid",
+    "question": "What is the minimum thickness (when new) of an F1 car's skid block?",
+    "correctAnswer": "10 mm",
+    "wrongAnswers": [
+      "12 mm",
+      "14m",
+      "15 mm"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Which car component is used to send information to race control and the garage in real-time?",
+    "correctAnswer": "Telemetry",
+    "wrongAnswers": [
+      "Aerodynamics",
+      "Electronic Control Unit",
+      "Sensors"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Name one of the two drivers who collided while leading the 2016 Spanish Grand Prix, taking each other out?",
+    "correctAnswer": "Nico Rosberg",
+    "wrongAnswers": [
+      "Sebastian Vettel",
+      "Valtteri Bottas",
+      "Sergio Perez"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Which driver was disqualified from the 2021 Hungarian Grand Prix for not having enough fuel for post-race sampling?",
+    "correctAnswer": "Sebastian Vettel",
+    "wrongAnswers": [
+      "George Russell",
+      "Nicholas Latifi",
+      "Lance Stroll"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Which famous F1 race ended in 2005 with only 6 cars starting due to tire safety concerns?",
+    "correctAnswer": "USGP (Indianapolis)",
+    "wrongAnswers": [
+      "British GP (Silverstone)",
+      "Mexico City GP",
+      "Austrian GP"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Which F1 support team member won an Olympic medal in rowing?",
+    "correctAnswer": "Tom Stallard",
+    "wrongAnswers": [
+      "Bernie Collins",
+      "Alessandro Fisaro",
+      "Adrian Newey"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fluid",
+    "question": "What is the fastest top speed ever recorded during an official F1 race weekend?",
+    "correctAnswer": "231 mph",
+    "wrongAnswers": [
+      "226 mph",
+      "214 mph",
+      "243 mph"
+    ]
+  },
+  {
+    "levelNumber": 5,
+    "levelName": "Legend",
+    "questionType": "Fixed",
+    "question": "Which 21st century F1 driver won the 24 Hours of Le Mans race while actively competing in the F1 season?",
+    "correctAnswer": "Nico Hulkenberg",
+    "wrongAnswers": [
+      "Robert Kubica",
+      "Fernando Alonso",
+      "Kamui Kobayashi"
+    ]
+  }
+]
