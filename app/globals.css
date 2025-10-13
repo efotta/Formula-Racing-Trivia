@@ -1,0 +1,945 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom F1 Trivia Challenge styles */
+.f1-gradient {
+  background: linear-gradient(135deg, #1a1d24 0%, #2c2f36 100%);
+}
+
+.f1-card {
+  background: rgba(44, 47, 54, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.f1-button {
+  background: linear-gradient(135deg, #00a9ff 0%, #0080cc 100%);
+  transition: all 0.3s ease;
+}
+
+.f1-button:hover {
+  background: linear-gradient(135deg, #0080cc 0%, #0066aa 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 169, 255, 0.3);
+}
+
+.f1-text-glow {
+  text-shadow: 0 0 20px rgba(0, 169, 255, 0.5);
+}
+
+.f1-pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* COMPREHENSIVE MOBILE SCROLL PREVENTION - iOS FOCUSED */
+.f1-no-scroll {
+  overflow: hidden !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100vh !important;
+  height: 100dvh !important; /* Dynamic viewport height for mobile */
+  touch-action: none !important;
+  -webkit-overflow-scrolling: auto !important;
+  overscroll-behavior: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -ms-overflow-style: none !important; /* IE and Edge */
+  scrollbar-width: none !important; /* Firefox */
+}
+
+/* iOS Safari and all mobile browsers - STRICT */
+html.f1-no-scroll {
+  overflow: hidden !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  touch-action: none !important;
+  overscroll-behavior: none !important;
+}
+
+/* LEVEL SELECTION MODAL - OPTIMIZED FOR ALL CONTENT VISIBILITY */
+.f1-level-select-modal {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  height: auto !important;
+  max-height: 80vh !important;
+  width: 90vw !important;
+  max-width: 500px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  border-radius: 12px !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Desktop specific - More space available */
+@media (min-width: 640px) {
+  .f1-level-select-modal {
+    height: auto !important;
+    max-height: 85vh !important;
+    width: 85vw !important;
+    max-width: 550px !important;
+  }
+}
+
+/* Mobile specific - Optimized for smaller screens and STRICT height limits */
+@media (max-width: 640px) {
+  .f1-level-select-modal {
+    height: auto !important;
+    max-height: 80vh !important; /* Reduced from 92vh to ensure no scrolling */
+    width: 95vw !important;
+    margin: 0 !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    overflow: hidden !important;
+  }
+}
+
+/* Level grid - COMPACT LAYOUT WITH MINIMAL SCROLLING */
+.f1-level-grid-container {
+  flex: 0 1 auto; /* Don't grow, but can shrink if needed */
+  overflow-y: auto !important; /* Allow internal scrolling as fallback */
+  overflow-x: hidden !important;
+  max-height: 45vh !important; /* Reduced max height for better fit on mobile */
+  height: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior: contain !important; /* Contain scrolling within this element */
+  padding: 0 2px; /* Reduced padding */
+  scroll-behavior: smooth;
+}
+
+/* Mobile specific - Even more compact grid */
+@media (max-width: 640px) {
+  .f1-level-grid-container {
+    max-height: 40vh !important; /* Even more compact on mobile */
+    padding: 0 1px; /* Minimal padding on mobile */
+  }
+}
+
+/* ALL iOS DEVICES - Prevent any touch scrolling while allowing internal modal scrolling */
+@supports (-webkit-touch-callout: none) {
+  .f1-level-select-modal {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    -webkit-transform: translate(-50%, -50%) !important;
+  }
+  
+  .f1-level-grid-container {
+    -webkit-overflow-scrolling: touch !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+  
+  body.f1-no-scroll,
+  html.f1-no-scroll {
+    -webkit-overflow-scrolling: auto !important;
+    -webkit-touch-callout: none !important;
+  }
+}
+
+/* Ultimate prevention layer */
+
+/* SAFE AREA SUPPORT FOR MOBILE DEVICES */
+.safe-area-inset-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* VIEWPORT CONTAINER - PROPER HEIGHT MANAGEMENT */
+.f1-viewport-container {
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+  display: flex;
+  flex-direction: column;
+}
+
+/* MOBILE SPECIFIC IMPROVEMENTS */
+@media (max-width: 640px) {
+  /* Ensure modal content is fully visible on mobile */
+  .f1-level-select-modal .flex {
+    min-height: 0; /* Allow flex items to shrink below content size */
+  }
+  
+  /* Better text sizing for mobile */
+  .f1-readable {
+    line-height: 1.4;
+    word-wrap: break-word;
+  }
+  
+  /* Improved button sizing for touch targets */
+  .f1-button-responsive {
+    min-height: 44px; /* Apple's recommended minimum touch target size */
+    min-width: 44px;
+  }
+}
+body.f1-no-scroll,
+html.f1-no-scroll {
+  overscroll-behavior: none !important;
+  -webkit-overflow-scrolling: auto !important;
+  touch-action: none !important;
+}
+
+/* MODAL BACKDROP - Prevent any touch events passing through */
+.f1-modal-backdrop {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  touch-action: none !important;
+  overflow: hidden !important;
+  z-index: 50 !important;
+}
+
+.f1-slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Racing-inspired loading animation */
+.f1-loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.f1-loading::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 169, 255, 0.2), transparent);
+  animation: racing 1.5s infinite;
+}
+
+@keyframes racing {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* ========================================
+   RESPONSIVE TYPOGRAPHY SYSTEM
+   ======================================== */
+
+/* Base responsive font sizes using clamp() for fluid scaling - CONSERVATIVE APPROACH */
+:root {
+  /* Hero section typography - scales from mobile to desktop */
+  --hero-title-size: clamp(2rem, 6vw, 3.5rem);            /* 32px -> 56px */
+  --hero-subtitle-size: clamp(0.875rem, 3vw, 1.25rem);    /* 14px -> 20px */
+  --hero-description-size: clamp(0.8rem, 2vw, 1rem);      /* 12.8px -> 16px */
+  
+  /* Game interface typography */
+  --question-title-size: clamp(0.875rem, 3.5vw, 1.5rem);  /* 14px -> 24px */
+  --question-text-size: clamp(0.8rem, 2.8vw, 1.125rem);   /* 12.8px -> 18px */
+  --answer-button-size: clamp(0.8rem, 2.2vw, 1rem);       /* 12.8px -> 16px */
+  --answer-letter-size: clamp(0.7rem, 1.8vw, 0.875rem);   /* 11.2px -> 14px */
+  
+  /* UI elements typography */
+  --header-text-size: clamp(0.8rem, 2.2vw, 1rem);         /* 12.8px -> 16px */
+  --timer-size: clamp(0.875rem, 2.5vw, 1.25rem);          /* 14px -> 20px */
+  --progress-size: clamp(0.7rem, 1.8vw, 0.8rem);          /* 11.2px -> 12.8px */
+  --button-text-size: clamp(0.75rem, 2vw, 0.875rem);      /* 12px -> 14px */
+  
+  /* Modal and dialog typography */
+  --modal-title-size: clamp(1rem, 3vw, 1.25rem);          /* 16px -> 20px */
+  --modal-text-size: clamp(0.8rem, 2.2vw, 0.875rem);      /* 12.8px -> 14px */
+  
+  /* Navigation and menu typography */
+  --nav-text-size: clamp(0.7rem, 1.8vw, 0.8rem);          /* 11.2px -> 12.8px */
+  --menu-text-size: clamp(0.75rem, 2vw, 0.875rem);        /* 12px -> 14px */
+}
+
+/* Custom responsive typography classes */
+.f1-hero-title {
+  font-size: var(--hero-title-size);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.f1-hero-subtitle {
+  font-size: var(--hero-subtitle-size);
+  line-height: 1.3;
+  font-weight: 400;
+}
+
+.f1-hero-description {
+  font-size: var(--hero-description-size);
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.f1-question-title {
+  font-size: var(--question-title-size);
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.f1-question-text {
+  font-size: var(--question-text-size);
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+.f1-answer-button {
+  font-size: var(--answer-button-size);
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.f1-answer-letter {
+  font-size: var(--answer-letter-size);
+  line-height: 1;
+  font-weight: 700;
+}
+
+.f1-header-text {
+  font-size: var(--header-text-size);
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.f1-timer {
+  font-size: var(--timer-size);
+  line-height: 1;
+  font-family: ui-monospace, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-weight: 600;
+}
+
+.f1-progress {
+  font-size: var(--progress-size);
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.f1-button-text {
+  font-size: var(--button-text-size);
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.f1-modal-title {
+  font-size: var(--modal-title-size);
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.f1-modal-text {
+  font-size: var(--modal-text-size);
+  line-height: 1.3;
+  font-weight: 400;
+}
+
+.f1-nav-text {
+  font-size: var(--nav-text-size);
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.f1-menu-text {
+  font-size: var(--menu-text-size);
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+/* Responsive spacing system - CONSERVATIVE APPROACH */
+:root {
+  --spacing-xs: clamp(0.25rem, 0.8vw, 0.4rem);   /* 4px -> 6.4px */
+  --spacing-sm: clamp(0.5rem, 1.5vw, 0.75rem);   /* 8px -> 12px */
+  --spacing-md: clamp(0.75rem, 2.5vw, 1.25rem);  /* 12px -> 20px */
+  --spacing-lg: clamp(1rem, 3vw, 1.5rem);        /* 16px -> 24px */
+  --spacing-xl: clamp(1.25rem, 4vw, 2rem);       /* 20px -> 32px */
+  --spacing-2xl: clamp(1.5rem, 5vw, 2.5rem);     /* 24px -> 40px */
+}
+
+.f1-spacing-xs { padding: var(--spacing-xs); }
+.f1-spacing-sm { padding: var(--spacing-sm); }
+.f1-spacing-md { padding: var(--spacing-md); }
+.f1-spacing-lg { padding: var(--spacing-lg); }
+.f1-spacing-xl { padding: var(--spacing-xl); }
+.f1-spacing-2xl { padding: var(--spacing-2xl); }
+
+/* Responsive container classes */
+.f1-container {
+  max-width: clamp(320px, 95vw, 1200px);
+  margin: 0 auto;
+  padding: var(--spacing-sm);
+}
+
+.f1-game-container {
+  max-width: clamp(320px, 95vw, 900px);
+  margin: 0 auto;
+  padding: var(--spacing-xs);
+}
+
+/* Enhanced button scaling - CONSERVATIVE APPROACH */
+.f1-button-responsive {
+  padding: clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 3vw, 1.25rem);
+  min-height: clamp(2.25rem, 8vw, 2.75rem);
+}
+
+/* Question card responsive layout */
+.f1-question-container {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  border-radius: clamp(0.5rem, 2vw, 1rem);
+}
+
+.f1-answer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 45vw, 400px), 1fr));
+  gap: var(--spacing-sm);
+}
+
+.f1-answer-button-container {
+  min-height: clamp(2.5rem, 10vw, 3.25rem);
+  padding: var(--spacing-sm);
+  border-radius: clamp(0.375rem, 1.5vw, 0.5rem);
+}
+
+/* Device-specific optimizations */
+@media (max-width: 480px) {
+  /* Mobile phones - maximize vertical space */
+  .f1-mobile-optimized {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .f1-answer-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .f1-question-container {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Mobile viewport fixes */
+  .f1-viewport-container {
+    min-height: 100vh;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Hero section mobile spacing adjustments */
+  .f1-hero-mobile-spacing {
+    padding-top: 4rem; /* 64px */
+    padding-bottom: 2rem; /* 32px */
+  }
+  
+  /* Navigation mobile spacing */
+  .f1-nav-mobile-padding {
+    padding-top: 1rem;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  /* Tablets - balance horizontal and vertical space */
+  .f1-answer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Small desktop/large tablet - optimize for horizontal layout */
+  .f1-answer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  /* Large desktop - maximum space utilization */
+  .f1-answer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Prevent content overflow and ensure scrolling only where needed */
+.f1-viewport-container {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.f1-scrollable-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Improved readability across all devices */
+.f1-readable {
+  line-height: 1.4;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure proper contrast for accessibility */
+.f1-high-contrast {
+  color: #ffffff;
+  background-color: #000000;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1d24;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00a9ff;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0080cc;
+}
+
+/* Enhanced Answer Feedback Animations */
+.animate-pulse-once {
+  animation: pulseOnce 1s ease-in-out;
+}
+
+@keyframes pulseOnce {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-shake {
+  animation: shake 0.6s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-8px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(8px);
+  }
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.8s ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(20px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) translateY(-10px);
+  }
+  70% {
+    transform: scale(0.95) translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Additional visual feedback enhancements */
+.correct-answer-glow {
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.5), 0 0 40px rgba(34, 197, 94, 0.3);
+}
+
+.wrong-answer-glow {
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.5), 0 0 40px rgba(239, 68, 68, 0.3);
+}
+
+/* Mobile responsiveness for answer feedback */
+@media (max-width: 640px) {
+  .animate-shake {
+    animation: shakeMobile 0.6s ease-in-out;
+  }
+  
+  @keyframes shakeMobile {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+      transform: translateX(-4px);
+    }
+    20%, 40%, 60%, 80% {
+      transform: translateX(4px);
+    }
+  }
+}
+
+/* COMPLETE MOBILE HOVER ELIMINATION */
+.f1-mobile-button-reset {
+  /* Remove all mobile-specific focus and active states */
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  outline: none !important;
+}
+
+.f1-mobile-button-reset:focus {
+  outline: none !important;
+}
+
+/* DESKTOP-ONLY HOVER: Only apply hover effects on devices that actually support hovering */
+.f1-desktop-only-hover {
+  /* Default: no hover effects (mobile-first) */
+  background-color: #4B5563 !important; /* bg-gray-600 */
+  border-color: #6B7280 !important;     /* border-gray-500 */
+}
+
+/* Only apply hover effects on true desktop devices */
+@media (hover: hover) and (pointer: fine) {
+  .f1-desktop-only-hover:hover {
+    background-color: #6B7280 !important; /* bg-gray-500 */
+    border-color: #9CA3AF !important;     /* border-gray-400 */
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+}
+
+/* MOBILE/TOUCH DEVICES: Completely disable ANY hover-like effects */
+@media (hover: none) or (pointer: coarse) {
+  .f1-desktop-only-hover,
+  .f1-desktop-only-hover:hover,
+  .f1-desktop-only-hover:focus,
+  .f1-desktop-only-hover:active {
+    background-color: #4B5563 !important; /* Always gray-600 */
+    border-color: #6B7280 !important;     /* Always gray-500 */
+    transition: none !important;
+  }
+}
+
+/* IPAD SPECIFIC OPTIMIZATIONS */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: both) {
+  /* iPad home screen non-scrollable layout */
+  .f1-ipad-home-container {
+    height: 100vh !important;
+    height: 100dvh !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  .f1-ipad-hero-section {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding-bottom: 0 !important;
+    /* More aggressive space reservation for navigation - ensure buttons always visible */
+    max-height: calc(100vh - 140px) !important;
+    max-height: calc(100dvh - 140px) !important;
+    /* Additional padding to push content higher */
+    padding-top: 20px !important;
+  }
+  
+  .f1-ipad-hero-content {
+    max-height: 50vh !important; /* Reduced from 55vh to 50vh */
+    overflow: visible !important;
+    text-align: center !important;
+    /* Additional constraint to prevent content overflow */
+    max-width: 90% !important;
+  }
+  
+  .f1-ipad-navigation {
+    flex-shrink: 0 !important;
+    position: static !important;
+    background: rgba(17, 24, 39, 0.95) !important;
+    backdrop-filter: blur(8px) !important;
+    border-top: 1px solid rgba(107, 114, 128, 0.3) !important;
+    /* Increased padding to claim more vertical space */
+    padding: 16px 16px !important;
+    /* Guarantee navigation space - increased min/max heights */
+    min-height: 100px !important;
+    max-height: 140px !important;
+    /* Ensure it stays at bottom but claims adequate space */
+    z-index: 10 !important;
+  }
+  
+  .f1-ipad-nav-row {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px !important; /* Reduced gap for tighter spacing */
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    flex-wrap: wrap !important; /* Allow wrapping if needed */
+    min-height: 44px !important; /* Ensure minimum touch target */
+  }
+  
+  .f1-ipad-nav-button-white {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    /* Slightly reduced padding for better fit */
+    padding: 8px 12px !important;
+    font-size: 0.8125rem !important; /* Slightly smaller font */
+    font-weight: 500 !important;
+    min-height: 40px !important; /* Reduced but still accessible */
+    border-radius: 6px !important;
+    transition: all 0.2s ease !important;
+    /* Ensure buttons don't grow too wide */
+    flex: 0 1 auto !important;
+    white-space: nowrap !important;
+  }
+  
+  .f1-ipad-nav-button-white:hover {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+  }
+  
+  /* Text sizing optimizations for iPad */
+  .f1-ipad-title {
+    font-size: clamp(2.5rem, 5vw, 3rem) !important;
+    line-height: 1.1 !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .f1-ipad-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.125rem) !important;
+    line-height: 1.4 !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .f1-ipad-description {
+    font-size: clamp(0.875rem, 2vw, 0.9375rem) !important;
+    line-height: 1.4 !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .f1-ipad-button {
+    padding: 12px 24px !important;
+    font-size: 1rem !important;
+    min-height: 48px !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  /* User profile positioning for iPad */
+  .f1-ipad-user-profile {
+    position: absolute !important;
+    top: 16px !important;
+    right: 16px !important;
+    z-index: 20 !important;
+  }
+}
+
+/* iPad Landscape Mode - Even More Aggressive Space Management */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .f1-ipad-hero-section {
+    /* In landscape, we have even less vertical space */
+    max-height: calc(100vh - 160px) !important;
+    max-height: calc(100dvh - 160px) !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+  
+  .f1-ipad-hero-content {
+    max-height: 40vh !important; /* Even more compact for landscape */
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  
+  .f1-ipad-navigation {
+    min-height: 120px !important;
+    max-height: 160px !important;
+    padding: 20px 16px !important;
+  }
+  
+  .f1-ipad-title {
+    font-size: clamp(2rem, 4vw, 2.5rem) !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .f1-ipad-subtitle {
+    font-size: clamp(0.875rem, 2vw, 1rem) !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .f1-ipad-description {
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem) !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .f1-ipad-button {
+    padding: 10px 20px !important;
+    margin-bottom: 0.75rem !important;
+    min-height: 44px !important;
+  }
+}
+
+/* iPad Portrait Mode - Optimized for taller screens */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .f1-ipad-hero-section {
+    max-height: calc(100vh - 130px) !important;
+    max-height: calc(100dvh - 130px) !important;
+    padding-top: 30px !important;
+  }
+  
+  .f1-ipad-hero-content {
+    max-height: 55vh !important; /* More space available in portrait */
+  }
+  
+  .f1-ipad-navigation {
+    min-height: 90px !important;
+    max-height: 130px !important;
+    padding: 14px 16px !important;
+  }
+}
+
+/* Disabled state should override all other states */
+.f1-mobile-button-reset:disabled,
+.f1-mobile-button-reset[disabled] {
+  -webkit-tap-highlight-color: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.f1-mobile-button-reset:disabled:focus,
+.f1-mobile-button-reset:disabled:active,
+.f1-mobile-button-reset[disabled]:focus,
+.f1-mobile-button-reset[disabled]:active {
+  outline: none !important;
+  background-color: inherit !important;
+  border-color: inherit !important;
+  opacity: inherit !important;
+  transform: none !important;
+}
+
+/* User Profile Dialog Close Button - Force black color on all devices including iOS */
+.user-profile-dialog button[aria-label="Close"],
+.user-profile-dialog [data-radix-dialog-close] {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+.user-profile-dialog button[aria-label="Close"]:hover,
+.user-profile-dialog [data-radix-dialog-close]:hover {
+  color: #374151 !important;
+  -webkit-text-fill-color: #374151 !important;
+}
