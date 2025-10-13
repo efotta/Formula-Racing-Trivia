@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
       ['ID', 'Level', 'Level Name', 'Question Type', 'Question', 'Correct Answer', 'Wrong Answer 1', 'Wrong Answer 2', 'Wrong Answer 3', 'Created At', 'Updated At']
     ];
 
-    questions.forEach(question => {
+    questions.forEach((question: Question) => {
       const wrongAnswers = question.wrongAnswers || [];
       questionsData.push([
         question.id,
@@ -83,7 +83,7 @@ export async function GET(request: NextRequest) {
       ['Level', 'Level Name', 'Total Questions', 'Sample Question']
     ];
 
-    Object.entries(questionsByLevel).forEach(([level, levelQuestions]) => {
+    Object.entries(questionsByLevel).forEach(([level, levelQuestions]: [string, Question[]]) => {
       const levelNum = parseInt(level);
       const levelName = levelQuestions[0]?.levelName || `Level ${levelNum}`;
       const sampleQuestion = levelQuestions[0]?.question || 'No questions available';
