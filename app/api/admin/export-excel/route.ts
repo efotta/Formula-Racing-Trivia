@@ -83,7 +83,7 @@ export async function GET(request: NextRequest) {
       ['Level', 'Level Name', 'Total Questions', 'Sample Question']
     ];
 
-    Object.entries(questionsByLevel).forEach(([level, levelQuestions]: [string, Question[]]) => {
+    (Object.entries(questionsByLevel) as [string, Question[]][]).forEach(([level, levelQuestions]) => {
       const levelNum = parseInt(level);
       const levelName = levelQuestions[0]?.levelName || `Level ${levelNum}`;
       const sampleQuestion = levelQuestions[0]?.question || 'No questions available';
