@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       users,
       total: users.length,
-      admins: users.filter(u => u.isAdmin && u.isApproved).length
+      admins: users.filter((u): u is typeof users[number] => u.isAdmin && u.isApproved).length
     });
   } catch (error) {
     console.error('Error fetching users:', error);
