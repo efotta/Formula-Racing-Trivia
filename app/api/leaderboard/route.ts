@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
     });
 
     // Sort manually to prioritize Perfect Run times over All Level times
-    const sortedLeaderboard = leaderboard.sort((a, b) => {
+    const sortedLeaderboard = leaderboard.sort((a: typeof leaderboard[number], b: typeof leaderboard[number]) => {
       // Both have Perfect Runs - compare Perfect Run times
       if (a.hasPerfectRun && a.perfectRunTime && b.hasPerfectRun && b.perfectRunTime) {
         return a.perfectRunTime - b.perfectRunTime;
