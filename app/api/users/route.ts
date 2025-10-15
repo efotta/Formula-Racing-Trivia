@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
     // Calculate best times for all completed levels
     const bestTimesByLevel = scores
       .filter((s: typeof scores[number]) => s.completed)
-      .reduce((acc, score) => {
+      .reduce((acc: Record<number, number>, score: typeof scores[number]) => {
         if (!acc[score.level] || score.finalTime < acc[score.level]) {
           acc[score.level] = score.finalTime;
         }
@@ -75,7 +75,7 @@ export async function GET(request: NextRequest) {
     // Calculate perfect completion stats
     const perfectTimesByLevel = scores
       .filter((s: typeof scores[number]) => s.completed && s.questionsCorrect === s.totalQuestions)
-      .reduce((acc, score) => {
+      .reduce((acc: Record<number, number>, score: typeof scores[number]) => {
         if (!acc[score.level] || score.finalTime < acc[score.level]) {
           acc[score.level] = score.finalTime;
         }
