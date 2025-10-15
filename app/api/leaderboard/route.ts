@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
     });
 
     // Add rank to each entry
-    const rankedLeaderboard = sortedLeaderboard.map((entry, index) => ({
+    const rankedLeaderboard = sortedLeaderboard.map((entry: typeof leaderboard[number], index) => ({
       ...entry,
       rank: index + 1
     }));
