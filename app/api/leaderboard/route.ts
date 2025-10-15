@@ -1,4 +1,3 @@
-
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 
@@ -44,7 +43,7 @@ export async function GET(request: NextRequest) {
     });
 
     // Add rank to each entry
-    const rankedLeaderboard = sortedLeaderboard.map((entry: typeof leaderboard[number], index) => ({
+    const rankedLeaderboard = sortedLeaderboard.map((entry: typeof leaderboard[number], index: number) => ({
       ...entry,
       rank: index + 1
     }));
