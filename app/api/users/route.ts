@@ -34,11 +34,11 @@ export async function GET(request: NextRequest) {
     });
 
     // Get completed levels (finished all questions regardless of wrong answers)
-    const completedLevels = [...new Set(scores.filter((s: typeof scores[number]) => s.completed).map((s: typeof scores[number]) => s.level))];
+    const completedLevels: number[] = [...new Set(scores.filter((s: typeof scores[number]) => s.completed).map((s: typeof scores[number]) => s.level))];
     const allLevelsCompleted = completedLevels.length === 5 && completedLevels.every((level: number) => [1,2,3,4,5].includes(level));
     
     // Get perfect levels (0 wrong answers)
-    const perfectLevels = [...new Set(scores.filter((s: typeof scores[number]) => s.completed && s.questionsCorrect === s.totalQuestions).map((s: typeof scores[number]) => s.level))];
+    const perfectLevels: number[] = [...new Set(scores.filter((s: typeof scores[number]) => s.completed && s.questionsCorrect === s.totalQuestions).map((s: typeof scores[number]) => s.level))];
     
     // Calculate best times for all completed levels
     const bestTimesByLevel = scores
