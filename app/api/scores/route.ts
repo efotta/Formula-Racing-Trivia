@@ -93,7 +93,7 @@ async function updateLeaderboard(userId: string, username: string, completedLeve
 
     // Get the actual score records for the best times
     const bestScores = await Promise.all(
-      bestScoresByLevel.map(async (levelGroup) => {
+      bestScoresByLevel.map(async (levelGroup: typeof bestScoresByLevel[number]) => {
         return await prisma.game_scores.findFirst({
           where: {
             userId,
