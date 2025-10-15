@@ -60,7 +60,7 @@ export async function GET(request: NextRequest) {
     // Calculate best overall time if all levels completed (sum of displayed individual times)
     // This ensures the total matches what users see when they add up the individual level times
     const allLevelsTime = allLevelsCompleted 
-      ? Object.values(bestTimesByLevel).reduce((sum: number, time: number) => sum + roundTimeForDisplay(time), 0)
+      ? (Object.values(bestTimesByLevel) as number[]).reduce((sum: number, time: number) => sum + roundTimeForDisplay(time), 0)
       : null;
 
     // Get leaderboard entry to check for perfect run time
