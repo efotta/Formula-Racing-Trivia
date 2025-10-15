@@ -92,7 +92,7 @@ export async function GET(request: NextRequest) {
         ? 'perfectRun' 
         : 'allLevels', // Indicate which time is being displayed
       averageTime: scores.length > 0 
-        ? scores.filter((s: typeof scores[number]) => s.completed).reduce((sum, s) => sum + s.finalTime, 0) / scores.filter((s: typeof scores[number]) => s.completed).length
+        ? scores.filter((s: typeof scores[number]) => s.completed).reduce((sum: number, s: typeof scores[number]) => sum + s.finalTime, 0) / scores.filter((s: typeof scores[number]) => s.completed).length
         : 0,
       completedLevels,
       perfectLevels,
