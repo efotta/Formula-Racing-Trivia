@@ -34,15 +34,15 @@ export async function GET(request: NextRequest) {
     });
 
     // Get completed levels (finished all questions regardless of wrong answers)
-    const completedLevels = [...new Set(scores.filter(s => s.completed).map(s => s.level))];
+    const completedLevels = [...new Set(scores.filter((s: typeof scores[number]) => s.completed).map((s: typeof scores[number]) => s.level))];
     const allLevelsCompleted = completedLevels.length === 5 && completedLevels.every(level => [1,2,3,4,5].includes(level));
     
     // Get perfect levels (0 wrong answers)
-    const perfectLevels = [...new Set(scores.filter(s => s.completed && s.questionsCorrect === s.totalQuestions).map(s => s.level))];
+    const perfectLevels = [...new Set(scores.filter((s: typeof scores[number]) => s.completed && s.questionsCorrect === s.totalQuestions).map((s: typeof scores[number]) => s.level))];
     
     // Calculate best times for all completed levels
     const bestTimesByLevel = scores
-      .filter(s => s.completed)
+      .filter((s: typeof scores[number]) => s.completed)
       .reduce((acc, score) => {
         if (!acc[score.level] || score.finalTime < acc[score.level]) {
           acc[score.level] = score.finalTime;
@@ -74,7 +74,7 @@ export async function GET(request: NextRequest) {
       
     // Calculate perfect completion stats
     const perfectTimesByLevel = scores
-      .filter(s => s.completed && s.questionsCorrect === s.totalQuestions)
+      .filter((s: typeof scores[number]) => s.completed && s.questionsCorrect === s.totalQuestions)
       .reduce((acc, score) => {
         if (!acc[score.level] || score.finalTime < acc[score.level]) {
           acc[score.level] = score.finalTime;
@@ -92,7 +92,7 @@ export async function GET(request: NextRequest) {
         ? 'perfectRun' 
         : 'allLevels', // Indicate which time is being displayed
       averageTime: scores.length > 0 
-        ? scores.filter(s => s.completed).reduce((sum, s) => sum + s.finalTime, 0) / scores.filter(s => s.completed).length
+        ? scores.filter((s: typeof scores[number]) => s.completed).reduce((sum, s) => sum + s.finalTime, 0) / scores.filter((s: typeof scores[number]) => s.completed).length
         : 0,
       completedLevels,
       perfectLevels,
