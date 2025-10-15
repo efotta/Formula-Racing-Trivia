@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Flag, Trophy, Info, MessageSquare, Settings, User, LogOut, Shield, Share, Download } from 'lucide-react';
 import { useGameStore } from '@/lib/game-store';
@@ -347,12 +348,17 @@ export default function HomeScreen({
       {/* Hero Section */}
       <div className="relative flex-1 f1-ipad-hero-section flex items-center justify-center pb-8 sm:pb-12">
         {/* Formula Trivia Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: 'url(/formula-trivia-launch.png)',
-          }}
-        />
+        <div className="absolute inset-0 bg-gray-900">
+          <Image
+            src="/formula-trivia-launch.jpg"
+            alt="Formula Racing Car"
+            fill
+            priority
+            quality={90}
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </div>
         {/* Dark overlay for text readability */}
         <div 
           className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/80"
