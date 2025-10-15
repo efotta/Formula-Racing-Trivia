@@ -1,5 +1,5 @@
 
-const CACHE_NAME = 'formula-racing-trivia-v1';
+const CACHE_NAME = 'formula-racing-trivia-v2';
 const urlsToCache = [
   '/',
   '/manifest.json',
