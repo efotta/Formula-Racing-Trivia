@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Providers from '@/components/providers';
 import PWAInstaller from '@/components/pwa-installer';
+import PWAUpdateNotification from '@/components/pwa-update-notification';
 
 export const metadata: Metadata = {
   title: 'Formula Racing Trivia',
@@ -51,6 +52,7 @@ export default function RootLayout({
         <Providers>
           {children}
           <PWAInstaller />
+          <PWAUpdateNotification />
         </Providers>
       </body>
     </html>

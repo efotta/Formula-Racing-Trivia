@@ -34,15 +34,14 @@ export default function PWAInstaller() {
       setIsAndroid(/Android/.test(userAgent));
     }
 
-    // Register service worker
+    // Register service worker AFTER page load (better performance)
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js')
-        .then((registration) => {
-          console.log('Service Worker registered successfully:', registration);
-        })
-        .catch((error) => {
-          console.log('Service Worker registration failed:', error);
-        });
+      // Wait for page to load
+      if (document.readyState === 'complete') {
+        registerServiceWorker();
+      } else {
+        window.addEventListener('load', registerServiceWorker);
+      }
     }
 
     // Handle PWA install prompt
@@ -53,7 +52,7 @@ export default function PWAInstaller() {
     };
 
     const handleAppInstalled = () => {
-      console.log('PWA was installed');
+      console.log('✅ PWA was installed successfully');
       setIsInstallable(false);
       setDeferredPrompt(null);
       setIsDismissed(true);
@@ -65,8 +64,30 @@ export default function PWAInstaller() {
     return () => {
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
       window.removeEventListener('appinstalled', handleAppInstalled);
+      window.removeEventListener('load', registerServiceWorker);
     };
   }, []);
+
+  const registerServiceWorker = () => {
+    navigator.serviceWorker
+      .register('/sw.js')
+      .then((registration) => {
+        console.log('✅ Service Worker registered:', registration.scope);
+
+        // Check for updates periodically
+        setInterval(() => {
+          registration.update();
+        }, 60000); // Check every minute
+
+        // Listen for controller change (new SW activated)
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          console.log('🔄 Service Worker controller changed');
+        });
+      })
+      .catch((error) => {
+        console.error('❌ Service Worker registration failed:', error);
+      });
+  };
 
   const handleInstallClick = async () => {
     if (deferredPrompt) {
@@ -74,7 +95,7 @@ export default function PWAInstaller() {
       const { outcome } = await deferredPrompt.userChoice;
       
       if (outcome === 'accepted') {
-        console.log('User accepted the install prompt');
+        console.log('✅ User accepted the install prompt');
         setIsDismissed(true);
       }
       
@@ -160,5 +181,6 @@ export default function PWAInstaller() {
   }
 
   // Don't show floating button - Download App is now in the navigation menu
+  // PWA functionality is handled through the navigation button only
   return null;
 }
