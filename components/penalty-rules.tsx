@@ -27,19 +27,19 @@ export default function PenaltyRules({ open, onClose }: PenaltyRulesProps) {
     {
       number: 3,
       name: 'Front Runner',
-      penalties: '+1 second per wrong answer',
+      penalties: '+1 sec per wrong answer',
       color: 'bg-yellow-500'
     },
     {
       number: 4,
       name: 'World Champion',
-      penalties: '+1 second per wrong answer + 5-second Grid Drop penalty',
+      penalties: '+1 sec per wrong answer + 5-sec Grid Drop penalty',
       color: 'bg-orange-500'
     },
     {
       number: 5,
       name: 'Legend',
-      penalties: '+1 second per wrong answer + 10-second Loss of Sponsorship penalty',
+      penalties: '+1 sec per wrong answer + 10-sec Loss of Sponsorship penalty',
       color: 'bg-red-500'
     }
   ];
