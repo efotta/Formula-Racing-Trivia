@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Share, MessageSquare, Copy, ExternalLink } from 'lucide-react';
+import { Share, MessageSquare, Copy } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Image from 'next/image';
 
@@ -18,7 +18,6 @@ interface InviteFriendProps {
 
 export default function InviteFriend({ isOpen, onClose }: InviteFriendProps) {
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [customMessage, setCustomMessage] = useState('');
   const { toast } = useToast();
 
   // Get the current app URL - will be localhost in dev, deployed URL in production
@@ -32,7 +31,9 @@ export default function InviteFriend({ isOpen, onClose }: InviteFriendProps) {
   const defaultMessage = "This free Formula Racing trivia game is fun - give it a try! Fan-created and no ads!";
   const appUrl = getAppUrl();
   const fullMessage = `${defaultMessage}\n\nPlay now: ${appUrl}`;
-  const messageToSend = customMessage || fullMessage;
+  
+  // Editable message state - starts with default message
+  const [editableMessage, setEditableMessage] = useState(fullMessage);
 
   // Check if Web Share API is supported
   const canWebShare = typeof navigator !== 'undefined' && navigator.share;
@@ -50,7 +51,7 @@ export default function InviteFriend({ isOpen, onClose }: InviteFriendProps) {
     try {
       await navigator.share({
         title: 'Formula Trivia Challenge',
-        text: messageToSend,
+        text: editableMessage,
         url: appUrl,
       });
       
@@ -72,8 +73,8 @@ export default function InviteFriend({ isOpen, onClose }: InviteFriendProps) {
 
   const handleSMSShare = () => {
     const smsUrl = phoneNumber 
-      ? `sms:${phoneNumber}?body=${encodeURIComponent(messageToSend)}`
-      : `sms:?body=${encodeURIComponent(messageToSend)}`;
+      ? `sms:${phoneNumber}?body=${encodeURIComponent(editableMessage)}`
+      : `sms:?body=${encodeURIComponent(editableMessage)}`;
     
     window.open(smsUrl, '_self');
     
@@ -85,7 +86,7 @@ export default function InviteFriend({ isOpen, onClose }: InviteFriendProps) {
 
   const handleCopyMessage = async () => {
     try {
-      await navigator.clipboard.writeText(messageToSend);
+      await navigator.clipboard.writeText(editableMessage);
       toast({
         title: "Message copied!",
         description: "The invitation message has been copied to your clipboard.",
@@ -101,7 +102,7 @@ export default function InviteFriend({ isOpen, onClose }: InviteFriendProps) {
 
   const resetForm = () => {
     setPhoneNumber('');
-    setCustomMessage('');
+    setEditableMessage(fullMessage);
   };
 
   const handleClose = () => {
@@ -111,7 +112,7 @@ export default function InviteFriend({ isOpen, onClose }: InviteFriendProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="f1-modal-title flex items-center gap-2">
             <Share className="w-5 h-5 text-blue-500" />
@@ -119,61 +120,46 @@ export default function InviteFriend({ isOpen, onClose }: InviteFriendProps) {
           </DialogTitle>
         </DialogHeader>
         
-        <div className="space-y-4">
-          {/* App Icon Preview */}
-          <div className="flex items-center justify-center p-4 bg-gray-50 rounded-lg">
-            <div className="flex items-center gap-3">
-              <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-gray-200">
-                <Image
-                  src="/formula-racing-trivia-icon.jpg"
-                  alt="Formula Trivia Challenge Icon"
-                  fill
-                  className="object-cover"
-                  onError={(e) => {
-                    // Fallback if icon doesn't exist
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                  }}
-                />
-                <div className="absolute inset-0 flex items-center justify-center text-2xl bg-blue-600 text-white">
-                  🏁
-                </div>
-              </div>
-              <div>
-                <h3 className="font-semibold text-sm">Formula Trivia Challenge</h3>
-                <p className="text-xs text-gray-500">Racing Knowledge Game</p>
+        <div className="space-y-3">
+          {/* App Icon - Medium Size, Centered */}
+          <div className="flex justify-center py-2">
+            <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden shadow-lg">
+              <Image
+                src="/formula-racing-trivia-icon.jpg"
+                alt="Formula Trivia Challenge"
+                fill
+                className="object-cover"
+                priority
+                onError={(e) => {
+                  // Fallback if icon doesn't exist
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                }}
+              />
+              <div className="absolute inset-0 flex items-center justify-center text-3xl sm:text-4xl bg-blue-600 text-white">
+                🏁
               </div>
             </div>
           </div>
 
-          {/* Message Preview */}
+          {/* Editable Message */}
           <div className="space-y-2">
-            <Label className="f1-modal-text">Message Preview:</Label>
-            <div className="p-3 bg-blue-50 border border-blue-200 rounded-md">
-              <p className="f1-modal-text text-sm whitespace-pre-wrap">
-                {messageToSend}
-              </p>
-            </div>
-          </div>
-
-          {/* Custom Message Option */}
-          <div className="space-y-2">
-            <Label htmlFor="custom-message" className="f1-modal-text">
-              Custom Message (Optional):
+            <Label htmlFor="editable-message" className="f1-modal-text text-sm">
+              Your message (you can edit):
             </Label>
             <Textarea
-              id="custom-message"
-              placeholder="Add your own personal message or leave blank for default..."
-              value={customMessage}
-              onChange={(e) => setCustomMessage(e.target.value)}
-              className="min-h-[80px] resize-none f1-modal-text"
+              id="editable-message"
+              value={editableMessage}
+              onChange={(e) => setEditableMessage(e.target.value)}
+              className="min-h-[100px] sm:min-h-[120px] resize-none f1-modal-text text-sm"
+              placeholder="Edit your invitation message..."
             />
           </div>
 
-          {/* Phone Number Input */}
-          <div className="space-y-2">
-            <Label htmlFor="phone" className="f1-modal-text">
-              Friend's Phone Number (Optional for SMS):
+          {/* Phone Number Input - Compact */}
+          <div className="space-y-1.5">
+            <Label htmlFor="phone" className="f1-modal-text text-sm">
+              Phone # (optional for SMS):
             </Label>
             <Input
               id="phone"
@@ -181,20 +167,17 @@ export default function InviteFriend({ isOpen, onClose }: InviteFriendProps) {
               placeholder="e.g., +1234567890"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
-              className="f1-modal-text"
+              className="f1-modal-text text-sm"
             />
-            <p className="text-xs text-gray-500 f1-readable">
-              Leave blank to choose contact when SMS opens
-            </p>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col gap-2 pt-2">
+          <div className="flex flex-col gap-2 pt-1">
             {/* Web Share Button (if supported) */}
             {canWebShare && (
               <Button
                 onClick={handleWebShare}
-                className="w-full bg-green-600 hover:bg-green-700 text-white f1-button-text"
+                className="w-full bg-green-600 hover:bg-green-700 text-white f1-button-text text-sm sm:text-base"
               >
                 <Share className="w-4 h-4 mr-2" />
                 Share with Friends
@@ -205,7 +188,7 @@ export default function InviteFriend({ isOpen, onClose }: InviteFriendProps) {
             <Button
               onClick={handleSMSShare}
               variant="outline"
-              className="w-full f1-button-text"
+              className="w-full f1-button-text text-sm sm:text-base"
             >
               <MessageSquare className="w-4 h-4 mr-2" />
               Send via SMS
@@ -215,7 +198,7 @@ export default function InviteFriend({ isOpen, onClose }: InviteFriendProps) {
             <Button
               onClick={handleCopyMessage}
               variant="outline"
-              className="w-full f1-button-text"
+              className="w-full f1-button-text text-sm sm:text-base"
             >
               <Copy className="w-4 h-4 mr-2" />
               Copy Message
@@ -225,16 +208,10 @@ export default function InviteFriend({ isOpen, onClose }: InviteFriendProps) {
             <Button
               onClick={handleClose}
               variant="ghost"
-              className="w-full f1-button-text"
+              className="w-full f1-button-text text-sm sm:text-base"
             >
               Close
             </Button>
-          </div>
-
-          {/* Help Text */}
-          <div className="text-xs text-gray-500 text-center f1-readable">
-            <p>Choose "Share with Friends" for easy sharing, or "Send via SMS" to text directly.</p>
-            <p className="mt-1">The game icon and link will be included automatically!</p>
           </div>
         </div>
       </DialogContent>
