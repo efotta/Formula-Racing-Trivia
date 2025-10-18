@@ -349,15 +349,17 @@ export default function HomeScreen({
       <div className="relative flex-1 f1-ipad-hero-section flex items-center justify-center pb-8 sm:pb-12">
         {/* Formula Trivia Background Image */}
         <div className="absolute inset-0 bg-gray-900">
-          <Image
-            src="/formula-trivia-launch.jpg"
-            alt="Formula Racing Car"
-            fill
-            priority
-            quality={90}
-            sizes="100vw"
-            className="object-cover object-center"
-          />
+          <div className="relative w-full h-full">
+            <Image
+              src="/formula-trivia-launch.jpg"
+              alt="Formula Racing Car"
+              fill
+              priority
+              quality={90}
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+          </div>
         </div>
         {/* Dark overlay for text readability */}
         <div 
@@ -697,19 +699,63 @@ export default function HomeScreen({
             </div>
 
             {/* iOS Instructions */}
-            {typeof window !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent) && (
-              <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
-                <p className="font-semibold">To install on iOS:</p>
-                <ol className="list-decimal list-inside space-y-2 pl-2">
-                  <li>Tap the <strong>Share</strong> button (square with arrow) in Safari</li>
-                  <li>Scroll down and tap <strong>"Add to Home Screen"</strong></li>
-                  <li>Tap <strong>"Add"</strong> in the top right corner</li>
-                </ol>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-4">
-                  Note: This feature only works in Safari browser on iOS
-                </p>
-              </div>
-            )}
+            {typeof window !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent) && (() => {
+              const isSafari = /Safari/.test(navigator.userAgent) && !/CriOS|Chrome/.test(navigator.userAgent);
+              const isChrome = /CriOS|Chrome/.test(navigator.userAgent);
+              
+              return (
+                <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
+                  {isSafari ? (
+                    <>
+                      <p className="font-semibold">To install on iOS (Safari):</p>
+                      <ol className="list-decimal list-inside space-y-2 pl-2">
+                        <li>Tap the <strong>Share</strong> button <svg className="inline w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg> at the bottom of Safari</li>
+                        <li>In the menu that appears, <strong>scroll down through the options</strong></li>
+                        <li>Tap <strong>"Add to Home Screen"</strong> <svg className="inline w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></li>
+                        <li>Tap <strong>"Add"</strong> in the top right corner to confirm</li>
+                      </ol>
+                      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 mt-3">
+                        <p className="text-xs font-semibold text-blue-900 dark:text-blue-100 mb-1">💡 Tip:</p>
+                        <p className="text-xs text-blue-800 dark:text-blue-200">
+                          If you don't see "Add to Home Screen", make sure you're in <strong>Safari</strong> browser (not Chrome) and scroll down past the app suggestions.
+                        </p>
+                      </div>
+                    </>
+                  ) : isChrome ? (
+                    <>
+                      <p className="font-semibold">Chrome Browser Detected:</p>
+                      <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3">
+                        <p className="text-xs font-semibold text-yellow-900 dark:text-yellow-100 mb-2">⚠️ Installation Not Available in Chrome</p>
+                        <p className="text-xs text-yellow-800 dark:text-yellow-200 mb-3">
+                          To install Formula Racing Trivia as an app on your iPhone, you need to use <strong>Safari</strong> browser.
+                        </p>
+                        <p className="text-xs text-yellow-800 dark:text-yellow-200 font-semibold mb-1">
+                          How to switch to Safari:
+                        </p>
+                        <ol className="list-decimal list-inside space-y-1 pl-2 text-xs text-yellow-800 dark:text-yellow-200">
+                          <li>Copy this page's URL (long press the address bar)</li>
+                          <li>Open the <strong>Safari</strong> app on your iPhone</li>
+                          <li>Paste the URL and go to the page</li>
+                          <li>Then tap "Download App" again for instructions</li>
+                        </ol>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <p className="font-semibold">To install on iOS:</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
+                        Open this page in <strong>Safari</strong> browser, then:
+                      </p>
+                      <ol className="list-decimal list-inside space-y-2 pl-2">
+                        <li>Tap the <strong>Share</strong> button at the bottom</li>
+                        <li>Scroll down and tap <strong>"Add to Home Screen"</strong></li>
+                        <li>Tap <strong>"Add"</strong> to confirm</li>
+                      </ol>
+                    </>
+                  )}
+                </div>
+              );
+            })()}
 
             {/* Android Instructions */}
             {typeof window !== 'undefined' && /Android/.test(navigator.userAgent) && (
@@ -726,11 +772,13 @@ export default function HomeScreen({
             {/* Desktop Instructions */}
             {typeof window !== 'undefined' && !/iPad|iPhone|iPod|Android/.test(navigator.userAgent) && (
               <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
-                <p className="font-semibold">To install on Desktop:</p>
-                <ul className="list-disc list-inside space-y-2 pl-2">
-                  <li>Look for the <strong>install icon</strong> in your browser's address bar</li>
-                  <li>Or check your browser's menu for <strong>"Install app"</strong> option</li>
-                </ul>
+                <p className="font-semibold">Want quick access on Desktop?</p>
+                <p className="mt-3">
+                  Press <strong>Command+D</strong> (Mac) or <strong>Ctrl+D</strong> (Windows) to bookmark this page.
+                </p>
+                <p className="mt-2">
+                  Add it to your Bookmarks Bar so you can return anytime!
+                </p>
               </div>
             )}
 
