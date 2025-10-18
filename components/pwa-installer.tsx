@@ -161,11 +161,13 @@ export default function PWAInstaller() {
 
           {!isIOS && !isIPad && !isAndroid && (
             <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
-              <p className="font-semibold">To install on Desktop:</p>
-              <ul className="list-disc list-inside space-y-2 pl-2">
-                <li>Look for the <strong>install icon</strong> in your browser's address bar</li>
-                <li>Or check your browser's menu for <strong>"Install app"</strong> option</li>
-              </ul>
+              <p className="font-semibold">Want quick access on Desktop?</p>
+              <p className="mt-3">
+                Press <strong>Command+D</strong> (Mac) or <strong>Ctrl+D</strong> (Windows) to bookmark this page.
+              </p>
+              <p className="mt-2">
+                Add it to your Bookmarks Bar so you can return anytime!
+              </p>
             </div>
           )}
 
