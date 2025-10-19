@@ -18,6 +18,7 @@ interface InviteFriendProps {
 
 export default function InviteFriend({ isOpen, onClose }: InviteFriendProps) {
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [iconError, setIconError] = useState(false);
   const { toast } = useToast();
 
   // Get the current app URL - will be localhost in dev, deployed URL in production
@@ -103,6 +104,7 @@ export default function InviteFriend({ isOpen, onClose }: InviteFriendProps) {
   const resetForm = () => {
     setPhoneNumber('');
     setEditableMessage(fullMessage);
+    setIconError(false); // Reset icon error state
   };
 
   const handleClose = () => {
@@ -124,21 +126,22 @@ export default function InviteFriend({ isOpen, onClose }: InviteFriendProps) {
           {/* App Icon - Medium Size, Centered */}
           <div className="flex justify-center py-2">
             <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden shadow-lg">
-              <Image
-                src="/formula-racing-trivia-icon.jpg"
-                alt="Formula Trivia Challenge"
-                fill
-                className="object-cover"
-                priority
-                onError={(e) => {
-                  // Fallback if icon doesn't exist
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                }}
-              />
-              <div className="absolute inset-0 flex items-center justify-center text-3xl sm:text-4xl bg-blue-600 text-white">
-                🏁
-              </div>
+              {!iconError ? (
+                <Image
+                  src="/formula-racing-trivia-icon.jpg"
+                  alt="Formula Trivia Challenge"
+                  fill
+                  className="object-cover"
+                  priority
+                  onError={() => {
+                    setIconError(true);
+                  }}
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center text-3xl sm:text-4xl bg-blue-600 text-white">
+                  🏁
+                </div>
+              )}
             </div>
           </div>
 
