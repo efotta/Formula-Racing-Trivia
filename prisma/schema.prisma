@@ -1,6 +1,6 @@
 generator client {
     provider = "prisma-client-js"
-    binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+    binaryTargets = ["native", "rhel-openssl-1.0.x", "linux-musl-arm64-openssl-3.0.x"]
 }
 
 datasource db {
@@ -59,10 +59,26 @@ model leaderboard {
   hasPerfectRun      Boolean   @default(false)
   perfectRunDate     DateTime?
   perfectRunTime     Float?
+  
+  // New fields for progressive level tracking
+  highest_completed_level  Int?
+  level_1_cumulative_time  Float?
+  level_2_cumulative_time  Float?
+  level_3_cumulative_time  Float?
+  level_4_cumulative_time  Float?
+  level_1_completed_at     DateTime?
+  level_2_completed_at     DateTime?
+  level_3_completed_at     DateTime?
+  level_4_completed_at     DateTime?
+  
   users              users     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([allLevelsCompleted, noMistakes, totalTime])
   @@index([hasPerfectRun, perfectRunTime])
+  @@index([highest_completed_level, level_1_cumulative_time])
+  @@index([highest_completed_level, level_2_cumulative_time])
+  @@index([highest_completed_level, level_3_cumulative_time])
+  @@index([highest_completed_level, level_4_cumulative_time])
 }
 
 model penalty_settings {
