@@ -27,116 +27,123 @@ model feedback {
 model game_scores {
   id               String   @id
   userId           String
-  username         String
   level            Int
-  levelName        String
-  questionsCorrect Int
-  totalQuestions   Int
-  timeInSeconds    Float
-  penalties        Int      @default(0)
-  penaltyTime      Float    @default(0)
-  finalTime        Float
-  completed        Boolean  @default(false)
-  attempt          Int      @default(1)
-  createdAt        DateTime @default(now())
-  users            users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  score            Int
+  maxScore         Int
+  completedAt      DateTime
+  timeTaken        Int?
+  penaltyApplied   Int      @default(0)
+  questionIds      String[]
+  correctAnswers   Int
+  incorrectAnswers Int
 
-  @@index([completed, level])
+  user users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@index([userId, level])
-}
-
-model leaderboard {
-  id                 String    @id
-  userId             String    @unique
-  username           String
-  totalTime          Float
-  completedDate      DateTime
-  attempt            Int       @default(1)
-  allLevelsCompleted Boolean   @default(false)
-  noMistakes         Boolean   @default(false)
-  createdAt          DateTime  @default(now())
-  allLevelsTime      Float?
-  hasPerfectRun      Boolean   @default(false)
-  perfectRunDate     DateTime?
-  perfectRunTime     Float?
-  
-  // New fields for progressive level tracking
-  highest_completed_level  Int?
-  level_1_cumulative_time  Float?
-  level_2_cumulative_time  Float?
-  level_3_cumulative_time  Float?
-  level_4_cumulative_time  Float?
-  level_1_completed_at     DateTime?
-  level_2_completed_at     DateTime?
-  level_3_completed_at     DateTime?
-  level_4_completed_at     DateTime?
-  
-  users              users     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([allLevelsCompleted, noMistakes, totalTime])
-  @@index([hasPerfectRun, perfectRunTime])
-  @@index([highest_completed_level, level_1_cumulative_time])
-  @@index([highest_completed_level, level_2_cumulative_time])
-  @@index([highest_completed_level, level_3_cumulative_time])
-  @@index([highest_completed_level, level_4_cumulative_time])
+  @@index([userId, completedAt])
+  @@index([level, score])
 }
 
 model penalty_settings {
-  id                    String   @id
-  level3PenaltySeconds  Float    @default(1.0)
-  level4PenaltySeconds  Float    @default(1.0)
-  level5PenaltySeconds  Float    @default(1.0)
-  level4GridDropPenalty Float    @default(5.0)
-  level5SponsorPenalty  Float    @default(10.0)
-  updatedAt             DateTime
+  id                  String   @id
+  penalty_per_mistake Int      @default(10)
+  minimum_penalty     Int      @default(0)
+  last_updated        DateTime @default(now())
 }
 
-model perfect_run_sessions {
-  id           String    @id
-  userId       String
-  username     String
-  sessionId    String    @unique
-  startedAt    DateTime  @default(now())
-  completedAt  DateTime?
-  currentLevel Int       @default(1)
-  totalTime    Float?
-  completed    Boolean   @default(false)
-  users        users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+model perfect_runs {
+  id          String   @id
+  userId      String
+  level       Int
+  completedAt DateTime
 
-  @@index([completed, totalTime])
-  @@index([userId, sessionId])
+  user users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, level])
+  @@index([userId])
+  @@index([level])
 }
 
 model questions {
-  id            String       @id
-  level         Int
-  levelName     String
-  question      String
-  correctAnswer String
-  wrongAnswers  String[]
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime
-  questionType  QuestionType @default(Fixed)
+  id        String   @id
+  question  String
+  options   String[]
+  answer    String
+  level     Int
+  createdAt DateTime @default(now())
 
   @@index([level])
 }
 
 model users {
-  id                   String                 @id
-  username             String                 @unique
-  createdAt            DateTime               @default(now())
-  updatedAt            DateTime
-  addedBy              String?
-  isAdmin              Boolean                @default(false)
-  isApproved           Boolean                @default(false)
-  needsPasswordSetup   Boolean                @default(false)
-  password             String?
-  game_scores          game_scores[]
-  leaderboard          leaderboard?
-  perfect_run_sessions perfect_run_sessions[]
+  id                    String         @id
+  username              String         @unique
+  email                 String?        @unique
+  emailVerified         DateTime?
+  password              String?
+  image                 String?
+  twoFactorEnabled      Boolean        @default(false)
+  twoFactorSecret       String?
+  createdAt             DateTime       @default(now())
+  lastLoginAt           DateTime?
+  perfectLevels         Int[]
+  completedLevels       Int[]
+  accessibleLevels      Int[]          @default([1])
+  scores                game_scores[]
+  perfect_runs          perfect_runs[]
+  accounts              Account[]
+  sessions              Session[]
+  Authenticator         Authenticator[]
+
+  @@index([username])
 }
 
-enum QuestionType {
-  Fixed
-  Fluid
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+  user                 users   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, credentialID])
 }
