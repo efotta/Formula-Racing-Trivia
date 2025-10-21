@@ -1,6 +1,6 @@
 
 // Enhanced Service Worker with Stale-While-Revalidate Strategy
-const CACHE_NAME = 'formula-racing-trivia-v4';
+const CACHE_NAME = 'formula-racing-trivia-v5';
 const urlsToCache = [
   '/',
   '/manifest.json',
