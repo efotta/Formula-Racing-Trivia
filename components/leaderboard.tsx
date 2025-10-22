@@ -232,48 +232,51 @@ export default function Leaderboard() {
         </div>
       ) : (
         <div className="space-y-6">
-          {/* CHAMPIONS SECTION */}
-          {(data.perfectRuns.length > 0 || data.allLevels.length > 0) && (
+          {/* PERFECT RUNS SECTION */}
+          {data.perfectRuns.length > 0 && (
             <>
-              <div className="border-b-2 border-yellow-500/30 pb-2">
+              <div className="border-b-2 border-blue-500/30 pb-2">
+                <h2 className="text-2xl font-bold text-blue-500">PERFECT RUNS</h2>
+              </div>
+              <div className="space-y-2">
+                {data.perfectRuns.map((entry) =>
+                  renderEntry(
+                    entry,
+                    'perfectRun',
+                    entry.perfectRunTime,
+                    <Zap className="w-4 h-4 text-blue-400" />,
+                    'PERFECT RUN'
+                  )
+                )}
+              </div>
+            </>
+          )}
+
+          {/* CHAMPIONS SECTION (All Levels) */}
+          {data.allLevels.length > 0 && (
+            <>
+              <div className="border-b-2 border-yellow-500/30 pb-2 mt-8">
                 <h2 className="text-2xl font-bold text-yellow-500">CHAMPIONS</h2>
               </div>
-
-              {data.perfectRuns.length > 0 && (
-                <div className="space-y-2">
-                  {data.perfectRuns.map((entry) =>
-                    renderEntry(
-                      entry,
-                      'perfectRun',
-                      entry.perfectRunTime,
-                      <Zap className="w-4 h-4 text-blue-400" />,
-                      'PERFECT RUN'
-                    )
-                  )}
-                </div>
-              )}
-
-              {data.allLevels.length > 0 && (
-                <div className="space-y-2">
-                  {data.allLevels.map((entry) =>
-                    renderEntry(
-                      entry,
-                      'allLevels',
-                      entry.allLevelsTime,
-                      <Star className="w-4 h-4 text-green-400" />,
-                      'ALL LEVELS'
-                    )
-                  )}
-                </div>
-              )}
+              <div className="space-y-2">
+                {data.allLevels.map((entry) =>
+                  renderEntry(
+                    entry,
+                    'allLevels',
+                    entry.allLevelsTime,
+                    <Star className="w-4 h-4 text-green-400" />,
+                    'ALL LEVELS'
+                  )
+                )}
+              </div>
             </>
           )}
 
           {/* LEVEL LEADERS SECTION */}
           {(data.level4.length > 0 || data.level3.length > 0 || data.level2.length > 0 || data.level1.length > 0) && (
             <>
-              <div className="border-b-2 border-blue-500/30 pb-2 mt-8">
-                <h2 className="text-2xl font-bold text-blue-500">LEVEL LEADERS</h2>
+              <div className="border-b-2 border-purple-500/30 pb-2 mt-8">
+                <h2 className="text-2xl font-bold text-purple-500">LEVEL LEADERS</h2>
               </div>
 
               {data.level4.length > 0 && (
