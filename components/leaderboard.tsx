@@ -151,13 +151,15 @@ export default function Leaderboard() {
 
   if (loading) {
     return (
-      <div className="max-w-6xl mx-auto p-6">
-        <div className="animate-pulse">
-          <div className="h-8 bg-gray-700 rounded w-1/4 mb-6"></div>
-          <div className="space-y-4">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="h-16 bg-gray-700 rounded"></div>
-            ))}
+      <div className="h-full w-full overflow-y-auto">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-700 rounded w-1/4 mb-6"></div>
+            <div className="space-y-4">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div key={i} className="h-16 bg-gray-700 rounded"></div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -174,38 +176,51 @@ export default function Leaderboard() {
   );
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <div className="mb-6">
-        <div className="flex items-center gap-3 mb-4">
-          <Trophy className="w-8 h-8 text-yellow-500" />
-          <h1 className="text-3xl font-bold text-white">Formula Trivia Champions</h1>
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-3 justify-between items-start sm:items-center mb-4">
-          {user && (
+    <div className="h-full w-full overflow-y-auto">
+      {/* Sticky Header */}
+      <div className="sticky top-0 z-10 bg-gray-900 border-b border-gray-800 shadow-lg">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4">
+          {/* Title Row */}
+          <div className="flex items-center justify-between gap-3 mb-3">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-500 flex-shrink-0" />
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white truncate">
+                Formula Trivia Champions
+              </h1>
+            </div>
+            {/* Return to Game Button - Always Visible */}
             <Button
-              onClick={handleFindMyScore}
+              onClick={() => window.location.href = '/'}
               variant="outline"
-              className="flex items-center gap-2"
+              className="flex-shrink-0 px-3 py-2 text-xs sm:px-4 sm:py-2 sm:text-sm hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors"
             >
-              <Search className="w-4 h-4" />
-              Find My Score
+              <span className="sm:hidden">Back</span>
+              <span className="hidden sm:inline">Return to Game</span>
             </Button>
-          )}
-          <Button
-            onClick={() => window.location.href = '/'}
-            variant="outline"
-            className="px-2 py-2 text-xs sm:px-4 sm:py-2 sm:text-sm"
-          >
-            <span className="sm:hidden">Back</span>
-            <span className="hidden sm:inline">Return to Game</span>
-          </Button>
-        </div>
+          </div>
 
-        <p className="text-sm text-gray-400 mb-2">
-          Displaying top 20 scores in each category. Complete levels to see your ranking!
-        </p>
+          {/* Action Buttons Row */}
+          <div className="flex items-center justify-between gap-3">
+            {user && (
+              <Button
+                onClick={handleFindMyScore}
+                variant="outline"
+                className="flex items-center gap-2 text-xs sm:text-sm"
+              >
+                <Search className="w-4 h-4" />
+                <span className="hidden sm:inline">Find My Score</span>
+                <span className="sm:hidden">Find Score</span>
+              </Button>
+            )}
+            <p className="text-xs sm:text-sm text-gray-400 text-right">
+              Top 20 scores in each category
+            </p>
+          </div>
+        </div>
       </div>
+
+      {/* Scrollable Content */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
 
       {!hasAnyEntries ? (
         <div className="text-center py-12">
@@ -322,6 +337,7 @@ export default function Leaderboard() {
           )}
         </div>
       )}
+      </div>
     </div>
   );
 }
