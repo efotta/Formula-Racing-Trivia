@@ -194,24 +194,21 @@ export default function Leaderboard() {
               variant="outline"
               className="flex-shrink-0 px-3 py-2 text-xs sm:px-4 sm:py-2 sm:text-sm hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors"
             >
-              <span className="sm:hidden">Back</span>
-              <span className="hidden sm:inline">Return to Game</span>
+              Return to Game
             </Button>
           </div>
 
           {/* Action Buttons Row */}
           <div className="flex items-center justify-between gap-3">
-            {user && (
-              <Button
-                onClick={handleFindMyScore}
-                variant="outline"
-                className="flex items-center gap-2 text-xs sm:text-sm"
-              >
-                <Search className="w-4 h-4" />
-                <span className="hidden sm:inline">Find My Score</span>
-                <span className="sm:hidden">Find Score</span>
-              </Button>
-            )}
+            <Button
+              onClick={handleFindMyScore}
+              variant="outline"
+              className="flex items-center gap-2 text-xs sm:text-sm"
+            >
+              <Search className="w-4 h-4" />
+              <span className="hidden sm:inline">Find My Score</span>
+              <span className="sm:hidden">Find Score</span>
+            </Button>
             <p className="text-xs sm:text-sm text-gray-400 text-right">
               Top 20 scores in each category
             </p>
