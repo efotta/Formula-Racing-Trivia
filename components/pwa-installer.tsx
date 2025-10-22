@@ -74,15 +74,27 @@ export default function PWAInstaller() {
       .then((registration) => {
         console.log('✅ Service Worker registered:', registration.scope);
 
-        // Check for updates periodically
-        setInterval(() => {
-          registration.update();
+        // Check for updates periodically (only if registration is active)
+        const updateInterval = setInterval(() => {
+          if (registration && registration.active) {
+            registration.update().catch((error) => {
+              console.warn('⚠️ Service Worker update check failed:', error);
+            });
+          }
         }, 60000); // Check every minute
 
         // Listen for controller change (new SW activated)
-        navigator.serviceWorker.addEventListener('controllerchange', () => {
+        const controllerChangeHandler = () => {
           console.log('🔄 Service Worker controller changed');
-        });
+        };
+        
+        navigator.serviceWorker.addEventListener('controllerchange', controllerChangeHandler);
+
+        // Cleanup function
+        return () => {
+          clearInterval(updateInterval);
+          navigator.serviceWorker.removeEventListener('controllerchange', controllerChangeHandler);
+        };
       })
       .catch((error) => {
         console.error('❌ Service Worker registration failed:', error);
