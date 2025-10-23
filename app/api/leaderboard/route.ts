@@ -142,7 +142,7 @@ export async function GET(request: NextRequest) {
       if (userEntry) {
         // Determine which category the user is in
         if (userEntry.hasPerfectRun && userEntry.perfectRunTime) {
-          const rank = perfectRuns.findIndex(e => e.userId === currentUserId) + 1;
+          const rank = perfectRuns.findIndex((e: any) => e.userId === currentUserId) + 1;
           userPosition = {
             category: 'perfectRun',
             rank: rank > 0 ? rank : null,
@@ -150,7 +150,7 @@ export async function GET(request: NextRequest) {
             inTop20: rank > 0 && rank <= 20
           };
         } else if (userEntry.allLevelsCompleted && userEntry.allLevelsTime) {
-          const rank = allLevels.findIndex(e => e.userId === currentUserId) + 1;
+          const rank = allLevels.findIndex((e: any) => e.userId === currentUserId) + 1;
           userPosition = {
             category: 'allLevels',
             rank: rank > 0 ? rank : null,
@@ -158,7 +158,7 @@ export async function GET(request: NextRequest) {
             inTop20: rank > 0 && rank <= 20
           };
         } else if (userEntry.highest_completed_level === 4 && userEntry.level_4_cumulative_time) {
-          const rank = level4.findIndex(e => e.userId === currentUserId) + 1;
+          const rank = level4.findIndex((e: any) => e.userId === currentUserId) + 1;
           userPosition = {
             category: 'level4',
             rank: rank > 0 ? rank : null,
@@ -166,7 +166,7 @@ export async function GET(request: NextRequest) {
             inTop20: rank > 0 && rank <= 20
           };
         } else if (userEntry.highest_completed_level === 3 && userEntry.level_3_cumulative_time) {
-          const rank = level3.findIndex(e => e.userId === currentUserId) + 1;
+          const rank = level3.findIndex((e: any) => e.userId === currentUserId) + 1;
           userPosition = {
             category: 'level3',
             rank: rank > 0 ? rank : null,
@@ -174,7 +174,7 @@ export async function GET(request: NextRequest) {
             inTop20: rank > 0 && rank <= 20
           };
         } else if (userEntry.highest_completed_level === 2 && userEntry.level_2_cumulative_time) {
-          const rank = level2.findIndex(e => e.userId === currentUserId) + 1;
+          const rank = level2.findIndex((e: any) => e.userId === currentUserId) + 1;
           userPosition = {
             category: 'level2',
             rank: rank > 0 ? rank : null,
@@ -182,7 +182,7 @@ export async function GET(request: NextRequest) {
             inTop20: rank > 0 && rank <= 20
           };
         } else if (userEntry.highest_completed_level === 1 && userEntry.level_1_cumulative_time) {
-          const rank = level1.findIndex(e => e.userId === currentUserId) + 1;
+          const rank = level1.findIndex((e: any) => e.userId === currentUserId) + 1;
           userPosition = {
             category: 'level1',
             rank: rank > 0 ? rank : null,
@@ -195,12 +195,12 @@ export async function GET(request: NextRequest) {
 
     // Return categorized leaderboard
     return NextResponse.json({
-      perfectRuns: perfectRuns.map((entry, index) => ({ ...entry, rank: index + 1 })),
-      allLevels: allLevels.map((entry, index) => ({ ...entry, rank: index + 1 })),
-      level4: level4.map((entry, index) => ({ ...entry, rank: index + 1 })),
-      level3: level3.map((entry, index) => ({ ...entry, rank: index + 1 })),
-      level2: level2.map((entry, index) => ({ ...entry, rank: index + 1 })),
-      level1: level1.map((entry, index) => ({ ...entry, rank: index + 1 })),
+      perfectRuns: perfectRuns.map((entry: any, index: number) => ({ ...entry, rank: index + 1 })),
+      allLevels: allLevels.map((entry: any, index: number) => ({ ...entry, rank: index + 1 })),
+      level4: level4.map((entry: any, index: number) => ({ ...entry, rank: index + 1 })),
+      level3: level3.map((entry: any, index: number) => ({ ...entry, rank: index + 1 })),
+      level2: level2.map((entry: any, index: number) => ({ ...entry, rank: index + 1 })),
+      level1: level1.map((entry: any, index: number) => ({ ...entry, rank: index + 1 })),
       userPosition
     });
   } catch (error) {

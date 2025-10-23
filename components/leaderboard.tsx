@@ -118,49 +118,30 @@ export default function Leaderboard() {
   ) => {
     const isCurrentUser = !!(user && user.username === entry.username);
     
-    // Create mobile-friendly shortened labels
-    const getMobileLabel = (label: string) => {
-      switch (label) {
-        case 'PERFECT RUN': return 'PR';
-        case 'ALL LEVELS': return 'ALL';
-        case 'LEVEL 4': return 'L4';
-        case 'LEVEL 3': return 'L3';
-        case 'LEVEL 2': return 'L2';
-        case 'LEVEL 1': return 'L1';
-        default: return label;
-      }
-    };
-    
     return (
       <div
         key={`${category}-${entry.userId}`}
         ref={isCurrentUser ? userEntryRef : null}
-        className={`border rounded-lg p-2 sm:p-3 transition-all duration-200 hover:shadow-lg ${getRankBg(entry.rank, isCurrentUser)}`}
+        className={`border rounded-lg p-3 transition-all duration-200 hover:shadow-lg ${getRankBg(entry.rank, isCurrentUser)}`}
       >
-        <div className="flex items-center gap-1 sm:gap-3">
-          <div className="text-base sm:text-lg font-bold text-gray-300 min-w-[2rem] sm:min-w-[3rem]">
+        <div className="flex items-center gap-3">
+          <div className="text-lg font-bold text-gray-300 min-w-[3rem]">
             {getMedalEmoji(entry.rank)}
           </div>
-          <div className="flex items-center gap-1 sm:gap-2 flex-1 min-w-0">
+          <div className="flex items-center gap-2 flex-1">
             {icon}
-            {/* Show shortened label on mobile, full label on desktop */}
-            <span className="text-xs sm:hidden font-medium text-gray-400 flex-shrink-0">
-              {getMobileLabel(categoryLabel)}:
-            </span>
-            <span className="hidden sm:inline text-sm font-medium text-gray-400 flex-shrink-0">
-              {categoryLabel}:
-            </span>
-            <span className="font-semibold text-white truncate">
+            <span className="text-sm font-medium text-gray-400">{categoryLabel}:</span>
+            <span className="font-semibold text-white">
               {entry.username}
             </span>
             {isCurrentUser && (
               <Star 
-                className="w-5 h-5 sm:w-7 sm:h-7 text-yellow-400 fill-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.7)] animate-pulse flex-shrink-0" 
+                className="w-7 h-7 text-yellow-400 fill-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.7)] animate-pulse" 
                 strokeWidth={2.5}
               />
             )}
           </div>
-          <div className="text-xs sm:text-sm font-mono text-gray-300 flex-shrink-0 text-right">
+          <div className="text-sm font-mono text-gray-300">
             {formatTime(time)}
           </div>
         </div>
@@ -198,24 +179,24 @@ export default function Leaderboard() {
     <div className="h-full w-full overflow-y-auto">
       {/* Sticky Header */}
       <div className="sticky top-0 z-10 bg-gray-900 border-b border-gray-800 shadow-lg">
-        <div className="max-w-6xl mx-auto px-3 sm:px-6 py-3 sm:py-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4">
           {/* Row 1: Title Only */}
-          <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
-            <Trophy className="w-5 h-5 sm:w-8 sm:h-8 text-yellow-500 flex-shrink-0" />
-            <h1 className="text-lg sm:text-2xl md:text-3xl font-bold text-white">
+          <div className="flex items-center gap-3 mb-3">
+            <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-500 flex-shrink-0" />
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
               Formula Trivia Champions
             </h1>
           </div>
 
           {/* Row 2: Info Text (Centered) */}
-          <div className="text-center mb-2 sm:mb-3">
+          <div className="text-center mb-3">
             <p className="text-xs sm:text-sm text-gray-400">
               Top 20 scores in each category
             </p>
           </div>
 
           {/* Row 3: Action Buttons */}
-          <div className="flex items-center justify-between gap-2 sm:gap-3">
+          <div className="flex items-center justify-between gap-3">
             <Button
               onClick={handleFindMyScore}
               variant="outline"
@@ -237,7 +218,7 @@ export default function Leaderboard() {
       </div>
 
       {/* Scrollable Content */}
-      <div className="max-w-6xl mx-auto px-3 sm:px-6 py-4 sm:py-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
 
       {!hasAnyEntries ? (
         <div className="text-center py-12">
@@ -250,7 +231,7 @@ export default function Leaderboard() {
           </p>
         </div>
       ) : (
-        <div className="space-y-4 sm:space-y-6">
+        <div className="space-y-6">
           {/* PERFECT RUNS SECTION */}
           {data.perfectRuns.length > 0 && (
             <>
@@ -274,8 +255,11 @@ export default function Leaderboard() {
           {/* CHAMPIONS SECTION (All Levels) */}
           {data.allLevels.length > 0 && (
             <>
-              <div className="border-b-2 border-yellow-500/30 pb-2 mt-6 sm:mt-8">
-                <h2 className="text-2xl font-bold text-yellow-500">CHAMPIONS</h2>
+              <div className="border-b-2 border-yellow-500/30 pb-2 mt-8">
+                <h2 className="text-2xl font-bold text-yellow-500">
+                  <span className="sm:hidden">ALL LEVEL CHAMPIONS</span>
+                  <span className="hidden sm:inline">CHAMPIONS</span>
+                </h2>
               </div>
               <div className="space-y-2">
                 {data.allLevels.map((entry) =>
@@ -294,7 +278,7 @@ export default function Leaderboard() {
           {/* LEVEL LEADERS SECTION */}
           {(data.level4.length > 0 || data.level3.length > 0 || data.level2.length > 0 || data.level1.length > 0) && (
             <>
-              <div className="border-b-2 border-purple-500/30 pb-2 mt-6 sm:mt-8">
+              <div className="border-b-2 border-purple-500/30 pb-2 mt-8">
                 <h2 className="text-2xl font-bold text-purple-500">LEVEL LEADERS</h2>
               </div>
 
