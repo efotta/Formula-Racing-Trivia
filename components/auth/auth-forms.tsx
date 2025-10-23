@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { User, CheckCircle, AlertCircle, LogIn, UserPlus, Eye, EyeOff, ArrowRight, X } from 'lucide-react';
 import { useAuth } from '@/components/providers';
+import ForgotPasswordDialog from '@/components/forgot-password-dialog';
 
 interface AuthFormsProps {
   isOpen: boolean;
@@ -112,6 +113,7 @@ export default function AuthForms({ isOpen, onClose, onSuccess }: AuthFormsProps
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [step, setStep] = useState<'username' | 'login' | 'register'>('username');
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
   
   // Username validation state
   const [isCheckingUsername, setIsCheckingUsername] = useState(false);
@@ -372,18 +374,6 @@ export default function AuthForms({ isOpen, onClose, onSuccess }: AuthFormsProps
         </div>
       )}
 
-      {step === 'register' && (
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-          <div className="flex items-start gap-2">
-            <AlertCircle className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />
-            <div className="text-xs text-amber-700">
-              <p className="font-semibold mb-1">Privacy Notice</p>
-              <p>Save your password safely - it cannot be reset. No personal information required.</p>
-            </div>
-          </div>
-        </div>
-      )}
-
       <div className="space-y-3">
         <Button
           type="submit"
@@ -394,6 +384,22 @@ export default function AuthForms({ isOpen, onClose, onSuccess }: AuthFormsProps
           {isLoading ? 'Processing...' : 
            step === 'login' ? `Log in as ${username}` : 'Create Account & Enter Game'}
         </Button>
+        
+        {step === 'login' && (
+          <div className="text-center">
+            <button
+              type="button"
+              onClick={() => {
+                onClose();
+                setTimeout(() => setShowForgotPassword(true), 300);
+              }}
+              className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+              disabled={isLoading}
+            >
+              Forgot Password?
+            </button>
+          </div>
+        )}
         
         <Button
           type="button"
@@ -441,6 +447,12 @@ export default function AuthForms({ isOpen, onClose, onSuccess }: AuthFormsProps
           {step === 'username' ? renderUsernameForm() : renderAuthForm()}
         </div>
       </DialogContent>
+
+      {/* Forgot Password Dialog */}
+      <ForgotPasswordDialog
+        isOpen={showForgotPassword}
+        onClose={() => setShowForgotPassword(false)}
+      />
     </Dialog>
   );
 }
