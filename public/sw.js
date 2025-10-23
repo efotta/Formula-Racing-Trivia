@@ -1,17 +1,19 @@
 
 // Enhanced Service Worker with Stale-While-Revalidate Strategy
-const CACHE_NAME = 'formula-racing-trivia-v5';
+// Version bumped to v8 to force cache update for new auth features
+const CACHE_NAME = 'formula-racing-trivia-v8';
 const urlsToCache = [
   '/',
   '/manifest.json',
   '/icon-192x192.png',
   '/icon-512x512.png',
-  '/formula-trivia-launch.jpg'
+  '/formula-trivia-launch.jpg',
+  '/apple-touch-icon.png'
 ];
 
 // Install service worker and cache core assets
 self.addEventListener('install', (event) => {
-  console.log('[SW] Installing Service Worker v4...');
+  console.log('[SW] Installing Service Worker v8...');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
@@ -30,7 +32,7 @@ self.addEventListener('install', (event) => {
 
 // Activate service worker and clean up old caches
 self.addEventListener('activate', (event) => {
-  console.log('[SW] Activating Service Worker v4...');
+  console.log('[SW] Activating Service Worker v8...');
   event.waitUntil(
     caches.keys()
       .then((cacheNames) => {
@@ -44,7 +46,7 @@ self.addEventListener('activate', (event) => {
         );
       })
       .then(() => {
-        console.log('[SW] Service Worker v4 activated! 🚀');
+        console.log('[SW] Service Worker v8 activated! 🚀');
         console.log('[SW] Taking control of all clients');
         return self.clients.claim();
       })
@@ -54,7 +56,7 @@ self.addEventListener('activate', (event) => {
           clients.forEach((client) => {
             client.postMessage({
               type: 'SW_UPDATED',
-              version: 'v4',
+              version: 'v8',
               message: 'New version available!'
             });
           });
