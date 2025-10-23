@@ -114,7 +114,8 @@ export default function Leaderboard() {
     category: string,
     time: number,
     icon: React.ReactNode,
-    categoryLabel: string
+    categoryLabel: string,
+    mobileLabel: string
   ) => {
     const isCurrentUser = !!(user && user.username === entry.username);
     
@@ -122,26 +123,32 @@ export default function Leaderboard() {
       <div
         key={`${category}-${entry.userId}`}
         ref={isCurrentUser ? userEntryRef : null}
-        className={`border rounded-lg p-3 transition-all duration-200 hover:shadow-lg ${getRankBg(entry.rank, isCurrentUser)}`}
+        className={`border rounded-lg p-2.5 sm:p-3 transition-all duration-200 hover:shadow-lg ${getRankBg(entry.rank, isCurrentUser)}`}
       >
-        <div className="flex items-center gap-3">
-          <div className="text-lg font-bold text-gray-300 min-w-[3rem]">
-            {getMedalEmoji(entry.rank)}
-          </div>
-          <div className="flex items-center gap-2 flex-1">
+        <div className="flex items-center justify-between gap-2">
+          {/* Left side: Rank, Icon, Label, Username, Star */}
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-1 min-w-0">
+            <div className="text-base sm:text-lg font-bold text-gray-300 flex-shrink-0">
+              {getMedalEmoji(entry.rank)}
+            </div>
             {icon}
-            <span className="text-sm font-medium text-gray-400">{categoryLabel}:</span>
-            <span className="font-semibold text-white">
+            <span className="text-xs sm:text-sm font-medium text-gray-400 flex-shrink-0">
+              <span className="sm:hidden">{mobileLabel}</span>
+              <span className="hidden sm:inline">{categoryLabel}</span>:
+            </span>
+            <span className="font-semibold text-white text-sm sm:text-base truncate">
               {entry.username}
             </span>
             {isCurrentUser && (
               <Star 
-                className="w-7 h-7 text-yellow-400 fill-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.7)] animate-pulse" 
+                className="w-5 h-5 sm:w-7 sm:h-7 text-yellow-400 fill-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.7)] animate-pulse flex-shrink-0" 
                 strokeWidth={2.5}
               />
             )}
           </div>
-          <div className="text-sm font-mono text-gray-300">
+          
+          {/* Right side: Time (right-aligned) */}
+          <div className="text-xs sm:text-sm font-mono text-gray-300 flex-shrink-0 text-right">
             {formatTime(time)}
           </div>
         </div>
@@ -245,7 +252,8 @@ export default function Leaderboard() {
                     'perfectRun',
                     entry.perfectRunTime,
                     <Zap className="w-4 h-4 text-blue-400" />,
-                    'PERFECT RUN'
+                    'PERFECT RUN',
+                    'PR'
                   )
                 )}
               </div>
@@ -268,7 +276,8 @@ export default function Leaderboard() {
                     'allLevels',
                     entry.allLevelsTime,
                     <Star className="w-4 h-4 text-green-400" />,
-                    'ALL LEVELS'
+                    'ALL LEVELS',
+                    'ALL'
                   )
                 )}
               </div>
@@ -290,7 +299,8 @@ export default function Leaderboard() {
                       'level4',
                       entry.level_4_cumulative_time!,
                       <BarChart3 className="w-4 h-4 text-purple-400" />,
-                      'LEVEL 4'
+                      'LEVEL 4',
+                      'L4'
                     )
                   )}
                 </div>
@@ -304,7 +314,8 @@ export default function Leaderboard() {
                       'level3',
                       entry.level_3_cumulative_time!,
                       <BarChart3 className="w-4 h-4 text-purple-400" />,
-                      'LEVEL 3'
+                      'LEVEL 3',
+                      'L3'
                     )
                   )}
                 </div>
@@ -318,7 +329,8 @@ export default function Leaderboard() {
                       'level2',
                       entry.level_2_cumulative_time!,
                       <BarChart3 className="w-4 h-4 text-purple-400" />,
-                      'LEVEL 2'
+                      'LEVEL 2',
+                      'L2'
                     )
                   )}
                 </div>
@@ -332,7 +344,8 @@ export default function Leaderboard() {
                       'level1',
                       entry.level_1_cumulative_time!,
                       <BarChart3 className="w-4 h-4 text-purple-400" />,
-                      'LEVEL 1'
+                      'LEVEL 1',
+                      'L1'
                     )
                   )}
                 </div>
