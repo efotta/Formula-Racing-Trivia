@@ -115,16 +115,46 @@ async function updateLeaderboard(userId: string, username: string, completedLeve
     const userCompletedLevels = validBestScores.map(score => score!.level);
     const allLevelsCompleted = allLevels.every(level => userCompletedLevels.includes(level));
 
-    if (allLevelsCompleted) {
-      // Helper function to round time consistently (same as frontend formatting)
-      const roundTimeForDisplay = (seconds: number) => {
-        const minutes = Math.floor(seconds / 60);
-        const remainingSeconds = Math.floor(seconds % 60);
-        return minutes * 60 + remainingSeconds;
-      };
+    // Helper function to round time consistently (same as frontend formatting)
+    const roundTimeForDisplay = (seconds: number) => {
+      const minutes = Math.floor(seconds / 60);
+      const remainingSeconds = Math.floor(seconds % 60);
+      return minutes * 60 + remainingSeconds;
+    };
 
+    // Calculate cumulative times for levels 1-4
+    const level1Score = validBestScores.find(s => s!.level === 1);
+    const level2Score = validBestScores.find(s => s!.level === 2);
+    const level3Score = validBestScores.find(s => s!.level === 3);
+    const level4Score = validBestScores.find(s => s!.level === 4);
+
+    const level1Time = level1Score ? roundTimeForDisplay(level1Score.finalTime) : null;
+    const level2Time = level1Time && level2Score 
+      ? level1Time + roundTimeForDisplay(level2Score.finalTime) 
+      : null;
+    const level3Time = level2Time && level3Score 
+      ? level2Time + roundTimeForDisplay(level3Score.finalTime) 
+      : null;
+    const level4Time = level3Time && level4Score 
+      ? level3Time + roundTimeForDisplay(level4Score.finalTime) 
+      : null;
+
+    // Determine highest completed level (1-4 only, 5 is tracked by allLevelsCompleted)
+    let highestLevel = 0;
+    if (level4Score) highestLevel = 4;
+    else if (level3Score) highestLevel = 3;
+    else if (level2Score) highestLevel = 2;
+    else if (level1Score) highestLevel = 1;
+
+    // Get existing entry to preserve perfect run data if it exists
+    const existingEntry = await prisma.leaderboard.findUnique({
+      where: { userId }
+    });
+
+    if (allLevelsCompleted) {
+      // User completed all 5 levels
+      
       // Calculate total time from best scores (this is "All Levels" time)
-      // Use the same rounding logic as the individual level displays for consistency
       const allLevelsTime = validBestScores.reduce((sum, score) => sum + roundTimeForDisplay(score!.finalTime), 0);
       
       // Check if completed without mistakes (all best attempts should be 1)
@@ -134,11 +164,6 @@ async function updateLeaderboard(userId: string, username: string, completedLeve
       const completedDate = validBestScores.sort((a, b) => 
         new Date(b!.createdAt).getTime() - new Date(a!.createdAt).getTime()
       )[0]!.createdAt;
-
-      // Get existing entry to preserve perfect run data if it exists
-      const existingEntry = await prisma.leaderboard.findUnique({
-        where: { userId }
-      });
 
       // For display purposes, use the better time (perfect run if available, otherwise all levels)
       const displayTime = existingEntry?.perfectRunTime && existingEntry.perfectRunTime < allLevelsTime 
@@ -155,6 +180,16 @@ async function updateLeaderboard(userId: string, username: string, completedLeve
           allLevelsCompleted: true,
           noMistakes,
           allLevelsTime, // Always update the sum of best individual times
+          // PRESERVE individual level data even when all levels are completed
+          highest_completed_level: highestLevel > 0 ? highestLevel : undefined,
+          level_1_cumulative_time: level1Time,
+          level_2_cumulative_time: level2Time,
+          level_3_cumulative_time: level3Time,
+          level_4_cumulative_time: level4Time,
+          level_1_completed_at: level1Score?.createdAt,
+          level_2_completed_at: level2Score?.createdAt,
+          level_3_completed_at: level3Score?.createdAt,
+          level_4_completed_at: level4Score?.createdAt,
         },
         create: {
           id: `leaderboard_${userId}_${Date.now()}`,
@@ -166,6 +201,76 @@ async function updateLeaderboard(userId: string, username: string, completedLeve
           noMistakes,
           allLevelsTime,
           hasPerfectRun: false, // Will be updated by perfect run logic
+          highest_completed_level: highestLevel > 0 ? highestLevel : undefined,
+          level_1_cumulative_time: level1Time,
+          level_2_cumulative_time: level2Time,
+          level_3_cumulative_time: level3Time,
+          level_4_cumulative_time: level4Time,
+          level_1_completed_at: level1Score?.createdAt,
+          level_2_completed_at: level2Score?.createdAt,
+          level_3_completed_at: level3Score?.createdAt,
+          level_4_completed_at: level4Score?.createdAt,
+        }
+      });
+    } else if (highestLevel > 0) {
+      // User has NOT completed all 5 levels but has completed at least one level
+      // This ensures users show up in Level 1-4 leaderboards
+      
+      // Use the latest level completion date as the completed date
+      const latestLevelScore = validBestScores.sort((a, b) => 
+        new Date(b!.createdAt).getTime() - new Date(a!.createdAt).getTime()
+      )[0];
+      
+      const completedDate = latestLevelScore!.createdAt;
+      
+      // Use the cumulative time up to the highest level as the display time
+      let displayTime = 0;
+      if (highestLevel >= 1 && level1Time) displayTime = level1Time;
+      if (highestLevel >= 2 && level2Time) displayTime = level2Time;
+      if (highestLevel >= 3 && level3Time) displayTime = level3Time;
+      if (highestLevel >= 4 && level4Time) displayTime = level4Time;
+
+      await prisma.leaderboard.upsert({
+        where: { userId },
+        update: {
+          username,
+          totalTime: displayTime,
+          completedDate,
+          allLevelsCompleted: false,
+          highest_completed_level: highestLevel,
+          level_1_cumulative_time: level1Time,
+          level_2_cumulative_time: level2Time,
+          level_3_cumulative_time: level3Time,
+          level_4_cumulative_time: level4Time,
+          level_1_completed_at: level1Score?.createdAt,
+          level_2_completed_at: level2Score?.createdAt,
+          level_3_completed_at: level3Score?.createdAt,
+          level_4_completed_at: level4Score?.createdAt,
+          // Preserve perfect run data if it exists
+          ...(existingEntry?.hasPerfectRun && {
+            hasPerfectRun: existingEntry.hasPerfectRun,
+            perfectRunTime: existingEntry.perfectRunTime,
+            perfectRunDate: existingEntry.perfectRunDate,
+          })
+        },
+        create: {
+          id: `leaderboard_${userId}_${Date.now()}`,
+          userId,
+          username,
+          totalTime: displayTime,
+          completedDate,
+          allLevelsCompleted: false,
+          noMistakes: false,
+          hasPerfectRun: false,
+          highest_completed_level: highestLevel,
+          level_1_cumulative_time: level1Time,
+          level_2_cumulative_time: level2Time,
+          level_3_cumulative_time: level3Time,
+          level_4_cumulative_time: level4Time,
+          level_1_completed_at: level1Score?.createdAt,
+          level_2_completed_at: level2Score?.createdAt,
+          level_3_completed_at: level3Score?.createdAt,
+          level_4_completed_at: level4Score?.createdAt,
         }
       });
     }
@@ -219,6 +324,18 @@ async function updatePerfectRunSession(sessionId: string, userId: string, userna
           ...(shouldUpdateDisplay && {
             totalTime: perfectRunTime, // Update display time if this is better
             completedDate: completedSession.completedAt!
+          }),
+          // Preserve individual level data
+          ...(existingEntry?.highest_completed_level && {
+            highest_completed_level: existingEntry.highest_completed_level,
+            level_1_cumulative_time: existingEntry.level_1_cumulative_time,
+            level_2_cumulative_time: existingEntry.level_2_cumulative_time,
+            level_3_cumulative_time: existingEntry.level_3_cumulative_time,
+            level_4_cumulative_time: existingEntry.level_4_cumulative_time,
+            level_1_completed_at: existingEntry.level_1_completed_at,
+            level_2_completed_at: existingEntry.level_2_completed_at,
+            level_3_completed_at: existingEntry.level_3_completed_at,
+            level_4_completed_at: existingEntry.level_4_completed_at,
           })
         },
         create: {
