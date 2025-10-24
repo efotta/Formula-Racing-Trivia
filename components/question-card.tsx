@@ -18,12 +18,15 @@ export default function QuestionCard() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioUnlockedRef = useRef<boolean>(false);
   
-  // Initialize audio with iOS Safari compatibility
+  // Initialize audio with iOS Safari compatibility - OPTIMIZED FOR INSTANT PLAYBACK
   useEffect(() => {
     try {
       audioRef.current = new Audio('/audio/trivia_wrong_answer_ding.mp3');
-      audioRef.current.volume = 0.8; // Slightly lower volume for better UX
-      audioRef.current.preload = 'auto';
+      audioRef.current.volume = 1.0; // Full volume for louder sound
+      audioRef.current.preload = 'auto'; // Pre-load for instant playback
+      
+      // Force load the audio immediately for zero-lag playback
+      audioRef.current.load();
       
       // iOS Safari requires user interaction to unlock audio
       // We'll unlock it on first touch/click anywhere on the page
@@ -34,7 +37,7 @@ export default function QuestionCard() {
             audioRef.current!.pause();
             audioRef.current!.currentTime = 0;
             audioUnlockedRef.current = true;
-            console.log('✅ Audio unlocked for iOS');
+            console.log('✅ Audio unlocked and ready for instant playback');
           }).catch(() => {
             // Silent fail - will try again on next interaction
           });
@@ -54,36 +57,37 @@ export default function QuestionCard() {
     }
   }, []);
   
-  // Function to play wrong answer audio with iOS Safari support
+  // Function to play wrong answer audio - OPTIMIZED FOR INSTANT PLAYBACK (NO LAG)
   const playWrongAnswerSound = () => {
     try {
       if (audioRef.current) {
-        // Reset audio to beginning
+        // Reset to beginning for instant replay
         audioRef.current.currentTime = 0;
         
-        // Play the audio - iOS Safari should work now since we're in a user interaction
+        // Play IMMEDIATELY - no pause, no load, just play
         const playPromise = audioRef.current.play();
         
         if (playPromise !== undefined) {
           playPromise
             .then(() => {
-              console.log('🔊 Wrong answer sound played');
+              console.log('🔊 Wrong answer sound played instantly');
             })
             .catch(error => {
+              console.error('🔇 Audio playback failed:', error);
               // If still fails on iOS, try to unlock again
               if (!audioUnlockedRef.current) {
                 console.warn('🔇 Audio still locked on iOS, attempting to unlock...');
                 audioRef.current?.play().catch(e => {
                   console.warn('Audio playback blocked by browser:', e);
                 });
-              } else {
-                console.warn('Audio playback failed:', error);
               }
             });
         }
+      } else {
+        console.warn('🔇 Audio ref is null, cannot play sound');
       }
     } catch (error) {
-      console.warn('Audio playback error:', error);
+      console.error('Audio playback error:', error);
     }
   };
   
