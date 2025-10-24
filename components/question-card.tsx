@@ -16,28 +16,71 @@ export default function QuestionCard() {
   
   // Audio ref for wrong answer feedback
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioUnlockedRef = useRef<boolean>(false);
   
-  // Initialize audio
+  // Initialize audio with iOS Safari compatibility
   useEffect(() => {
     try {
-      audioRef.current = new Audio('/audio/f1_radio_sound-293747.mp3');
-      audioRef.current.volume = 1.0; // Set volume to 100% for maximum impact
+      audioRef.current = new Audio('/audio/trivia_wrong_answer_ding.mp3');
+      audioRef.current.volume = 0.8; // Slightly lower volume for better UX
       audioRef.current.preload = 'auto';
+      
+      // iOS Safari requires user interaction to unlock audio
+      // We'll unlock it on first touch/click anywhere on the page
+      const unlockAudio = () => {
+        if (!audioUnlockedRef.current && audioRef.current) {
+          // Play and immediately pause to unlock audio on iOS
+          audioRef.current.play().then(() => {
+            audioRef.current!.pause();
+            audioRef.current!.currentTime = 0;
+            audioUnlockedRef.current = true;
+            console.log('✅ Audio unlocked for iOS');
+          }).catch(() => {
+            // Silent fail - will try again on next interaction
+          });
+        }
+      };
+      
+      // Listen for first user interaction to unlock audio
+      document.addEventListener('touchstart', unlockAudio, { once: true });
+      document.addEventListener('click', unlockAudio, { once: true });
+      
+      return () => {
+        document.removeEventListener('touchstart', unlockAudio);
+        document.removeEventListener('click', unlockAudio);
+      };
     } catch (error) {
       console.warn('Audio initialization failed:', error);
     }
   }, []);
   
-  // Function to play wrong answer audio
+  // Function to play wrong answer audio with iOS Safari support
   const playWrongAnswerSound = () => {
     try {
       if (audioRef.current) {
-        // Reset audio to beginning in case it was played before
+        // Reset audio to beginning
         audioRef.current.currentTime = 0;
-        // Play the audio
-        audioRef.current.play().catch(error => {
-          console.warn('Audio playback failed:', error);
-        });
+        
+        // Play the audio - iOS Safari should work now since we're in a user interaction
+        const playPromise = audioRef.current.play();
+        
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              console.log('🔊 Wrong answer sound played');
+            })
+            .catch(error => {
+              // If still fails on iOS, try to unlock again
+              if (!audioUnlockedRef.current) {
+                console.warn('🔇 Audio still locked on iOS, attempting to unlock...');
+                audioRef.current?.play().catch(e => {
+                  console.warn('Audio playback blocked by browser:', e);
+                });
+              } else {
+                console.warn('Audio playback failed:', error);
+              }
+            });
+        }
       }
     } catch (error) {
       console.warn('Audio playback error:', error);
