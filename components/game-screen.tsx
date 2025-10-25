@@ -8,6 +8,7 @@ import GameHeader from './game-header';
 import QuestionCard from './question-card';
 import GameModals from './game-modals';
 import PerfectCompletionCelebration from './perfect-completion-celebration';
+import GameAudioManager from './game-audio-manager';
 
 interface GameScreenProps {
   level: number;
@@ -423,6 +424,9 @@ export default function GameScreen({ level: initialLevel, onReturnHome }: GameSc
 
   return (
     <div className="f1-viewport-container bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+      {/* Global Audio Manager - Never unmounts, persists across all state changes */}
+      <GameAudioManager />
+      
       <GameHeader />
       
       <div className="f1-scrollable-content f1-mobile-optimized">

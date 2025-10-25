@@ -14,91 +14,22 @@ export default function QuestionCard() {
   const [answerIsCorrect, setAnswerIsCorrect] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState<string>('');
   
-  // Audio ref for wrong answer feedback
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const audioUnlockedRef = useRef<boolean>(false);
-  
-  // Initialize audio with iOS Safari compatibility - OPTIMIZED FOR INSTANT PLAYBACK
-  useEffect(() => {
+  // Function to play wrong answer audio using global audio manager
+  // This calls the persistent audio manager that never unmounts
+  const playWrongAnswerSound = () => {
     try {
-      audioRef.current = new Audio('/audio/trivia_wrong_answer_ding.mp3');
-      audioRef.current.volume = 1.0; // Full volume for louder sound
-      audioRef.current.preload = 'auto'; // Pre-load for instant playback
+      console.log('🔊 QUESTION CARD: Calling global audio manager');
       
-      // Force load the audio immediately for zero-lag playback
-      audioRef.current.load();
-      
-      // iOS Safari requires user interaction to unlock audio
-      // We'll unlock it on first touch/click anywhere on the page
-      const unlockAudio = () => {
-        if (!audioUnlockedRef.current && audioRef.current) {
-          // Play and immediately pause to unlock audio on iOS
-          audioRef.current.play().then(() => {
-            audioRef.current!.pause();
-            audioRef.current!.currentTime = 0;
-            audioUnlockedRef.current = true;
-            console.log('✅ Audio unlocked and ready for instant playback');
-          }).catch(() => {
-            // Silent fail - will try again on next interaction
-          });
-        }
-      };
-      
-      // Listen for first user interaction to unlock audio
-      document.addEventListener('touchstart', unlockAudio, { once: true });
-      document.addEventListener('click', unlockAudio, { once: true });
-      
-      return () => {
-        document.removeEventListener('touchstart', unlockAudio);
-        document.removeEventListener('click', unlockAudio);
-      };
-    } catch (error) {
-      console.warn('Audio initialization failed:', error);
-    }
-  }, []);
-  
-  // Function to play wrong answer audio - OPTIMIZED FOR INSTANT PLAYBACK (NO LAG)
-  // Returns a promise that resolves when audio starts playing (for iOS compatibility)
-  const playWrongAnswerSound = (): Promise<void> => {
-    return new Promise((resolve) => {
-      try {
-        if (audioRef.current) {
-          // Reset to beginning for instant replay
-          audioRef.current.currentTime = 0;
-          
-          // Play IMMEDIATELY - no pause, no load, just play
-          const playPromise = audioRef.current.play();
-          
-          if (playPromise !== undefined) {
-            playPromise
-              .then(() => {
-                console.log('🔊 Wrong answer sound played instantly');
-                // Small delay to ensure audio starts on iOS before any state changes
-                setTimeout(resolve, 100);
-              })
-              .catch(error => {
-                console.error('🔇 Audio playback failed:', error);
-                // If still fails on iOS, try to unlock again
-                if (!audioUnlockedRef.current) {
-                  console.warn('🔇 Audio still locked on iOS, attempting to unlock...');
-                  audioRef.current?.play().catch(e => {
-                    console.warn('Audio playback blocked by browser:', e);
-                  });
-                }
-                resolve(); // Resolve anyway to not block game flow
-              });
-          } else {
-            resolve();
-          }
-        } else {
-          console.warn('🔇 Audio ref is null, cannot play sound');
-          resolve();
-        }
-      } catch (error) {
-        console.error('Audio playback error:', error);
-        resolve();
+      // Call the global audio function exposed by GameAudioManager
+      if (typeof (window as any).__playWrongAnswerSound === 'function') {
+        (window as any).__playWrongAnswerSound();
+        console.log('✅ QUESTION CARD: Global audio function called successfully');
+      } else {
+        console.warn('⚠️ QUESTION CARD: Global audio function not available yet');
       }
-    });
+    } catch (error) {
+      console.error('❌ QUESTION CARD: Error calling global audio', error);
+    }
   };
   
 
@@ -131,7 +62,7 @@ export default function QuestionCard() {
     }
   }, [gameState?.currentQuestionIndex]);
 
-  const handleAnswerSelect = async (answer: string) => {
+  const handleAnswerSelect = (answer: string) => {
     // Block if already answered
     if (selectedAnswer !== null) {
       console.log('⚠️ BLOCKED: Already answered');
@@ -151,10 +82,11 @@ export default function QuestionCard() {
     // Only show feedback for wrong answers
     if (!isCorrect) {
       setShowFeedback(true);
-      // Play wrong answer sound and WAIT for it to start (critical for iOS on 3rd error)
-      console.log('🔊 Playing wrong answer sound...');
-      await playWrongAnswerSound();
-      console.log('🔊 Sound playing confirmed');
+      // Play wrong answer sound immediately using global audio manager
+      // The audio manager persists even when this component unmounts
+      console.log('🔊 Playing wrong answer sound via global manager...');
+      playWrongAnswerSound();
+      console.log('✅ Sound playback initiated');
     }
     
     console.log('🚨 FEEDBACK STATE SET:', {
