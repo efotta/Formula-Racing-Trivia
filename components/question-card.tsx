@@ -16,20 +16,21 @@ export default function QuestionCard() {
   
   // Function to play wrong answer audio using global audio manager
   // This calls the persistent audio manager that never unmounts
-  // Returns a promise that resolves when audio completes
-  const playWrongAnswerSound = async (): Promise<void> => {
+  // MUST be called synchronously from the click event for iPhone compatibility
+  const playWrongAnswerSound = () => {
     try {
       console.log('🔊 QUESTION CARD: Calling global audio manager');
       
       // Call the global audio function exposed by GameAudioManager
+      // This MUST be synchronous (no await) to work reliably on iPhone
       if (typeof (window as any).__playWrongAnswerSound === 'function') {
-        await (window as any).__playWrongAnswerSound();
-        console.log('✅ QUESTION CARD: Audio completed successfully');
+        (window as any).__playWrongAnswerSound();
+        console.log('✅ QUESTION CARD: Audio playback initiated');
       } else {
         console.warn('⚠️ QUESTION CARD: Global audio function not available yet');
       }
     } catch (error) {
-      console.error('❌ QUESTION CARD: Error with audio playback', error);
+      console.error('❌ QUESTION CARD: Error calling audio function', error);
     }
   };
   
@@ -63,7 +64,7 @@ export default function QuestionCard() {
     }
   }, [gameState?.currentQuestionIndex]);
 
-  const handleAnswerSelect = async (answer: string) => {
+  const handleAnswerSelect = (answer: string) => {
     // Block if already answered
     if (selectedAnswer !== null) {
       console.log('⚠️ BLOCKED: Already answered');
@@ -80,6 +81,15 @@ export default function QuestionCard() {
     setAnswerIsCorrect(isCorrect);
     setCorrectAnswer(currentQuestion.correctAnswer);
     
+    // Only show feedback for wrong answers
+    if (!isCorrect) {
+      setShowFeedback(true);
+      
+      // Play wrong answer sound IMMEDIATELY (synchronous call from click event)
+      // This is critical for iPhone - audio must start during user interaction
+      playWrongAnswerSound();
+    }
+    
     console.log('🚨 FEEDBACK STATE SET:', {
       selected: answer,
       correct: isCorrect,
@@ -87,20 +97,11 @@ export default function QuestionCard() {
       showFeedback: !isCorrect
     });
     
-    // Only show feedback for wrong answers
-    if (!isCorrect) {
-      setShowFeedback(true);
-      
-      // CRITICAL FOR iPHONE: Play audio and WAIT for it to complete
-      // before submitting answer and triggering game state changes
-      console.log('🔊 Playing wrong answer sound and waiting for completion...');
-      await playWrongAnswerSound();
-      console.log('✅ Audio playback completed, now waiting visual delay');
-      
-      // Additional delay for user to see the feedback (2 seconds total from click)
-      await new Promise(resolve => setTimeout(resolve, 1800));
-      
-      console.log('⏰ SUBMITTING ANSWER TO GAME ENGINE (after audio + delay)');
+    // DELAY game advancement - immediate for correct answers, 2 seconds for wrong answers
+    // The 2-second delay gives audio time to complete before QuestionCard unmounts
+    const delayTime = isCorrect ? 0 : 2000;
+    setTimeout(() => {
+      console.log(`⏰ SUBMITTING ANSWER TO GAME ENGINE after ${delayTime/1000} seconds`);
       submitAnswer(answer);
       
       // Clear feedback state after submission
@@ -110,21 +111,8 @@ export default function QuestionCard() {
         setShowFeedback(false);
         setAnswerIsCorrect(false);
         setCorrectAnswer('');
-      }, 100);
-    } else {
-      // Correct answer - immediate submission, no delay
-      console.log('⏰ SUBMITTING CORRECT ANSWER IMMEDIATELY');
-      submitAnswer(answer);
-      
-      // Clear feedback state after submission
-      setTimeout(() => {
-        console.log('⏰ CLEARING FEEDBACK');
-        setSelectedAnswer(null);
-        setShowFeedback(false);
-        setAnswerIsCorrect(false);
-        setCorrectAnswer('');
-      }, 100);
-    }
+      }, 100); // Small delay to allow game state to update
+    }, delayTime); // Variable delay based on answer correctness
   };
 
   // MOBILE FOCUS CLEANUP: Simple focus removal on question change

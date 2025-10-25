@@ -50,50 +50,34 @@ export default function GameAudioManager({ onAudioReady }: GameAudioManagerProps
       document.addEventListener('touchstart', unlockAudio, { once: true });
       document.addEventListener('click', unlockAudio, { once: true });
       
-      // Expose global play function that returns a promise
-      // This promise resolves when the audio has finished playing
-      (window as any).__playWrongAnswerSound = (): Promise<void> => {
-        return new Promise((resolve, reject) => {
-          if (audioRef.current) {
+      // Expose global play function - SYNCHRONOUS for iPhone compatibility
+      // Must be called directly from user interaction (not async)
+      (window as any).__playWrongAnswerSound = () => {
+        if (audioRef.current) {
+          try {
             console.log('🔊 AUDIO MANAGER: Playing wrong answer sound');
+            
+            // Reset to start
             audioRef.current.currentTime = 0;
             
-            // Listen for the 'ended' event to know when audio completes
-            const handleEnded = () => {
-              console.log('✅ AUDIO MANAGER: Audio playback completed');
-              audioRef.current?.removeEventListener('ended', handleEnded);
-              audioRef.current?.removeEventListener('error', handleError);
-              resolve();
-            };
-            
-            const handleError = (error: Event) => {
-              console.error('❌ AUDIO MANAGER: Playback error', error);
-              audioRef.current?.removeEventListener('ended', handleEnded);
-              audioRef.current?.removeEventListener('error', handleError);
-              reject(error);
-            };
-            
-            audioRef.current.addEventListener('ended', handleEnded);
-            audioRef.current.addEventListener('error', handleError);
-            
+            // Play immediately - this MUST be synchronous from click event
             const playPromise = audioRef.current.play();
+            
             if (playPromise !== undefined) {
               playPromise
                 .then(() => {
-                  console.log('✅ AUDIO MANAGER: Sound started playing successfully');
+                  console.log('✅ AUDIO MANAGER: Sound playing successfully');
                 })
                 .catch((error) => {
-                  console.error('❌ AUDIO MANAGER: Playback start failed', error);
-                  audioRef.current?.removeEventListener('ended', handleEnded);
-                  audioRef.current?.removeEventListener('error', handleError);
-                  reject(error);
+                  console.error('❌ AUDIO MANAGER: Playback failed', error);
                 });
             }
-          } else {
-            console.warn('⚠️ AUDIO MANAGER: Audio ref is null');
-            reject(new Error('Audio ref is null'));
+          } catch (error) {
+            console.error('❌ AUDIO MANAGER: Error during playback', error);
           }
-        });
+        } else {
+          console.warn('⚠️ AUDIO MANAGER: Audio ref is null');
+        }
       };
       
       console.log('✅ AUDIO MANAGER: Global audio manager initialized');
