@@ -17,20 +17,23 @@ export default function QuestionCard() {
   // Function to play wrong answer audio using global audio manager
   // This calls the persistent audio manager that never unmounts
   // MUST be called synchronously from the click event for iPhone compatibility
-  const playWrongAnswerSound = () => {
+  // Returns a promise that resolves when audio finishes (for critical scenarios)
+  const playWrongAnswerSound = (onComplete?: () => void): void => {
     try {
-      console.log('🔊 QUESTION CARD: Calling global audio manager');
+      console.log('🔊 QUESTION CARD V2: Calling global audio manager with callback');
       
       // Call the global audio function exposed by GameAudioManager
-      // This MUST be synchronous (no await) to work reliably on iPhone
+      // Now uses callback instead of promise for better iPhone compatibility
       if (typeof (window as any).__playWrongAnswerSound === 'function') {
-        (window as any).__playWrongAnswerSound();
-        console.log('✅ QUESTION CARD: Audio playback initiated');
+        (window as any).__playWrongAnswerSound(onComplete);
+        console.log('✅ QUESTION CARD V2: Audio playback initiated with callback');
       } else {
-        console.warn('⚠️ QUESTION CARD: Global audio function not available yet');
+        console.warn('⚠️ QUESTION CARD V2: Global audio function not available yet');
+        if (onComplete) onComplete();
       }
     } catch (error) {
-      console.error('❌ QUESTION CARD: Error calling audio function', error);
+      console.error('❌ QUESTION CARD V2: Error calling audio function', error);
+      if (onComplete) onComplete();
     }
   };
   
@@ -81,27 +84,64 @@ export default function QuestionCard() {
     setAnswerIsCorrect(isCorrect);
     setCorrectAnswer(currentQuestion.correctAnswer);
     
+    // Check if this is the third wrong answer (critical for iPhone audio)
+    const currentWrongAnswers = gameState?.wrongAnswers || 0;
+    const willBeThirdError = !isCorrect && currentWrongAnswers === 2;
+    
+    console.log('🔍 ERROR CHECK:', {
+      currentWrongAnswers,
+      isCorrect,
+      willBeThirdError
+    });
+    
     // Only show feedback for wrong answers
     if (!isCorrect) {
       setShowFeedback(true);
       
-      // Play wrong answer sound IMMEDIATELY (synchronous call from click event)
-      // This is critical for iPhone - audio must start during user interaction
-      playWrongAnswerSound();
-    }
-    
-    console.log('🚨 FEEDBACK STATE SET:', {
-      selected: answer,
-      correct: isCorrect,
-      correctAnswer: currentQuestion.correctAnswer,
-      showFeedback: !isCorrect
-    });
-    
-    // DELAY game advancement - immediate for correct answers, 2 seconds for wrong answers
-    // The 2-second delay gives audio time to complete before QuestionCard unmounts
-    const delayTime = isCorrect ? 0 : 2000;
-    setTimeout(() => {
-      console.log(`⏰ SUBMITTING ANSWER TO GAME ENGINE after ${delayTime/1000} seconds`);
+      if (willBeThirdError) {
+        // CRITICAL: Third wrong answer on iPhone
+        // Use callback to wait for audio to COMPLETE before submitting answer
+        // This ensures audio plays fully before game-over state change
+        console.log('🚨 THIRD WRONG ANSWER V2: Playing audio with completion callback');
+        
+        playWrongAnswerSound(() => {
+          console.log('✅ AUDIO COMPLETE V2: Now submitting third wrong answer');
+          
+          // Submit answer after audio finishes
+          submitAnswer(answer);
+          
+          // Clear feedback state after submission
+          setTimeout(() => {
+            console.log('⏰ CLEARING FEEDBACK');
+            setSelectedAnswer(null);
+            setShowFeedback(false);
+            setAnswerIsCorrect(false);
+            setCorrectAnswer('');
+          }, 100);
+        });
+      } else {
+        // First or second wrong answer: Play audio but don't wait for completion
+        console.log('🔊 WRONG ANSWER V2 (not third): Playing audio without waiting');
+        playWrongAnswerSound(); // Fire and forget
+        
+        // Standard 2-second delay for first/second wrong answers
+        setTimeout(() => {
+          console.log('⏰ SUBMITTING ANSWER TO GAME ENGINE after 2 seconds');
+          submitAnswer(answer);
+          
+          // Clear feedback state after submission
+          setTimeout(() => {
+            console.log('⏰ CLEARING FEEDBACK');
+            setSelectedAnswer(null);
+            setShowFeedback(false);
+            setAnswerIsCorrect(false);
+            setCorrectAnswer('');
+          }, 100);
+        }, 2000);
+      }
+    } else {
+      // Correct answer: Submit immediately
+      console.log('✅ CORRECT ANSWER: Submitting immediately');
       submitAnswer(answer);
       
       // Clear feedback state after submission
@@ -111,8 +151,16 @@ export default function QuestionCard() {
         setShowFeedback(false);
         setAnswerIsCorrect(false);
         setCorrectAnswer('');
-      }, 100); // Small delay to allow game state to update
-    }, delayTime); // Variable delay based on answer correctness
+      }, 100);
+    }
+    
+    console.log('🚨 FEEDBACK STATE SET:', {
+      selected: answer,
+      correct: isCorrect,
+      correctAnswer: currentQuestion.correctAnswer,
+      showFeedback: !isCorrect,
+      willBeThirdError
+    });
   };
 
   // MOBILE FOCUS CLEANUP: Simple focus removal on question change
