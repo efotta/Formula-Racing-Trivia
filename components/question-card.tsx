@@ -16,19 +16,20 @@ export default function QuestionCard() {
   
   // Function to play wrong answer audio using global audio manager
   // This calls the persistent audio manager that never unmounts
-  const playWrongAnswerSound = () => {
+  // Returns a promise that resolves when audio completes
+  const playWrongAnswerSound = async (): Promise<void> => {
     try {
       console.log('🔊 QUESTION CARD: Calling global audio manager');
       
       // Call the global audio function exposed by GameAudioManager
       if (typeof (window as any).__playWrongAnswerSound === 'function') {
-        (window as any).__playWrongAnswerSound();
-        console.log('✅ QUESTION CARD: Global audio function called successfully');
+        await (window as any).__playWrongAnswerSound();
+        console.log('✅ QUESTION CARD: Audio completed successfully');
       } else {
         console.warn('⚠️ QUESTION CARD: Global audio function not available yet');
       }
     } catch (error) {
-      console.error('❌ QUESTION CARD: Error calling global audio', error);
+      console.error('❌ QUESTION CARD: Error with audio playback', error);
     }
   };
   
@@ -62,7 +63,7 @@ export default function QuestionCard() {
     }
   }, [gameState?.currentQuestionIndex]);
 
-  const handleAnswerSelect = (answer: string) => {
+  const handleAnswerSelect = async (answer: string) => {
     // Block if already answered
     if (selectedAnswer !== null) {
       console.log('⚠️ BLOCKED: Already answered');
@@ -79,16 +80,6 @@ export default function QuestionCard() {
     setAnswerIsCorrect(isCorrect);
     setCorrectAnswer(currentQuestion.correctAnswer);
     
-    // Only show feedback for wrong answers
-    if (!isCorrect) {
-      setShowFeedback(true);
-      // Play wrong answer sound immediately using global audio manager
-      // The audio manager persists even when this component unmounts
-      console.log('🔊 Playing wrong answer sound via global manager...');
-      playWrongAnswerSound();
-      console.log('✅ Sound playback initiated');
-    }
-    
     console.log('🚨 FEEDBACK STATE SET:', {
       selected: answer,
       correct: isCorrect,
@@ -96,10 +87,20 @@ export default function QuestionCard() {
       showFeedback: !isCorrect
     });
     
-    // DELAY game advancement - immediate for correct answers, 2 seconds for wrong answers
-    const delayTime = isCorrect ? 0 : 2000;
-    setTimeout(() => {
-      console.log(`⏰ SUBMITTING ANSWER TO GAME ENGINE after ${delayTime/1000} seconds`);
+    // Only show feedback for wrong answers
+    if (!isCorrect) {
+      setShowFeedback(true);
+      
+      // CRITICAL FOR iPHONE: Play audio and WAIT for it to complete
+      // before submitting answer and triggering game state changes
+      console.log('🔊 Playing wrong answer sound and waiting for completion...');
+      await playWrongAnswerSound();
+      console.log('✅ Audio playback completed, now waiting visual delay');
+      
+      // Additional delay for user to see the feedback (2 seconds total from click)
+      await new Promise(resolve => setTimeout(resolve, 1800));
+      
+      console.log('⏰ SUBMITTING ANSWER TO GAME ENGINE (after audio + delay)');
       submitAnswer(answer);
       
       // Clear feedback state after submission
@@ -109,8 +110,21 @@ export default function QuestionCard() {
         setShowFeedback(false);
         setAnswerIsCorrect(false);
         setCorrectAnswer('');
-      }, 100); // Small delay to allow game state to update
-    }, delayTime); // Variable delay based on answer correctness
+      }, 100);
+    } else {
+      // Correct answer - immediate submission, no delay
+      console.log('⏰ SUBMITTING CORRECT ANSWER IMMEDIATELY');
+      submitAnswer(answer);
+      
+      // Clear feedback state after submission
+      setTimeout(() => {
+        console.log('⏰ CLEARING FEEDBACK');
+        setSelectedAnswer(null);
+        setShowFeedback(false);
+        setAnswerIsCorrect(false);
+        setCorrectAnswer('');
+      }, 100);
+    }
   };
 
   // MOBILE FOCUS CLEANUP: Simple focus removal on question change
