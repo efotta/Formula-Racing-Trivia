@@ -1,7 +1,7 @@
 
 // Enhanced Service Worker with Stale-While-Revalidate Strategy
-// Version bumped to v8 to force cache update for new auth features
-const CACHE_NAME = 'formula-racing-trivia-v8';
+// Version bumped to v9 to force cache update for V3 audio fix
+const CACHE_NAME = 'formula-racing-trivia-v9';
 const urlsToCache = [
   '/',
   '/manifest.json',
