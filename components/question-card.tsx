@@ -58,37 +58,47 @@ export default function QuestionCard() {
   }, []);
   
   // Function to play wrong answer audio - OPTIMIZED FOR INSTANT PLAYBACK (NO LAG)
-  const playWrongAnswerSound = () => {
-    try {
-      if (audioRef.current) {
-        // Reset to beginning for instant replay
-        audioRef.current.currentTime = 0;
-        
-        // Play IMMEDIATELY - no pause, no load, just play
-        const playPromise = audioRef.current.play();
-        
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              console.log('🔊 Wrong answer sound played instantly');
-            })
-            .catch(error => {
-              console.error('🔇 Audio playback failed:', error);
-              // If still fails on iOS, try to unlock again
-              if (!audioUnlockedRef.current) {
-                console.warn('🔇 Audio still locked on iOS, attempting to unlock...');
-                audioRef.current?.play().catch(e => {
-                  console.warn('Audio playback blocked by browser:', e);
-                });
-              }
-            });
+  // Returns a promise that resolves when audio starts playing (for iOS compatibility)
+  const playWrongAnswerSound = (): Promise<void> => {
+    return new Promise((resolve) => {
+      try {
+        if (audioRef.current) {
+          // Reset to beginning for instant replay
+          audioRef.current.currentTime = 0;
+          
+          // Play IMMEDIATELY - no pause, no load, just play
+          const playPromise = audioRef.current.play();
+          
+          if (playPromise !== undefined) {
+            playPromise
+              .then(() => {
+                console.log('🔊 Wrong answer sound played instantly');
+                // Small delay to ensure audio starts on iOS before any state changes
+                setTimeout(resolve, 100);
+              })
+              .catch(error => {
+                console.error('🔇 Audio playback failed:', error);
+                // If still fails on iOS, try to unlock again
+                if (!audioUnlockedRef.current) {
+                  console.warn('🔇 Audio still locked on iOS, attempting to unlock...');
+                  audioRef.current?.play().catch(e => {
+                    console.warn('Audio playback blocked by browser:', e);
+                  });
+                }
+                resolve(); // Resolve anyway to not block game flow
+              });
+          } else {
+            resolve();
+          }
+        } else {
+          console.warn('🔇 Audio ref is null, cannot play sound');
+          resolve();
         }
-      } else {
-        console.warn('🔇 Audio ref is null, cannot play sound');
+      } catch (error) {
+        console.error('Audio playback error:', error);
+        resolve();
       }
-    } catch (error) {
-      console.error('Audio playback error:', error);
-    }
+    });
   };
   
 
@@ -121,7 +131,7 @@ export default function QuestionCard() {
     }
   }, [gameState?.currentQuestionIndex]);
 
-  const handleAnswerSelect = (answer: string) => {
+  const handleAnswerSelect = async (answer: string) => {
     // Block if already answered
     if (selectedAnswer !== null) {
       console.log('⚠️ BLOCKED: Already answered');
@@ -141,8 +151,10 @@ export default function QuestionCard() {
     // Only show feedback for wrong answers
     if (!isCorrect) {
       setShowFeedback(true);
-      // Play wrong answer sound
-      playWrongAnswerSound();
+      // Play wrong answer sound and WAIT for it to start (critical for iOS on 3rd error)
+      console.log('🔊 Playing wrong answer sound...');
+      await playWrongAnswerSound();
+      console.log('🔊 Sound playing confirmed');
     }
     
     console.log('🚨 FEEDBACK STATE SET:', {
