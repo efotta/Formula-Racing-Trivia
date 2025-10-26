@@ -92,13 +92,6 @@ export default function QuestionCard() {
     console.log('📝 CORRECT ANSWER:', currentQuestion.correctAnswer);
     
     const isCorrect = answer === currentQuestion.correctAnswer;
-    
-    // Set state for tracking, but only show feedback for wrong answers
-    setSelectedAnswer(answer);
-    setAnswerIsCorrect(isCorrect);
-    setCorrectAnswer(currentQuestion.correctAnswer);
-    
-    // Check if this is the third wrong answer (critical for iPhone audio)
     const currentWrongAnswers = gameState?.wrongAnswers || 0;
     const willBeThirdError = !isCorrect && currentWrongAnswers === 2;
     
@@ -108,64 +101,70 @@ export default function QuestionCard() {
       willBeThirdError
     });
     
-    // Only show feedback for wrong answers
+    // ⚡ CRITICAL V6 FIX: CALL AUDIO FIRST - BEFORE ANY STATE UPDATES!
+    // iOS Safari REQUIRES audio play() to be synchronous from the click event.
+    // React state updates are batched/async and break the synchronous chain.
+    // So we MUST call audio BEFORE any setState calls!
+    
     if (!isCorrect) {
-      setShowFeedback(true);
-      
+      // Trigger audio IMMEDIATELY while still synchronous with click event
       if (willBeThirdError) {
-        // CRITICAL: Third wrong answer on iPhone
-        // V5 FIX: Wait for audio + give user time to see correct answer
-        console.log('🚨 THIRD WRONG ANSWER V5: Playing audio and waiting for completion + delay');
-        
-        // Trigger audio synchronously from click event
-        // Use callback to ensure audio completes, then add delay for user to see answer
+        console.log('🚨 V6 THIRD WRONG ANSWER: Playing audio FIRST (synchronous with click)');
         playWrongAnswerSound(() => {
-          console.log('✅ AUDIO COMPLETE V5: Audio ended callback - waiting 2.5s for user to see answer');
+          console.log('✅ V6 AUDIO COMPLETE: Audio ended callback - waiting 2.5s for user to see answer');
           
-          // Add 2.5-second delay after audio completes so user can see correct answer
           setTimeout(() => {
-            console.log('⏰ THIRD ANSWER V5: Submitting after audio + 2.5s delay');
+            console.log('⏰ V6 THIRD ANSWER: Submitting after audio + 2.5s delay');
             submitAnswer(answer);
             
-            // Clear feedback state after submission
             setTimeout(() => {
-              console.log('⏰ CLEARING FEEDBACK');
+              console.log('⏰ V6 CLEARING FEEDBACK');
               setSelectedAnswer(null);
               setShowFeedback(false);
               setAnswerIsCorrect(false);
               setCorrectAnswer('');
             }, 100);
-          }, 2500); // 2.5-second delay after audio completes
+          }, 2500);
         });
       } else {
-        // First or second wrong answer: Play audio but don't wait for completion
-        console.log('🔊 WRONG ANSWER V5 (not third): Playing audio without waiting');
-        playWrongAnswerSound(); // Fire and forget
-        
-        // V5: Increased to 3-second delay for first/second wrong answers
-        // This gives user more time to see the correct answer
+        console.log('🔊 V6 WRONG ANSWER (1st/2nd): Playing audio FIRST (synchronous with click)');
+        playWrongAnswerSound(); // Fire and forget, but BEFORE state updates
+      }
+    }
+    
+    // NOW set state for tracking and UI updates
+    // This happens AFTER audio is triggered, so audio remains synchronous with click
+    setSelectedAnswer(answer);
+    setAnswerIsCorrect(isCorrect);
+    setCorrectAnswer(currentQuestion.correctAnswer);
+    
+    // Show feedback for wrong answers
+    if (!isCorrect) {
+      setShowFeedback(true);
+      
+      // For 1st and 2nd wrong answers, handle the delayed submission
+      if (!willBeThirdError) {
         setTimeout(() => {
-          console.log('⏰ SUBMITTING ANSWER TO GAME ENGINE after 3 seconds');
+          console.log('⏰ V6 SUBMITTING ANSWER (1st/2nd) after 3 seconds');
           submitAnswer(answer);
           
-          // Clear feedback state after submission
           setTimeout(() => {
-            console.log('⏰ CLEARING FEEDBACK');
+            console.log('⏰ V6 CLEARING FEEDBACK');
             setSelectedAnswer(null);
             setShowFeedback(false);
             setAnswerIsCorrect(false);
             setCorrectAnswer('');
           }, 100);
-        }, 3000); // V5: Increased from 2 seconds to 3 seconds
+        }, 3000);
       }
+      // Note: 3rd wrong answer submission is handled in the audio callback above
     } else {
       // Correct answer: Submit immediately
-      console.log('✅ CORRECT ANSWER: Submitting immediately');
+      console.log('✅ V6 CORRECT ANSWER: Submitting immediately');
       submitAnswer(answer);
       
-      // Clear feedback state after submission
       setTimeout(() => {
-        console.log('⏰ CLEARING FEEDBACK');
+        console.log('⏰ V6 CLEARING FEEDBACK');
         setSelectedAnswer(null);
         setShowFeedback(false);
         setAnswerIsCorrect(false);
@@ -173,7 +172,7 @@ export default function QuestionCard() {
       }, 100);
     }
     
-    console.log('🚨 FEEDBACK STATE SET:', {
+    console.log('🚨 V6 FEEDBACK STATE SET:', {
       selected: answer,
       correct: isCorrect,
       correctAnswer: currentQuestion.correctAnswer,
