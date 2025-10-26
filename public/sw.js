@@ -1,14 +1,15 @@
 
 // Enhanced Service Worker with Stale-While-Revalidate Strategy
-// Version bumped to v9 to force cache update for V3 audio fix
-const CACHE_NAME = 'formula-racing-trivia-v9';
+// Version bumped to v11 - CRITICAL FIX: Added audio file to cache for iPhone
+const CACHE_NAME = 'formula-racing-trivia-v11';
 const urlsToCache = [
   '/',
   '/manifest.json',
   '/icon-192x192.png',
   '/icon-512x512.png',
   '/formula-trivia-launch.jpg',
-  '/apple-touch-icon.png'
+  '/apple-touch-icon.png',
+  '/audio/trivia_wrong_answer_ding.mp3'  // CRITICAL: Cache audio file for iPhone!
 ];
 
 // Install service worker and cache core assets

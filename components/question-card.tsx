@@ -17,23 +17,37 @@ export default function QuestionCard() {
   // Function to play wrong answer audio using global audio manager
   // This calls the persistent audio manager that never unmounts
   // MUST be called synchronously from the click event for iPhone compatibility
-  // V3: Enhanced with force-restart to prevent "already playing" blocking
+  // V4: Enhanced with better defensive checks and fallbacks
   const playWrongAnswerSound = (onComplete?: () => void): void => {
     try {
-      console.log('🔊 QUESTION CARD V3: Calling global audio manager with callback');
+      console.log('🔊 QUESTION CARD V4: Calling global audio manager');
+      console.log('🔊 QUESTION CARD V4: Function type:', typeof (window as any).__playWrongAnswerSound);
+      console.log('🔊 QUESTION CARD V4: Has callback:', !!onComplete);
       
       // Call the global audio function exposed by GameAudioManager
-      // V3: Audio manager now force-stops existing playback before playing
+      // V4: Enhanced defensive checks for iPhone compatibility
       if (typeof (window as any).__playWrongAnswerSound === 'function') {
         (window as any).__playWrongAnswerSound(onComplete);
-        console.log('✅ QUESTION CARD V3: Audio playback initiated with callback');
+        console.log('✅ QUESTION CARD V4: Audio playback initiated');
       } else {
-        console.warn('⚠️ QUESTION CARD V3: Global audio function not available yet');
-        if (onComplete) onComplete();
+        console.error('❌ QUESTION CARD V4: Global audio function NOT available!');
+        console.error('❌ This means GameAudioManager failed to initialize');
+        console.error('❌ Check console for AUDIO MANAGER initialization errors');
+        
+        // DEFENSIVE FALLBACK: If audio function is missing, still call callback
+        // This prevents the game from getting stuck waiting for audio
+        if (onComplete) {
+          console.log('⚠️ FALLBACK V4: Calling completion callback without audio');
+          setTimeout(onComplete, 500); // Small delay to mimic audio duration
+        }
       }
     } catch (error) {
-      console.error('❌ QUESTION CARD V3: Error calling audio function', error);
-      if (onComplete) onComplete();
+      console.error('❌ QUESTION CARD V4: Error calling audio function', error);
+      // DEFENSIVE FALLBACK: Always call callback to prevent stuck state
+      if (onComplete) {
+        console.log('⚠️ FALLBACK V4: Calling completion callback after error');
+        setTimeout(onComplete, 500);
+      }
     }
   };
   
@@ -100,29 +114,29 @@ export default function QuestionCard() {
       
       if (willBeThirdError) {
         // CRITICAL: Third wrong answer on iPhone
-        // Play audio immediately, then add safety delay before state change
-        console.log('🚨 THIRD WRONG ANSWER V3: Playing audio with extended delay');
+        // V4 FIX: Wait for audio callback BEFORE submitting
+        console.log('🚨 THIRD WRONG ANSWER V4: Playing audio and waiting for completion');
         
         // Trigger audio synchronously from click event
+        // NEW: Actually use the callback to submit answer!
         playWrongAnswerSound(() => {
-          console.log('✅ AUDIO COMPLETE V3: Audio ended callback received');
-        });
-        
-        // Add 1.5 second safety delay to ensure audio FULLY completes
-        // This gives extra buffer beyond the audio's natural duration
-        setTimeout(() => {
-          console.log('⏰ THIRD ANSWER V3: Submitting after safety delay');
-          submitAnswer(answer);
+          console.log('✅ AUDIO COMPLETE V4: Audio ended callback - NOW submitting answer');
           
-          // Clear feedback state after submission
+          // Add small buffer after audio completes, then submit
           setTimeout(() => {
-            console.log('⏰ CLEARING FEEDBACK');
-            setSelectedAnswer(null);
-            setShowFeedback(false);
-            setAnswerIsCorrect(false);
-            setCorrectAnswer('');
-          }, 100);
-        }, 1500); // 1.5 second delay for 3rd mistake
+            console.log('⏰ THIRD ANSWER V4: Submitting after audio completion + buffer');
+            submitAnswer(answer);
+            
+            // Clear feedback state after submission
+            setTimeout(() => {
+              console.log('⏰ CLEARING FEEDBACK');
+              setSelectedAnswer(null);
+              setShowFeedback(false);
+              setAnswerIsCorrect(false);
+              setCorrectAnswer('');
+            }, 100);
+          }, 300); // Small 300ms buffer after audio completes
+        });
       } else {
         // First or second wrong answer: Play audio but don't wait for completion
         console.log('🔊 WRONG ANSWER V3 (not third): Playing audio without waiting');
