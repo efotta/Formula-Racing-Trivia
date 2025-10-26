@@ -4,6 +4,7 @@ import './globals.css';
 import Providers from '@/components/providers';
 import PWAInstaller from '@/components/pwa-installer';
 import PWAUpdateNotification from '@/components/pwa-update-notification';
+import GameAudioManager from '@/components/game-audio-manager';
 
 export const metadata: Metadata = {
   title: 'Formula Racing Trivia',
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
       { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
     ],
     apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
       { url: '/icon-144x144.png', sizes: '144x144', type: 'image/png' },
       { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
     ],
@@ -51,6 +53,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <Providers>
           {children}
+          <GameAudioManager />
           <PWAInstaller />
           <PWAUpdateNotification />
         </Providers>
