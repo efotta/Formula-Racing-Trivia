@@ -12,12 +12,10 @@ interface GameAudioManagerProps {
  * This component never unmounts, so audio continues playing even when
  * game states change (like transitioning to game-over on 3rd error)
  * 
- * V4 COMPREHENSIVE IPHONE FIX:
- * - Audio file now cached in Service Worker (no 404s!)
+ * V3 IPHONE FIX:
  * - Uses direct Audio element in DOM with callback-based approach
  * - FORCE RESTARTS audio on each play (no "already playing" blocking)
- * - Enhanced defensive checks and fallback mechanisms
- * - Better error handling and logging for iPhone debugging
+ * - Ensures 3rd beep always plays by stopping any existing playback first
  */
 export default function GameAudioManager({ onAudioReady }: GameAudioManagerProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -27,24 +25,12 @@ export default function GameAudioManager({ onAudioReady }: GameAudioManagerProps
   // Initialize audio once on mount
   useEffect(() => {
     try {
-      console.log('🔊 AUDIO MANAGER V4: Initializing with comprehensive iPhone fixes');
-      console.log('🔊 AUDIO MANAGER V4: Audio file path: /audio/trivia_wrong_answer_ding.mp3');
-      console.log('🔊 AUDIO MANAGER V4: Service Worker should have cached this file (v11)');
+      console.log('🔊 AUDIO MANAGER V3: Initializing with force-restart capability for iPhone');
       
       // Create audio element
       audioRef.current = new Audio('/audio/trivia_wrong_answer_ding.mp3');
       audioRef.current.volume = 1.0; // Full volume
       audioRef.current.preload = 'auto'; // Pre-load for instant playback
-      
-      // Add error handler to detect loading issues
-      audioRef.current.onerror = (error) => {
-        console.error('❌ AUDIO MANAGER V4: Audio file failed to load!', error);
-        console.error('❌ This might be a 404 or CORS issue - check network tab');
-      };
-      
-      audioRef.current.onloadeddata = () => {
-        console.log('✅ AUDIO MANAGER V4: Audio file loaded successfully');
-      };
       
       // Force load the audio immediately
       audioRef.current.load();
@@ -52,16 +38,16 @@ export default function GameAudioManager({ onAudioReady }: GameAudioManagerProps
       // iOS Safari requires user interaction to unlock audio
       const unlockAudio = () => {
         if (!audioUnlockedRef.current && audioRef.current) {
-          console.log('🔊 AUDIO MANAGER V4: Unlocking audio on first interaction');
+          console.log('🔊 AUDIO MANAGER V3: Unlocking audio on first interaction');
           
           audioRef.current.play().then(() => {
             audioRef.current!.pause();
             audioRef.current!.currentTime = 0;
             audioUnlockedRef.current = true;
-            console.log('✅ AUDIO MANAGER V4: Audio unlocked and ready');
+            console.log('✅ AUDIO MANAGER V3: Audio unlocked and ready');
             if (onAudioReady) onAudioReady();
           }).catch((error) => {
-            console.warn('⚠️ AUDIO MANAGER V4: Audio unlock failed, will retry', error);
+            console.warn('⚠️ AUDIO MANAGER V3: Audio unlock failed, will retry', error);
           });
         }
       };
@@ -73,23 +59,15 @@ export default function GameAudioManager({ onAudioReady }: GameAudioManagerProps
       // Expose global play function with CALLBACK instead of promise
       // This ensures we can block UI updates until audio completes
       (window as any).__playWrongAnswerSound = (onComplete?: () => void) => {
-        console.log('🎵 GLOBAL PLAY FUNCTION V4: Called', {
-          hasAudioRef: !!audioRef.current,
-          isPlaying: isPlayingRef.current,
-          audioUnlocked: audioUnlockedRef.current,
-          hasCallback: !!onComplete
-        });
-        
         if (audioRef.current) {
           try {
-            console.log('🔊 AUDIO MANAGER V4: Playing wrong answer sound (force restart)');
+            console.log('🔊 AUDIO MANAGER V3: Playing wrong answer sound (force restart)');
             
             // CRITICAL FIX: Force stop any existing playback and reset
             // This prevents the "already playing" issue on 3rd beep
             try {
               audioRef.current.pause();
               audioRef.current.currentTime = 0;
-              console.log('✅ AUDIO MANAGER V4: Force stopped existing playback');
             } catch (e) {
               console.warn('⚠️ Force stop failed:', e);
             }
@@ -151,22 +129,10 @@ export default function GameAudioManager({ onAudioReady }: GameAudioManagerProps
         }
       };
       
-      console.log('✅ AUDIO MANAGER V4: Global audio manager initialized');
-      console.log('✅ AUDIO MANAGER V4: window.__playWrongAnswerSound is now available');
-      console.log('✅ AUDIO MANAGER V4: Verification:', typeof (window as any).__playWrongAnswerSound);
-      
-      // Verify the function is actually accessible
-      setTimeout(() => {
-        if (typeof (window as any).__playWrongAnswerSound === 'function') {
-          console.log('✅ VERIFICATION V4: Global audio function confirmed accessible');
-        } else {
-          console.error('❌ VERIFICATION V4: Global audio function NOT accessible!');
-        }
-      }, 100);
+      console.log('✅ AUDIO MANAGER V3: Global audio manager initialized with force-restart capability');
       
       return () => {
         // Cleanup
-        console.log('🧹 AUDIO MANAGER V4: Cleanup - removing global function');
         document.removeEventListener('touchstart', unlockAudio);
         document.removeEventListener('click', unlockAudio);
         delete (window as any).__playWrongAnswerSound;
@@ -177,7 +143,7 @@ export default function GameAudioManager({ onAudioReady }: GameAudioManagerProps
         }
       };
     } catch (error) {
-      console.error('❌ AUDIO MANAGER V4: Initialization failed', error);
+      console.error('❌ AUDIO MANAGER V2: Initialization failed', error);
     }
   }, [onAudioReady]);
 

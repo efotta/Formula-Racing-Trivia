@@ -1,15 +1,14 @@
 
 // Enhanced Service Worker with Stale-While-Revalidate Strategy
-// Version bumped to v13 - V8 FIX: Prevent component unmounting during 3rd beep playback
-const CACHE_NAME = 'formula-racing-trivia-v13';
+// Version bumped to v10 to force ultra-aggressive cache clear for iPhone
+const CACHE_NAME = 'formula-racing-trivia-v10';
 const urlsToCache = [
   '/',
   '/manifest.json',
   '/icon-192x192.png',
   '/icon-512x512.png',
   '/formula-trivia-launch.jpg',
-  '/apple-touch-icon.png',
-  '/audio/trivia_wrong_answer_ding.mp3'  // CRITICAL: Cache audio file for iPhone!
+  '/apple-touch-icon.png'
 ];
 
 // Install service worker and cache core assets

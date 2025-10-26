@@ -17,37 +17,23 @@ export default function QuestionCard() {
   // Function to play wrong answer audio using global audio manager
   // This calls the persistent audio manager that never unmounts
   // MUST be called synchronously from the click event for iPhone compatibility
-  // V7: ALL React state updates delayed by 50ms to prevent audio context suspension
+  // V3: Enhanced with force-restart to prevent "already playing" blocking
   const playWrongAnswerSound = (onComplete?: () => void): void => {
     try {
-      console.log('🔊 QUESTION CARD V4: Calling global audio manager');
-      console.log('🔊 QUESTION CARD V4: Function type:', typeof (window as any).__playWrongAnswerSound);
-      console.log('🔊 QUESTION CARD V4: Has callback:', !!onComplete);
+      console.log('🔊 QUESTION CARD V3: Calling global audio manager with callback');
       
       // Call the global audio function exposed by GameAudioManager
-      // V4: Enhanced defensive checks for iPhone compatibility
+      // V3: Audio manager now force-stops existing playback before playing
       if (typeof (window as any).__playWrongAnswerSound === 'function') {
         (window as any).__playWrongAnswerSound(onComplete);
-        console.log('✅ QUESTION CARD V4: Audio playback initiated');
+        console.log('✅ QUESTION CARD V3: Audio playback initiated with callback');
       } else {
-        console.error('❌ QUESTION CARD V4: Global audio function NOT available!');
-        console.error('❌ This means GameAudioManager failed to initialize');
-        console.error('❌ Check console for AUDIO MANAGER initialization errors');
-        
-        // DEFENSIVE FALLBACK: If audio function is missing, still call callback
-        // This prevents the game from getting stuck waiting for audio
-        if (onComplete) {
-          console.log('⚠️ FALLBACK V4: Calling completion callback without audio');
-          setTimeout(onComplete, 500); // Small delay to mimic audio duration
-        }
+        console.warn('⚠️ QUESTION CARD V3: Global audio function not available yet');
+        if (onComplete) onComplete();
       }
     } catch (error) {
-      console.error('❌ QUESTION CARD V4: Error calling audio function', error);
-      // DEFENSIVE FALLBACK: Always call callback to prevent stuck state
-      if (onComplete) {
-        console.log('⚠️ FALLBACK V4: Calling completion callback after error');
-        setTimeout(onComplete, 500);
-      }
+      console.error('❌ QUESTION CARD V3: Error calling audio function', error);
+      if (onComplete) onComplete();
     }
   };
   
@@ -92,6 +78,13 @@ export default function QuestionCard() {
     console.log('📝 CORRECT ANSWER:', currentQuestion.correctAnswer);
     
     const isCorrect = answer === currentQuestion.correctAnswer;
+    
+    // Set state for tracking, but only show feedback for wrong answers
+    setSelectedAnswer(answer);
+    setAnswerIsCorrect(isCorrect);
+    setCorrectAnswer(currentQuestion.correctAnswer);
+    
+    // Check if this is the third wrong answer (critical for iPhone audio)
     const currentWrongAnswers = gameState?.wrongAnswers || 0;
     const willBeThirdError = !isCorrect && currentWrongAnswers === 2;
     
@@ -101,94 +94,63 @@ export default function QuestionCard() {
       willBeThirdError
     });
     
-    // ⚡ CRITICAL V7 FIX: ULTIMATE iOS SAFARI SOLUTION
-    // iOS Safari audio policy is EXTREMELY strict:
-    // - audio.play() must be called DIRECTLY in click handler
-    // - NO React state updates can happen in the same synchronous block
-    // - Even if audio.play() is called first, setState calls suspend audio context
-    //
-    // SOLUTION: Delay ALL state updates by 50ms using requestAnimationFrame + setTimeout
-    // This ensures audio.play() completes its initialization before ANY React updates
-    
+    // Only show feedback for wrong answers
     if (!isCorrect) {
-      // ⚡ V8 ULTIMATE FIX: For 3rd error, play audio + show feedback for FULL 3 seconds
-      // THEN submit answer. This keeps QuestionCard mounted for entire duration.
-      // Previous issue: submitAnswer() was called too early → parent unmounted QuestionCard
-      // → audio callback orphaned → beep never heard!
+      setShowFeedback(true);
       
       if (willBeThirdError) {
-        console.log('🚨 V8 THIRD WRONG ANSWER: Playing audio with ZERO interference');
+        // CRITICAL: Third wrong answer on iPhone
+        // Play audio immediately, then add safety delay before state change
+        console.log('🚨 THIRD WRONG ANSWER V3: Playing audio with extended delay');
         
-        // Play audio FIRST (synchronous, iOS requirement)
+        // Trigger audio synchronously from click event
         playWrongAnswerSound(() => {
-          console.log('✅ V8 AUDIO COMPLETE: Audio ended - waiting FULL 3s for user feedback');
-          
-          // V8 FIX: Wait FULL 3 seconds (not 2.5s) to match feedback display time
-          // This ensures QuestionCard stays mounted for entire audio + feedback duration
-          setTimeout(() => {
-            console.log('⏰ V8 THIRD ANSWER: NOW submitting after audio + 3s delay');
-            submitAnswer(answer);
-            
-            // Clear feedback state after submission
-            setTimeout(() => {
-              console.log('⏰ V8 CLEARING FEEDBACK');
-              setSelectedAnswer(null);
-              setShowFeedback(false);
-              setAnswerIsCorrect(false);
-              setCorrectAnswer('');
-            }, 100);
-          }, 3000); // V8: Changed from 2500 to 3000 to keep component alive longer
+          console.log('✅ AUDIO COMPLETE V3: Audio ended callback received');
         });
-      } else {
-        // 1st and 2nd wrong answers: just play audio, no callback needed
-        console.log('🔊 V8 WRONG ANSWER (1st/2nd): Playing audio with ZERO interference');
-        playWrongAnswerSound();
-      }
-      
-      // V8: Delay ALL state updates to ensure audio plays first
-      // requestAnimationFrame pushes to next frame, then setTimeout adds 50ms buffer
-      requestAnimationFrame(() => {
+        
+        // Add 1.5 second safety delay to ensure audio FULLY completes
+        // This gives extra buffer beyond the audio's natural duration
         setTimeout(() => {
-          console.log('🔄 V8: Setting state AFTER audio initialization (50ms delay)');
-          setSelectedAnswer(answer);
-          setAnswerIsCorrect(false);
-          setCorrectAnswer(currentQuestion.correctAnswer);
-          setShowFeedback(true);
-        }, 50);
-      });
-      
-      // For 1st and 2nd wrong answers, handle the delayed submission
-      if (!willBeThirdError) {
-        setTimeout(() => {
-          console.log('⏰ V8 SUBMITTING ANSWER (1st/2nd) after 3 seconds');
+          console.log('⏰ THIRD ANSWER V3: Submitting after safety delay');
           submitAnswer(answer);
           
+          // Clear feedback state after submission
           setTimeout(() => {
-            console.log('⏰ V8 CLEARING FEEDBACK (1st/2nd)');
+            console.log('⏰ CLEARING FEEDBACK');
             setSelectedAnswer(null);
             setShowFeedback(false);
             setAnswerIsCorrect(false);
             setCorrectAnswer('');
           }, 100);
-        }, 3000);
-      }
-      // V8: 3rd wrong answer submission now happens AFTER full audio + 3s delay
-    } else {
-      // Correct answer - still delay state updates to avoid any audio interference
-      console.log('✅ V7 CORRECT ANSWER: Setting state with delay');
-      
-      requestAnimationFrame(() => {
+        }, 1500); // 1.5 second delay for 3rd mistake
+      } else {
+        // First or second wrong answer: Play audio but don't wait for completion
+        console.log('🔊 WRONG ANSWER V3 (not third): Playing audio without waiting');
+        playWrongAnswerSound(); // Fire and forget
+        
+        // Standard 2-second delay for first/second wrong answers
         setTimeout(() => {
-          setSelectedAnswer(answer);
-          setAnswerIsCorrect(true);
-          setCorrectAnswer(currentQuestion.correctAnswer);
-        }, 50);
-      });
-      
+          console.log('⏰ SUBMITTING ANSWER TO GAME ENGINE after 2 seconds');
+          submitAnswer(answer);
+          
+          // Clear feedback state after submission
+          setTimeout(() => {
+            console.log('⏰ CLEARING FEEDBACK');
+            setSelectedAnswer(null);
+            setShowFeedback(false);
+            setAnswerIsCorrect(false);
+            setCorrectAnswer('');
+          }, 100);
+        }, 2000);
+      }
+    } else {
+      // Correct answer: Submit immediately
+      console.log('✅ CORRECT ANSWER: Submitting immediately');
       submitAnswer(answer);
       
+      // Clear feedback state after submission
       setTimeout(() => {
-        console.log('⏰ V7 CLEARING FEEDBACK (correct)');
+        console.log('⏰ CLEARING FEEDBACK');
         setSelectedAnswer(null);
         setShowFeedback(false);
         setAnswerIsCorrect(false);
@@ -196,7 +158,7 @@ export default function QuestionCard() {
       }, 100);
     }
     
-    console.log('🚨 V6 FEEDBACK STATE SET:', {
+    console.log('🚨 FEEDBACK STATE SET:', {
       selected: answer,
       correct: isCorrect,
       correctAnswer: currentQuestion.correctAnswer,
