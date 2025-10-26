@@ -114,17 +114,17 @@ export default function QuestionCard() {
       
       if (willBeThirdError) {
         // CRITICAL: Third wrong answer on iPhone
-        // V4 FIX: Wait for audio callback BEFORE submitting
-        console.log('🚨 THIRD WRONG ANSWER V4: Playing audio and waiting for completion');
+        // V5 FIX: Wait for audio + give user time to see correct answer
+        console.log('🚨 THIRD WRONG ANSWER V5: Playing audio and waiting for completion + delay');
         
         // Trigger audio synchronously from click event
-        // NEW: Actually use the callback to submit answer!
+        // Use callback to ensure audio completes, then add delay for user to see answer
         playWrongAnswerSound(() => {
-          console.log('✅ AUDIO COMPLETE V4: Audio ended callback - NOW submitting answer');
+          console.log('✅ AUDIO COMPLETE V5: Audio ended callback - waiting 2.5s for user to see answer');
           
-          // Add small buffer after audio completes, then submit
+          // Add 2.5-second delay after audio completes so user can see correct answer
           setTimeout(() => {
-            console.log('⏰ THIRD ANSWER V4: Submitting after audio completion + buffer');
+            console.log('⏰ THIRD ANSWER V5: Submitting after audio + 2.5s delay');
             submitAnswer(answer);
             
             // Clear feedback state after submission
@@ -135,16 +135,17 @@ export default function QuestionCard() {
               setAnswerIsCorrect(false);
               setCorrectAnswer('');
             }, 100);
-          }, 300); // Small 300ms buffer after audio completes
+          }, 2500); // 2.5-second delay after audio completes
         });
       } else {
         // First or second wrong answer: Play audio but don't wait for completion
-        console.log('🔊 WRONG ANSWER V3 (not third): Playing audio without waiting');
+        console.log('🔊 WRONG ANSWER V5 (not third): Playing audio without waiting');
         playWrongAnswerSound(); // Fire and forget
         
-        // Standard 2-second delay for first/second wrong answers
+        // V5: Increased to 3-second delay for first/second wrong answers
+        // This gives user more time to see the correct answer
         setTimeout(() => {
-          console.log('⏰ SUBMITTING ANSWER TO GAME ENGINE after 2 seconds');
+          console.log('⏰ SUBMITTING ANSWER TO GAME ENGINE after 3 seconds');
           submitAnswer(answer);
           
           // Clear feedback state after submission
@@ -155,7 +156,7 @@ export default function QuestionCard() {
             setAnswerIsCorrect(false);
             setCorrectAnswer('');
           }, 100);
-        }, 2000);
+        }, 3000); // V5: Increased from 2 seconds to 3 seconds
       }
     } else {
       // Correct answer: Submit immediately
