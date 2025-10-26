@@ -111,35 +111,45 @@ export default function QuestionCard() {
     // This ensures audio.play() completes its initialization before ANY React updates
     
     if (!isCorrect) {
-      // Call audio FIRST, absolutely nothing else in this synchronous block
+      // ⚡ V8 ULTIMATE FIX: For 3rd error, play audio + show feedback for FULL 3 seconds
+      // THEN submit answer. This keeps QuestionCard mounted for entire duration.
+      // Previous issue: submitAnswer() was called too early → parent unmounted QuestionCard
+      // → audio callback orphaned → beep never heard!
+      
       if (willBeThirdError) {
-        console.log('🚨 V7 THIRD WRONG ANSWER: Playing audio with ZERO interference');
+        console.log('🚨 V8 THIRD WRONG ANSWER: Playing audio with ZERO interference');
+        
+        // Play audio FIRST (synchronous, iOS requirement)
         playWrongAnswerSound(() => {
-          console.log('✅ V7 AUDIO COMPLETE: Audio ended - waiting 2.5s for user to see answer');
+          console.log('✅ V8 AUDIO COMPLETE: Audio ended - waiting FULL 3s for user feedback');
           
+          // V8 FIX: Wait FULL 3 seconds (not 2.5s) to match feedback display time
+          // This ensures QuestionCard stays mounted for entire audio + feedback duration
           setTimeout(() => {
-            console.log('⏰ V7 THIRD ANSWER: Submitting after audio + 2.5s delay');
+            console.log('⏰ V8 THIRD ANSWER: NOW submitting after audio + 3s delay');
             submitAnswer(answer);
             
+            // Clear feedback state after submission
             setTimeout(() => {
-              console.log('⏰ V7 CLEARING FEEDBACK');
+              console.log('⏰ V8 CLEARING FEEDBACK');
               setSelectedAnswer(null);
               setShowFeedback(false);
               setAnswerIsCorrect(false);
               setCorrectAnswer('');
             }, 100);
-          }, 2500);
+          }, 3000); // V8: Changed from 2500 to 3000 to keep component alive longer
         });
       } else {
-        console.log('🔊 V7 WRONG ANSWER (1st/2nd): Playing audio with ZERO interference');
+        // 1st and 2nd wrong answers: just play audio, no callback needed
+        console.log('🔊 V8 WRONG ANSWER (1st/2nd): Playing audio with ZERO interference');
         playWrongAnswerSound();
       }
       
-      // V7: Delay ALL state updates to ensure audio plays first
+      // V8: Delay ALL state updates to ensure audio plays first
       // requestAnimationFrame pushes to next frame, then setTimeout adds 50ms buffer
       requestAnimationFrame(() => {
         setTimeout(() => {
-          console.log('🔄 V7: Setting state AFTER audio initialization (50ms delay)');
+          console.log('🔄 V8: Setting state AFTER audio initialization (50ms delay)');
           setSelectedAnswer(answer);
           setAnswerIsCorrect(false);
           setCorrectAnswer(currentQuestion.correctAnswer);
@@ -150,11 +160,11 @@ export default function QuestionCard() {
       // For 1st and 2nd wrong answers, handle the delayed submission
       if (!willBeThirdError) {
         setTimeout(() => {
-          console.log('⏰ V7 SUBMITTING ANSWER (1st/2nd) after 3 seconds');
+          console.log('⏰ V8 SUBMITTING ANSWER (1st/2nd) after 3 seconds');
           submitAnswer(answer);
           
           setTimeout(() => {
-            console.log('⏰ V7 CLEARING FEEDBACK (1st/2nd)');
+            console.log('⏰ V8 CLEARING FEEDBACK (1st/2nd)');
             setSelectedAnswer(null);
             setShowFeedback(false);
             setAnswerIsCorrect(false);
@@ -162,7 +172,7 @@ export default function QuestionCard() {
           }, 100);
         }, 3000);
       }
-      // Note: 3rd wrong answer submission is handled in the audio callback above
+      // V8: 3rd wrong answer submission now happens AFTER full audio + 3s delay
     } else {
       // Correct answer - still delay state updates to avoid any audio interference
       console.log('✅ V7 CORRECT ANSWER: Setting state with delay');

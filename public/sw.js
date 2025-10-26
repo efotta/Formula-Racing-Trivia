@@ -1,7 +1,7 @@
 
 // Enhanced Service Worker with Stale-While-Revalidate Strategy
-// Version bumped to v12 - V7 FIX: State update delays prevent audio context suspension
-const CACHE_NAME = 'formula-racing-trivia-v12';
+// Version bumped to v13 - V8 FIX: Prevent component unmounting during 3rd beep playback
+const CACHE_NAME = 'formula-racing-trivia-v13';
 const urlsToCache = [
   '/',
   '/manifest.json',
