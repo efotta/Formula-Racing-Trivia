@@ -1,7 +1,7 @@
 
 // Enhanced Service Worker with Stale-While-Revalidate Strategy
-// Version bumped to v11 - CRITICAL FIX: Added audio file to cache for iPhone
-const CACHE_NAME = 'formula-racing-trivia-v11';
+// Version bumped to v12 - V7 FIX: State update delays prevent audio context suspension
+const CACHE_NAME = 'formula-racing-trivia-v12';
 const urlsToCache = [
   '/',
   '/manifest.json',
