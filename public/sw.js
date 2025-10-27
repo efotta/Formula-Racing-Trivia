@@ -14,7 +14,7 @@ const urlsToCache = [
 
 // Install service worker and cache core assets
 self.addEventListener('install', (event) => {
-  console.log('[SW] Installing Service Worker v8...');
+  console.log('[SW] Installing Service Worker v13...');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
@@ -33,7 +33,7 @@ self.addEventListener('install', (event) => {
 
 // Activate service worker and clean up old caches
 self.addEventListener('activate', (event) => {
-  console.log('[SW] Activating Service Worker v8...');
+  console.log('[SW] Activating Service Worker v13...');
   event.waitUntil(
     caches.keys()
       .then((cacheNames) => {
@@ -47,7 +47,7 @@ self.addEventListener('activate', (event) => {
         );
       })
       .then(() => {
-        console.log('[SW] Service Worker v8 activated! 🚀');
+        console.log('[SW] Service Worker v13 activated! 🚀');
         console.log('[SW] Taking control of all clients');
         return self.clients.claim();
       })
@@ -57,7 +57,7 @@ self.addEventListener('activate', (event) => {
           clients.forEach((client) => {
             client.postMessage({
               type: 'SW_UPDATED',
-              version: 'v8',
+              version: 'v13',
               message: 'New version available!'
             });
           });
