@@ -70,7 +70,7 @@ export default function PWAInstaller() {
 
   const registerServiceWorker = () => {
     navigator.serviceWorker
-      .register('/sw.js?v=14')
+      .register('/sw.js?v=15')
       .then((registration) => {
         console.log('✅ Service Worker registered:', registration.scope);
 
