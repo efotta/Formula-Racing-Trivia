@@ -20,17 +20,17 @@ export default function QuestionCard() {
   // V7: ALL React state updates delayed by 50ms to prevent audio context suspension
   const playWrongAnswerSound = (onComplete?: () => void): void => {
     try {
-      console.log('🔊 QUESTION CARD V10: Calling global audio manager');
-      console.log('🔊 QUESTION CARD V10: Function type:', typeof (window as any).__playWrongAnswerSound);
-      console.log('🔊 QUESTION CARD V10: Has callback:', !!onComplete);
+      console.log('🔊 QUESTION CARD V11: Calling global audio manager');
+      console.log('🔊 QUESTION CARD V11: Function type:', typeof (window as any).__playWrongAnswerSound);
+      console.log('🔊 QUESTION CARD V11: Has callback:', !!onComplete);
       
       // Call the global audio function exposed by GameAudioManager
       // V4: Enhanced defensive checks for iPhone compatibility
       if (typeof (window as any).__playWrongAnswerSound === 'function') {
         (window as any).__playWrongAnswerSound(onComplete);
-        console.log('✅ QUESTION CARD V10: Audio playback initiated');
+        console.log('✅ QUESTION CARD V11: Audio playback initiated');
       } else {
-        console.error('❌ QUESTION CARD V10: Global audio function NOT available!');
+        console.error('❌ QUESTION CARD V11: Global audio function NOT available!');
         console.error('❌ This means GameAudioManager failed to initialize');
         console.error('❌ Check console for AUDIO MANAGER initialization errors');
         
@@ -42,7 +42,7 @@ export default function QuestionCard() {
         }
       }
     } catch (error) {
-      console.error('❌ QUESTION CARD V10: Error calling audio function', error);
+      console.error('❌ QUESTION CARD V11: Error calling audio function', error);
       // DEFENSIVE FALLBACK: Always call callback to prevent stuck state
       if (onComplete) {
         console.log('⚠️ FALLBACK V4: Calling completion callback after error');

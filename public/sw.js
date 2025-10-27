@@ -1,7 +1,7 @@
 
 // Enhanced Service Worker with Stale-While-Revalidate Strategy
-// Version bumped to v15 - V9 FIX: Extra 500ms delay after audio completes on iPhone
-const CACHE_NAME = 'formula-racing-trivia-v15';
+// Version bumped to v16 - V9 FIX: Extra 500ms delay after audio completes on iPhone
+const CACHE_NAME = 'formula-racing-trivia-v16';
 const urlsToCache = [
   '/',
   '/manifest.json',
@@ -14,7 +14,7 @@ const urlsToCache = [
 
 // Install service worker and cache core assets
 self.addEventListener('install', (event) => {
-  console.log('[SW] Installing Service Worker v15...');
+  console.log('[SW] Installing Service Worker v16...');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
@@ -33,7 +33,7 @@ self.addEventListener('install', (event) => {
 
 // Activate service worker and clean up old caches
 self.addEventListener('activate', (event) => {
-  console.log('[SW] Activating Service Worker v15...');
+  console.log('[SW] Activating Service Worker v16...');
   event.waitUntil(
     caches.keys()
       .then((cacheNames) => {
@@ -47,7 +47,7 @@ self.addEventListener('activate', (event) => {
         );
       })
       .then(() => {
-        console.log('[SW] Service Worker v15 activated! 🚀');
+        console.log('[SW] Service Worker v16 activated! 🚀');
         console.log('[SW] Taking control of all clients');
         return self.clients.claim();
       })

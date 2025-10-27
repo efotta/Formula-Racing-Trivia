@@ -27,41 +27,52 @@ export default function GameAudioManager({ onAudioReady }: GameAudioManagerProps
   // Initialize audio once on mount
   useEffect(() => {
     try {
-      console.log('🔊 AUDIO MANAGER V10: Initializing with comprehensive iPhone fixes');
-      console.log('🔊 AUDIO MANAGER V10: Audio file path: /audio/trivia_wrong_answer_ding.mp3');
-      console.log('🔊 AUDIO MANAGER V10: Service Worker should have cached this file (v15)');
+      console.log('🔊 AUDIO MANAGER V11: Initializing with PERSISTENT audio element');
+      console.log('🔊 AUDIO MANAGER V11: Audio file path: /audio/trivia_wrong_answer_ding.mp3');
+      console.log('🔊 AUDIO MANAGER V11: Service Worker should have cached this file (v16)');
       
-      // Create audio element
-      audioRef.current = new Audio('/audio/trivia_wrong_answer_ding.mp3');
-      audioRef.current.volume = 1.0; // Full volume
-      audioRef.current.preload = 'auto'; // Pre-load for instant playback
+      // V11: Store audio element in GLOBAL SCOPE so it survives component unmount!
+      if (!(window as any).__globalAudioElement) {
+        console.log('🔊 AUDIO MANAGER V11: Creating NEW global audio element');
+        (window as any).__globalAudioElement = new Audio('/audio/trivia_wrong_answer_ding.mp3');
+      } else {
+        console.log('🔊 AUDIO MANAGER V11: Reusing EXISTING global audio element');
+      }
       
-      // Add error handler to detect loading issues
-      audioRef.current.onerror = (error) => {
-        console.error('❌ AUDIO MANAGER V10: Audio file failed to load!', error);
-        console.error('❌ This might be a 404 or CORS issue - check network tab');
-      };
+      // Use the global audio element
+      audioRef.current = (window as any).__globalAudioElement;
       
-      audioRef.current.onloadeddata = () => {
-        console.log('✅ AUDIO MANAGER V10: Audio file loaded successfully');
-      };
-      
-      // Force load the audio immediately
-      audioRef.current.load();
+      if (audioRef.current) {
+        audioRef.current.volume = 1.0; // Full volume
+        audioRef.current.preload = 'auto'; // Pre-load for instant playback
+        
+        // Add error handler to detect loading issues
+        audioRef.current.onerror = (error) => {
+          console.error('❌ AUDIO MANAGER V11: Audio file failed to load!', error);
+          console.error('❌ This might be a 404 or CORS issue - check network tab');
+        };
+        
+        audioRef.current.onloadeddata = () => {
+          console.log('✅ AUDIO MANAGER V11: Audio file loaded successfully');
+        };
+        
+        // Force load the audio immediately
+        audioRef.current.load();
+      }
       
       // iOS Safari requires user interaction to unlock audio
       const unlockAudio = () => {
         if (!audioUnlockedRef.current && audioRef.current) {
-          console.log('🔊 AUDIO MANAGER V10: Unlocking audio on first interaction');
+          console.log('🔊 AUDIO MANAGER V11: Unlocking audio on first interaction');
           
           audioRef.current.play().then(() => {
             audioRef.current!.pause();
             audioRef.current!.currentTime = 0;
             audioUnlockedRef.current = true;
-            console.log('✅ AUDIO MANAGER V10: Audio unlocked and ready');
+            console.log('✅ AUDIO MANAGER V11: Audio unlocked and ready');
             if (onAudioReady) onAudioReady();
           }).catch((error) => {
-            console.warn('⚠️ AUDIO MANAGER V10: Audio unlock failed, will retry', error);
+            console.warn('⚠️ AUDIO MANAGER V11: Audio unlock failed, will retry', error);
           });
         }
       };
@@ -82,14 +93,14 @@ export default function GameAudioManager({ onAudioReady }: GameAudioManagerProps
         
         if (audioRef.current) {
           try {
-            console.log('🔊 AUDIO MANAGER V10: Playing wrong answer sound (force restart)');
+            console.log('🔊 AUDIO MANAGER V11: Playing wrong answer sound (force restart)');
             
             // CRITICAL FIX: Force stop any existing playback and reset
             // This prevents the "already playing" issue on 3rd beep
             try {
               audioRef.current.pause();
               audioRef.current.currentTime = 0;
-              console.log('✅ AUDIO MANAGER V10: Force stopped existing playback');
+              console.log('✅ AUDIO MANAGER V11: Force stopped existing playback');
             } catch (e) {
               console.warn('⚠️ Force stop failed:', e);
             }
@@ -98,28 +109,28 @@ export default function GameAudioManager({ onAudioReady }: GameAudioManagerProps
             
             // Set up ended event listener
             const handleEnded = () => {
-              console.log('✅ AUDIO MANAGER V10: Sound finished playing');
+              console.log('✅ AUDIO MANAGER V11: Sound finished playing');
               isPlayingRef.current = false;
               audioRef.current?.removeEventListener('ended', handleEnded);
               audioRef.current?.removeEventListener('error', handleError);
               
               // Call completion callback
               if (onComplete) {
-                console.log('📞 AUDIO MANAGER V10: Calling completion callback');
+                console.log('📞 AUDIO MANAGER V11: Calling completion callback');
                 onComplete();
               }
             };
             
             // Set up error handler
             const handleError = (error: any) => {
-              console.error('❌ AUDIO MANAGER V10: Playback error', error);
+              console.error('❌ AUDIO MANAGER V11: Playback error', error);
               isPlayingRef.current = false;
               audioRef.current?.removeEventListener('ended', handleEnded);
               audioRef.current?.removeEventListener('error', handleError);
               
               // Call completion callback even on error
               if (onComplete) {
-                console.log('📞 AUDIO MANAGER V10: Calling completion callback (after error)');
+                console.log('📞 AUDIO MANAGER V11: Calling completion callback (after error)');
                 onComplete();
               }
             };
@@ -133,41 +144,41 @@ export default function GameAudioManager({ onAudioReady }: GameAudioManagerProps
             if (playPromise !== undefined) {
               playPromise
                 .then(() => {
-                  console.log('✅ AUDIO MANAGER V10: Playback started successfully');
+                  console.log('✅ AUDIO MANAGER V11: Playback started successfully');
                 })
                 .catch((error) => {
-                  console.error('❌ AUDIO MANAGER V10: Play promise rejected', error);
+                  console.error('❌ AUDIO MANAGER V11: Play promise rejected', error);
                   handleError(error);
                 });
             }
           } catch (error) {
-            console.error('❌ AUDIO MANAGER V10: Exception during playback', error);
+            console.error('❌ AUDIO MANAGER V11: Exception during playback', error);
             isPlayingRef.current = false;
             if (onComplete) onComplete();
           }
         } else {
-          console.warn('⚠️ AUDIO MANAGER V10: Cannot play - audio ref is null');
+          console.warn('⚠️ AUDIO MANAGER V11: Cannot play - audio ref is null');
           if (onComplete) onComplete();
         }
       };
       
-      console.log('✅ AUDIO MANAGER V10: Global audio manager initialized');
-      console.log('✅ AUDIO MANAGER V10: window.__playWrongAnswerSound is now available');
-      console.log('✅ AUDIO MANAGER V10: Verification:', typeof (window as any).__playWrongAnswerSound);
+      console.log('✅ AUDIO MANAGER V11: Global audio manager initialized');
+      console.log('✅ AUDIO MANAGER V11: window.__playWrongAnswerSound is now available');
+      console.log('✅ AUDIO MANAGER V11: Verification:', typeof (window as any).__playWrongAnswerSound);
       
       // Verify the function is actually accessible
       setTimeout(() => {
         if (typeof (window as any).__playWrongAnswerSound === 'function') {
-          console.log('✅ VERIFICATION V10: Global audio function confirmed accessible');
+          console.log('✅ VERIFICATION V11: Global audio function confirmed accessible');
         } else {
-          console.error('❌ VERIFICATION V10: Global audio function NOT accessible!');
+          console.error('❌ VERIFICATION V11: Global audio function NOT accessible!');
         }
       }, 100);
       
       return () => {
         // V10 FIX: NEVER remove the global audio function!
         // iPhone needs this function to persist across ALL component lifecycles
-        console.log('🧹 AUDIO MANAGER V10: Cleanup called - keeping global function alive');
+        console.log('🧹 AUDIO MANAGER V11: Cleanup called - keeping global function alive');
         document.removeEventListener('touchstart', unlockAudio);
         document.removeEventListener('click', unlockAudio);
         
@@ -181,10 +192,10 @@ export default function GameAudioManager({ onAudioReady }: GameAudioManagerProps
         //   audioRef.current = null;
         // }
         
-        console.log('✅ AUDIO MANAGER V10: Global function preserved across unmount');
+        console.log('✅ AUDIO MANAGER V11: Global function preserved across unmount');
       };
     } catch (error) {
-      console.error('❌ AUDIO MANAGER V10: Initialization failed', error);
+      console.error('❌ AUDIO MANAGER V11: Initialization failed', error);
     }
   }, []); // V10: Empty array - only run once, never cleanup function
 
