@@ -117,27 +117,38 @@ export default function QuestionCard() {
       // → audio callback orphaned → beep never heard!
       
       if (willBeThirdError) {
-        console.log('🚨 V8 THIRD WRONG ANSWER: Playing audio with ZERO interference');
+        console.log('🚨 V9 THIRD WRONG ANSWER: Playing audio with MAXIMUM delay for iPhone');
+        
+        // V9 ULTIMATE iPhone FIX:
+        // 1. Play audio immediately (synchronous with click - iOS requirement)
+        // 2. Wait for audio callback (confirms audio finished playing)
+        // 3. Add EXTRA 500ms delay before submitting answer
+        // 4. This prevents game-over modal from interrupting audio on iPhone
         
         // Play audio FIRST (synchronous, iOS requirement)
         playWrongAnswerSound(() => {
-          console.log('✅ V8 AUDIO COMPLETE: Audio ended - waiting FULL 3s for user feedback');
+          console.log('✅ V9 AUDIO COMPLETE: Audio callback received - waiting 500ms MORE');
           
-          // V8 FIX: Wait FULL 3 seconds (not 2.5s) to match feedback display time
-          // This ensures QuestionCard stays mounted for entire audio + feedback duration
+          // V9: Extra 500ms delay AFTER audio completes before submitting
+          // This prevents modal from showing too quickly on iPhone
           setTimeout(() => {
-            console.log('⏰ V8 THIRD ANSWER: NOW submitting after audio + 3s delay');
-            submitAnswer(answer);
+            console.log('⏰ V9 EXTRA DELAY COMPLETE: Now waiting 3s for user to see feedback');
             
-            // Clear feedback state after submission
+            // V9: Now wait FULL 3 seconds for user to see feedback message
             setTimeout(() => {
-              console.log('⏰ V8 CLEARING FEEDBACK');
-              setSelectedAnswer(null);
-              setShowFeedback(false);
-              setAnswerIsCorrect(false);
-              setCorrectAnswer('');
-            }, 100);
-          }, 3000); // V8: Changed from 2500 to 3000 to keep component alive longer
+              console.log('⏰ V9 THIRD ANSWER: NOW submitting after audio + delays');
+              submitAnswer(answer);
+              
+              // Clear feedback state after submission
+              setTimeout(() => {
+                console.log('⏰ V9 CLEARING FEEDBACK');
+                setSelectedAnswer(null);
+                setShowFeedback(false);
+                setAnswerIsCorrect(false);
+                setCorrectAnswer('');
+              }, 100);
+            }, 3000); // User feedback display time
+          }, 500); // V9: EXTRA delay after audio completes
         });
       } else {
         // 1st and 2nd wrong answers: just play audio, no callback needed
